@@ -1,0 +1,16 @@
+.section {
+    min-height: 912px;
+    max-width: 600px;
+}
+
+.nav {
+    display: flex;
+}
+
+@media screen and (min-width: 320px) and (max-width: 1000px) {
+    .nav {
+        flex-direction: column;
+        padding: 0 26px;
+    }
+}
+

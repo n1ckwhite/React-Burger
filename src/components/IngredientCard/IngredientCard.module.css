@@ -1,0 +1,15 @@
+.li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.prices {
+    gap: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

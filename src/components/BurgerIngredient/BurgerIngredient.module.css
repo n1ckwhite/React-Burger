@@ -1,0 +1,27 @@
+.card {
+    max-height: calc(664px + 52px);
+    overflow-y: scroll;
+    scrollbar-color: var(--text-inactive-color) var(--colors-button-inactive);
+    outline: none;
+}
+
+.card::-webkit-scrollbar {
+    background: var(--colors-button-inactive);
+}
+
+.card::-webkit-scrollbar-thumb {
+    background: var(--text-inactive-color);
+}
+
+.ul {
+    list-style-type: none;
+    display: grid;
+    grid-gap: 40px 24px;
+    grid-template-columns: repeat(2,1fr);
+}
+
+@media screen and (min-width: 320px) and (max-width: 1000px) {
+    .ul {
+        grid-template-columns: 1fr;
+    }
+}
