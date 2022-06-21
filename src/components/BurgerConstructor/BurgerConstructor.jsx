@@ -12,16 +12,15 @@ export const BurgerConstructor = (props) => {
                     <ConstructorElement
                         type="top"
                         isLocked={true}
-                        text={`${props.arr[7].name} (верх)`}
-                        price={props.arr[7].price}
-                        thumbnail={props.arr[7].image}
-                        key={props.arr[7]._id}
+                        text={`${props.arr[0].name} (верх)`}
+                        price={props.arr[0].price}
+                        thumbnail={props.arr[0].image}
+                        key={props.arr[0]._id}
                     />
                 </li>
                 <div className={stylesBurgerConstructor.liScroll} key={keyRandom()}>
                 {
                     props.arr.map( (item,index) => {
-                        if(item.__v > 0) {
                             return (
                                 <li className={`${stylesBurgerConstructor.li}`} key={index}>
                                     <DragIcon type="primary" />
@@ -34,7 +33,6 @@ export const BurgerConstructor = (props) => {
                                 </li>
 
                             )
-                        }
                     })
                 }
                     </div>
@@ -42,10 +40,10 @@ export const BurgerConstructor = (props) => {
                     <ConstructorElement
                         type="bottom"
                         isLocked={true}
-                        text={`${props.arr[7].name} (низ)`}
-                        price={props.arr[7].price}
-                        thumbnail={props.arr[7].image}
-                        key={props.arr[7]._id}
+                        text={`${props.arr[0].name} (низ)`}
+                        price={props.arr[0].price}
+                        thumbnail={props.arr[0].image}
+                        key={props.arr[0]._id}
                     />
                 </li>
             </ul>
