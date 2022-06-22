@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 export const IngredientCard = (props) => {
     return (
-        <li className={`${stylesIngredientCard.li} mt-6`}>
+        <li className={`${stylesIngredientCard.li} mt-6`} onClick={props.openModal}>
             {props.count> 0 && <Counter count={props.count}/>}
             <img  src={props.image} alt={props.name}/>
             <p className={`${stylesIngredientCard.prices} text text_type_digits-default mt-4 mb-4`}>

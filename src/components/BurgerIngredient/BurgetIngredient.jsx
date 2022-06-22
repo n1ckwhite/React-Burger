@@ -14,7 +14,7 @@ export const BurgerIngredient = (props) => {
                 <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
                     {props.arrData.map((item) => {
                         if(item.type === 'bun') {
-                            return <IngredientCard key={item._id} image={item.image} count={item.__v} price={item.price} name={item.name} />
+                            return <IngredientCard openModal={props.handleModal} key={item._id} image={item.image} count={item.__v} price={item.price} name={item.name} />
                         }
                     })}
                 </ul>
@@ -26,7 +26,7 @@ export const BurgerIngredient = (props) => {
                 <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
                     {props.arrData.map((item) => {
                         if(item.type === 'sauce') {
-                            return <IngredientCard key={item._id} image={item.image} count={item.__v} price={item.price} name={item.name} />
+                            return <IngredientCard openModal={props.handleModal} key={item._id} image={item.image} count={item.__v} price={item.price} name={item.name}/>
                         }
                     })}
                 </ul>
@@ -38,7 +38,7 @@ export const BurgerIngredient = (props) => {
                 <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
                     {props.arrData.map((item) => {
                         if(item.type === 'main') {
-                            return <IngredientCard key={item._id} image={item.image} count={item.__v} price={item.price} name={item.name} />
+                            return <IngredientCard openModal={props.handleModal} key={item._id} image={item.image} count={item.__v} price={item.price} name={item.name} />
                         }
                     })}
                 </ul>

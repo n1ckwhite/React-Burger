@@ -4,7 +4,7 @@ import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {BurgerIngredient} from "../BurgerIngredient/BurgetIngredient";
 import PropTypes from "prop-types";
 
-export const BurgerIngredients = (props) => {
+export const BurgerIngredients = ({arrData,openModal}) => {
     const [current, setCurrent] = React.useState('one')
     return (
         <section className={`${stylesBurgerIngridients.section} mt-10`}>
@@ -22,7 +22,7 @@ export const BurgerIngredients = (props) => {
                     Начинки
                 </Tab>
             </div>
-            <BurgerIngredient arrData={props.arrData}/>
+            <BurgerIngredient handleModal={openModal} arrData={arrData}/>
         </section>
     )
 }

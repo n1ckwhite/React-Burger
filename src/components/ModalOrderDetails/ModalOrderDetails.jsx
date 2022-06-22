@@ -12,7 +12,7 @@ export const ModalOrderDetails = () => {
             <p className="text text_type_main-default mt-15">
                 Ваш заказ начали готовить
             </p>
-            <p className={`${stylesModalOrderDetails.subtitle} text text_type_main-default mt-2`}>
+            <p className="text text_type_main-default text_color_inactive">
                 Дождитесь готовности на орбитальной станции
             </p>
         </>

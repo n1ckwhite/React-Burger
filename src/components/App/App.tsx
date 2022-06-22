@@ -6,11 +6,12 @@ import {BurgerConstructor} from "../BurgerConstructor/BurgerConstructor";
 import {API_BURGERS} from "../../utils/data";
 import {Modal} from "../Modal/Modal";
 import {ModalOrderDetails} from "../ModalOrderDetails/ModalOrderDetails";
+import {ModalIngredientsDetails} from "../ModalIngredientDetails/ModalIngredientsDetails";
 
 function App() {
     const [priceModal,openPriceModal] = useState(false)
     const [ingredientsModal,openIngredientsModal] = useState(false)
-        const [burgers, burgerResponse] = useState({
+    const [burgers, burgerResponse] = useState({
             arr: [],
             loading: true
         })
@@ -48,13 +49,12 @@ function App() {
         <Modal isActive={priceModal} handleIsActive={handlePriceModal} closePopup={closePriseModal}>
             <ModalOrderDetails/>
         </Modal>
-        <Modal isActive={ingredientsModal} handleIsActive={handleOrderModal} closePopup={closeOrderModal}>
-            <div>
-            </div>
+        <Modal isActive={ingredientsModal} handleIsActive={handleOrderModal} closePopup={closeOrderModal} title="Детали ингредиента">
+        <ModalIngredientsDetails ingredient={burgers.arr}/>
         </Modal>
             <AppHeader/>
         <main className={AppStyles.container}>
-            {burgers.loading === false && <BurgerIngredients arrData={burgers.arr}/>}
+            {burgers.loading === false && <BurgerIngredients arrData={burgers.arr} openModal={handleOrderModal}/>}
             {burgers.loading === false && <BurgerConstructor arr={burgers.arr} openModal={handlePriceModal}/>}
         </main>
     </div>
