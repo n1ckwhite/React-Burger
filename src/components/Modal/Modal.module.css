@@ -10,6 +10,13 @@
     position: relative;
 }
 
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 
 .container {
     display: flex;
@@ -23,7 +30,7 @@
     border: 0;
     width: 24px;
     height: 24px;
-    object-fit: contain;
+    object-fit: cover;
     padding: 0;
     transition: .2s;
 }

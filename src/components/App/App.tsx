@@ -9,6 +9,7 @@ import {ModalOrderDetails} from "../ModalOrderDetails/ModalOrderDetails";
 
 function App() {
     const [priceModal,openPriceModal] = useState(false)
+    const [ingredientsModal,openIngredientsModal] = useState(false)
         const [burgers, burgerResponse] = useState({
             arr: [],
             loading: true
@@ -30,12 +31,26 @@ function App() {
     const handlePriceModal = () => {
         openPriceModal(!priceModal)
     }
+    const handleOrderModal = () => {
+        openIngredientsModal(!ingredientsModal)
+    }
+    const closeOrderModal = () => {
+        openIngredientsModal(false)
+
+    }
+    const closePriseModal = () => {
+        openPriceModal(false)
+    }
 
     return (
 
     <div className={AppStyles.App}>
-        <Modal isActive={priceModal} handleIsActive={handlePriceModal}>
+        <Modal isActive={priceModal} handleIsActive={handlePriceModal} closePopup={closePriseModal}>
             <ModalOrderDetails/>
+        </Modal>
+        <Modal isActive={ingredientsModal} handleIsActive={handleOrderModal} closePopup={closeOrderModal}>
+            <div>
+            </div>
         </Modal>
             <AppHeader/>
         <main className={AppStyles.container}>
