@@ -1,5 +1,6 @@
 import React from "react";
 import stylesModalIngredientsDetails from './ModalIngredientsDetails.module.css';
+import PropTypes from "prop-types";
 
 export const ModalIngredientsDetails = ({ingredient}) => {
     return (
@@ -38,3 +39,7 @@ export const ModalIngredientsDetails = ({ingredient}) => {
         </>
     )
 }
+
+ModalIngredientsDetails.propTypes = {
+    ingredient: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired
+};

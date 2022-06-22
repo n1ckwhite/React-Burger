@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import stylesModal from './Modal.module.css';
 import {ModalOverlay} from "../ModalOverlay/ModalOverlay";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
 
 export const Modal = ({children,isActive,handleIsActive,closePopup,title}) => {
     useEffect(() => {
@@ -44,4 +45,12 @@ export const Modal = ({children,isActive,handleIsActive,closePopup,title}) => {
 
 Modal.defaultProps ={
     title: null
+}
+
+Modal.propTypes = {
+    children: PropTypes.element.isRequired,
+    isActive: PropTypes.bool.isRequired,
+    handleIsActive: PropTypes.func.isRequired,
+    closePopup: PropTypes.func.isRequired,
+    title: PropTypes.string
 }
