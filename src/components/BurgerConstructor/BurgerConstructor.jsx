@@ -4,11 +4,11 @@ import {ConstructorElement,CurrencyIcon,Button,DragIcon} from "@ya.praktikum/rea
 import {menuItemPropTypes} from '../../utils/constans';
 import PropTypes from "prop-types";
 export const BurgerConstructor = ({arr,openModal}) => {
-    const keyRandom = () => (Math.random() * (200 - 1) + 1);
     return (
         <section className={`${stylesBurgerConstructor.section} mt-25`}>
+            <div className={stylesBurgerConstructor.liScroll}>
             <ul className={stylesBurgerConstructor.ul}>
-                <li className={`${stylesBurgerConstructor.li} mb-4`} key={keyRandom()}>
+                <li className={`${stylesBurgerConstructor.li} mb-4`}>
                     <ConstructorElement
                         type="top"
                         isLocked={true}
@@ -18,25 +18,7 @@ export const BurgerConstructor = ({arr,openModal}) => {
                         key={arr[0]._id}
                     />
                 </li>
-                <div className={stylesBurgerConstructor.liScroll} key={keyRandom()}>
-                {
-                    arr.map( (item,index) => {
-                            return (
-                                <li className={`${stylesBurgerConstructor.li}`} key={index}>
-                                    <DragIcon type="primary" />
-                                    <ConstructorElement
-                                        isLocked={false}
-                                        text={item.name}
-                                        price={item.price}
-                                        thumbnail={item.image}
-                                    />
-                                </li>
-
-                            )
-                    })
-                }
-                    </div>
-                    <li className={`${stylesBurgerConstructor.li} mt-4`} key={keyRandom()}>
+                    <li className={`${stylesBurgerConstructor.li} mt-4`}>
                     <ConstructorElement
                         type="bottom"
                         isLocked={true}
@@ -47,7 +29,8 @@ export const BurgerConstructor = ({arr,openModal}) => {
                     />
                 </li>
             </ul>
-            <div className={`${stylesBurgerConstructor.info} mt-10`}>
+        </div>
+    <div className={`${stylesBurgerConstructor.info} mt-10`}>
                 <p className={`text text_type_digits-medium ${stylesBurgerConstructor.price} mr-10`}>
                  610
                     <CurrencyIcon type="primary" /></p>
