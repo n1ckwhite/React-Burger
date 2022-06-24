@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import AppStyles from './App.module.css';
 import {AppHeader} from "../AppHeader/AppHeader";
 import {BurgerIngredients} from "../BurgerIngredients/BurgerIngredients";
@@ -10,31 +10,32 @@ import {ModalIngredientsDetails} from "../ModalIngredientDetails/ModalIngredient
 
 function App() {
     const [priceModal,openPriceModal] = useState(false)
-    const [currentItem,setCurrentItem] = useState({})
+    const [currentModalIngridients,setCurrentModalIngridients] = useState({})
     const [ingredientsModal,openIngredientsModal] = useState(false)
-    const [burgers, burgerResponse] = useState({
-            arr: [],
-            loading: true
-        })
+    const [burgers, setBurgers] = useState([])
+    const ingredientsResultBread = useMemo(() => {
+        return burgers.filter((item) => (item.type !== 'bun'))
+    },[burgers])
         useEffect(() => {
             const getResponse = async () => {
-                    burgerResponse({...burgers,loading: true})
                     const response = await fetch(API_BURGERS)
                     if(response.ok) {
                         const responseData = await response.json()
-                        burgerResponse({arr: responseData.data, loading: false})
+                        setBurgers(responseData.data)
                     } else {
                         alert("Ошибка HTTP: " + response.status);
                     }
             }
             getResponse()
-        },[]
+        },
+            []
  )
     const handlePriceModal = () => {
         openPriceModal(!priceModal)
     }
-    const handleOrderModal = () => {
-        openIngredientsModal(!ingredientsModal)
+    const handleOrderModal = (i) => {
+        setCurrentModalIngridients(i)
+        openIngredientsModal((v) => !v)
     }
     const closeOrderModal = () => {
         openIngredientsModal(false)
@@ -44,6 +45,13 @@ function App() {
         openPriceModal(false)
     }
 
+    const notBun = () => {
+        burgers.arr.filter(() => {
+            return
+        })
+    }
+
+
     return (
 
     <div className={AppStyles.App}>
@@ -51,12 +59,12 @@ function App() {
             <ModalOrderDetails/>
         </Modal>
         <Modal isActive={ingredientsModal} handleIsActive={handleOrderModal} closePopup={closeOrderModal} title="Детали ингредиента">
-        <ModalIngredientsDetails ingredient={burgers.arr}/>
+        <ModalIngredientsDetails ingredient={currentModalIngridients}/>
         </Modal>
             <AppHeader/>
         <main className={AppStyles.container}>
-            {!burgers.loading && <BurgerIngredients arrData={burgers.arr} openModal={handleOrderModal}/>}
-            {!burgers.loading && <BurgerConstructor arr={burgers.arr[0]} openModal={handlePriceModal}/>}
+            {burgers.length && <BurgerIngredients arrData={burgers} openModal={handleOrderModal}/>}
+            {burgers.length && <BurgerConstructor bur={burgers[0]} ingredients={ingredientsResultBread} openModal={handlePriceModal}/>}
         </main>
     </div>
   );

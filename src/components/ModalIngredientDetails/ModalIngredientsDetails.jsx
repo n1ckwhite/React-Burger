@@ -40,3 +40,8 @@ export const ModalIngredientsDetails = ({ingredient}) => {
     )
 }
 
+
+
+ModalIngredientsDetails.propType = {
+    ingredient: PropTypes.object.isRequired
+}

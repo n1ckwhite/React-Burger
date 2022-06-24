@@ -28,5 +28,6 @@ export const BurgerIngredients = ({arrData,openModal}) => {
 }
 
 BurgerIngredients.propTypes = {
-    openModal: PropTypes.func.isRequired
+    openModal: PropTypes.func.isRequired,
+    arrData: PropTypes.array.isRequired
 }
