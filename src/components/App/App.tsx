@@ -17,14 +17,14 @@ function App() {
         })
         useEffect(() => {
             const getResponse = async () => {
-                try {
                     burgerResponse({...burgers,loading: true})
                     const response = await fetch(API_BURGERS)
-                    const responseData = await response.json()
-                    burgerResponse({arr: responseData.data, loading: false})
-                } catch (error) {
-                    console.log('Ошибка: ',error)
-                }
+                    if(response.ok) {
+                        const responseData = await response.json()
+                        burgerResponse({arr: responseData.data, loading: false})
+                    } else {
+                        alert("Ошибка HTTP: " + response.status);
+                    }
             }
             getResponse()
         },[]
