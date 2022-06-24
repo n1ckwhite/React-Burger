@@ -3,25 +3,23 @@ import stylesIngredientCard from './IngredientCard.module.css';
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 
-export const IngredientCard = (props) => {
+export const IngredientCard = ({ingredient,openModal}) => {
     return (
-        <li className={`${stylesIngredientCard.li} mt-6`} onClick={props.openModal}>
-            {props.count> 0 && <Counter count={props.count}/>}
-            <img  src={props.image} alt={props.name}/>
+        <li className={`${stylesIngredientCard.li} mt-6`} onClick={openModal}>
+            {ingredient.count> 0 && <Counter count={ingredient.count}/>}
+            <img  src={ingredient.image} alt={ingredient.name}/>
             <p className={`${stylesIngredientCard.prices} text text_type_digits-default mt-4 mb-4`}>
-                {props.price}
+                {ingredient.price}
                 <CurrencyIcon type="primary" />
             </p>
             <p className="text text_type_main-default">
-                {props.name}
+                {ingredient.name}
             </p>
         </li>
     )
 }
 
 IngredientCard.propTypes = {
-    count: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired
+    ingredient: PropTypes.object.isRequired,
+    openModal: PropTypes.func.isRequired
 }

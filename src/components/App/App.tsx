@@ -10,6 +10,7 @@ import {ModalIngredientsDetails} from "../ModalIngredientDetails/ModalIngredient
 
 function App() {
     const [priceModal,openPriceModal] = useState(false)
+    const [currentItem,setCurrentItem] = useState({})
     const [ingredientsModal,openIngredientsModal] = useState(false)
     const [burgers, burgerResponse] = useState({
             arr: [],
@@ -54,12 +55,12 @@ function App() {
         </Modal>
             <AppHeader/>
         <main className={AppStyles.container}>
-            {burgers.loading === false && <BurgerIngredients arrData={burgers.arr} openModal={handleOrderModal}/>}
-            {burgers.loading === false && <BurgerConstructor arr={burgers.arr} openModal={handlePriceModal}/>}
+            {!burgers.loading && <BurgerIngredients arrData={burgers.arr} openModal={handleOrderModal}/>}
+            {!burgers.loading && <BurgerConstructor arr={burgers.arr[0]} openModal={handlePriceModal}/>}
         </main>
     </div>
   );
 }
 
-
 export default App;
+

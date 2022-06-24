@@ -3,7 +3,6 @@ import stylesBurgerIngredient from './BurgerIngredient.module.css';
 import {IngredientCard} from "../IngredientCard/IngredientCard";
 import PropTypes from "prop-types";
 import {menuItemPropTypes} from "../../utils/constans";
-import {BurgerConstructor} from "../BurgerConstructor/BurgerConstructor";
 export const BurgerIngredient = (props) => {
     return (
         <div className={stylesBurgerIngredient.card}>
@@ -12,9 +11,9 @@ export const BurgerIngredient = (props) => {
                     Булки
                 </p>
                 <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
-                    {props.arrData.map((item) => {
+                    {props.arrData.map((item,index) => {
                         if(item.type === 'bun') {
-                            return <IngredientCard openModal={props.handleModal} key={item._id} image={item.image} count={item.__v} price={item.price} name={item.name} />
+                            return <IngredientCard key={index} ingredient={item} openModal={props.handleModal} />
                         }
                     })}
                 </ul>
@@ -24,9 +23,9 @@ export const BurgerIngredient = (props) => {
                     Соусы
                 </p>
                 <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
-                    {props.arrData.map((item) => {
+                    {props.arrData.map((item,index) => {
                         if(item.type === 'sauce') {
-                            return <IngredientCard openModal={props.handleModal} key={item._id} image={item.image} count={item.__v} price={item.price} name={item.name}/>
+                            return <IngredientCard key={index} ingredient={item} openModal={props.handleModal}/>
                         }
                     })}
                 </ul>
@@ -36,9 +35,9 @@ export const BurgerIngredient = (props) => {
                     Начинки
                 </p>
                 <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
-                    {props.arrData.map((item) => {
+                    {props.arrData.map((item,index) => {
                         if(item.type === 'main') {
-                            return <IngredientCard openModal={props.handleModal} key={item._id} image={item.image} count={item.__v} price={item.price} name={item.name} />
+                            return <IngredientCard key={index} ingredient={item} openModal={props.handleModal}/>
                         }
                     })}
                 </ul>
