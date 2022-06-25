@@ -3,6 +3,7 @@ import stylesBurgerIngridients from './BurgerIngredients.module.css';
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {BurgerIngredient} from "../BurgerIngredient/BurgetIngredient";
 import PropTypes from "prop-types";
+import {menuItemPropTypes} from "../../utils/constans";
 
 export const BurgerIngredients = ({arrData,openModal}) => {
     const [current, setCurrent] = React.useState('one')
@@ -29,5 +30,5 @@ export const BurgerIngredients = ({arrData,openModal}) => {
 
 BurgerIngredients.propTypes = {
     openModal: PropTypes.func.isRequired,
-    arrData: PropTypes.array.isRequired
+    arrData: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired
 }

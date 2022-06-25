@@ -1,6 +1,7 @@
 import React from "react";
 import stylesModalIngredientsDetails from './ModalIngredientsDetails.module.css';
 import PropTypes from "prop-types";
+import {menuItemPropTypes} from "../../utils/constans";
 
 export const ModalIngredientsDetails = ({ingredient}) => {
     return (
@@ -43,5 +44,5 @@ export const ModalIngredientsDetails = ({ingredient}) => {
 
 
 ModalIngredientsDetails.propType = {
-    ingredient: PropTypes.object.isRequired
+    ingredient: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired
 }

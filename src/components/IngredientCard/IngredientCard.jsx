@@ -2,6 +2,7 @@ import React from "react";
 import stylesIngredientCard from './IngredientCard.module.css';
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import {menuItemPropTypes} from "../../utils/constans";
 
 export const IngredientCard = ({ingredient,openModal}) => {
     return (
@@ -20,6 +21,11 @@ export const IngredientCard = ({ingredient,openModal}) => {
 }
 
 IngredientCard.propTypes = {
-    ingredient: PropTypes.object.isRequired,
+    ingredient: PropTypes.shape({
+        count: PropTypes.number,
+        image: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired
+    }),
     openModal: PropTypes.func.isRequired
 }

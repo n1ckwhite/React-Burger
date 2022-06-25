@@ -2,6 +2,7 @@ import React from "react";
 import stylesBurgerConstructor from './BurgerConstructor.module.css';
 import {ConstructorElement,CurrencyIcon,Button,DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import {menuItemPropTypes} from "../../utils/constans";
 export const BurgerConstructor = ({bur,ingredients,openModal}) => {
     return (
         <section className={`${stylesBurgerConstructor.section} mt-25`}>
@@ -58,5 +59,5 @@ export const BurgerConstructor = ({bur,ingredients,openModal}) => {
 BurgerConstructor.propTypes = {
     openModal: PropTypes.func.isRequired,
     bur: PropTypes.object.isRequired,
-    ingredients: PropTypes.array.isRequired,
+    ingredients: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
 }
