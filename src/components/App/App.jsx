@@ -18,13 +18,16 @@ function App() {
     },[burgers])
         useEffect(() => {
             const getResponse = async () => {
+                try {
                     const response = await fetch(API_BURGERS)
-                    if(response.ok) {
-                        const responseData = await response.json()
-                        setBurgers(responseData.data)
-                    } else {
-                        alert("Ошибка HTTP: " + response.status);
+                    if(!response.ok) {
+                        throw new Error('Ответ сети был не ok.')
                     }
+                    const responseData = await response.json()
+                    setBurgers(responseData.data)
+                } catch (error) {
+                    alert("Ошибка HTTP: " + error.message);
+                }
             }
             getResponse()
         },
