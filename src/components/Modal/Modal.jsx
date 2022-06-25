@@ -48,7 +48,7 @@ Modal.defaultProps ={
 }
 
 Modal.propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
     isActive: PropTypes.bool.isRequired,
     handleIsActive: PropTypes.func.isRequired,
     closePopup: PropTypes.func.isRequired,

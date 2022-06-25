@@ -13,7 +13,7 @@ export const ModalOverlay = ({children,open, closePopup}) => {
 }
 
 ModalOverlay.propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
     open: PropTypes.bool.isRequired,
     closePopup: PropTypes.func.isRequired
 }
