@@ -3,8 +3,9 @@ import stylesBurgerIngridients from './BurgerIngredients.module.css';
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {BurgerIngredient} from "../BurgerIngredient/BurgetIngredient";
 import PropTypes from "prop-types";
+import {menuItemPropTypes} from "../../utils/constans";
 
-export const BurgerIngredients = (props) => {
+export const BurgerIngredients = ({arrData,openModal}) => {
     const [current, setCurrent] = React.useState('one')
     return (
         <section className={`${stylesBurgerIngridients.section} mt-10`}>
@@ -22,11 +23,12 @@ export const BurgerIngredients = (props) => {
                     Начинки
                 </Tab>
             </div>
-            <BurgerIngredient arrData={props.arrData}/>
+            <BurgerIngredient handleModal={openModal} arrData={arrData}/>
         </section>
     )
 }
 
 BurgerIngredients.propTypes = {
-    arrData: PropTypes.array.isRequired
+    openModal: PropTypes.func.isRequired,
+    arrData: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired
 }
