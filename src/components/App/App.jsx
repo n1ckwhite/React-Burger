@@ -14,7 +14,7 @@ function App() {
     const [ingredientsModal,openIngredientsModal] = useState(false)
     const [burgers, setBurgers] = useState([])
     const ingredientsResultBread = useMemo(() => {
-        return burgers.filter((item) => (item.type !== 'bun'))
+        return burgers.filter(item => item.type !== 'bun')
     },[burgers])
         useEffect(() => {
             const getResponse = async () => {
@@ -47,13 +47,6 @@ function App() {
     const closePriseModal = () => {
         openPriceModal(false)
     }
-
-    const notBun = () => {
-        burgers.arr.filter(() => {
-            return
-        })
-    }
-
 
     return (
 
