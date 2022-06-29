@@ -1,51 +1,25 @@
-import React from "react";
+import React, {useContext} from "react";
 import stylesBurgerConstructor from './BurgerConstructor.module.css';
-import {ConstructorElement,CurrencyIcon,Button,DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {CurrencyIcon,Button} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import {menuItemPropTypes} from "../../utils/constans";
-export const BurgerConstructor = ({bur,ingredients,openModal}) => {
+import {IngredientsContext} from "../../services/IngredientsContext";
+import {BurgerConstructorItem} from "../BurgetConstructorItem/BurgerConstructorItem";
+
+export const BurgerConstructor = ({bur,openModal}) => {
+    const [...ingredients] = useContext(IngredientsContext);
+    const prices = ingredients.reduce((a,b) => (a + b.price),0)
     return (
         <section className={`${stylesBurgerConstructor.section} mt-25`}>
+            <BurgerConstructorItem item={bur} type="top" isLocked={true} position={true}/>
             <ul className={stylesBurgerConstructor.ul}>
-                <li className={`${stylesBurgerConstructor.li} mb-4`}>
-                    <ConstructorElement
-                        type="top"
-                        isLocked={true}
-                        text={`${bur.name} (верх)`}
-                        price={bur.price}
-                        thumbnail={bur.image}
-                        key={bur._id}
-                    />
-                </li>
-                <div className={stylesBurgerConstructor.liScroll}>
                     {ingredients.map(function(item,index) {
-                        return (
-                            <li className={`${stylesBurgerConstructor.li}`} key={index}>
-                                <DragIcon type="primary" />
-                                <ConstructorElement
-                                    isLocked={false}
-                                    text={item.name}
-                                    price={item.price}
-                                    thumbnail={item.image}
-                                />
-                            </li>
-                        )
+                        return <BurgerConstructorItem item={item} key={index} type="middle" drag={true}/>
                     })}
-                    </div>
-                    <li className={`${stylesBurgerConstructor.li} mt-4`}>
-                    <ConstructorElement
-                        type="bottom"
-                        isLocked={true}
-                        text={`${bur.name} (низ)`}
-                        price={bur.price}
-                        thumbnail={bur.image}
-                        key={bur._id}
-                    />
-                </li>
             </ul>
+            <BurgerConstructorItem item={bur} type="bottom" isLocked={true} position={false}/>
             <div className={`${stylesBurgerConstructor.info} mt-10`}>
                 <p className={`text text_type_digits-medium ${stylesBurgerConstructor.price} mr-10`}>
-                 610
+                    {prices + (2 * bur.price)}
                     <CurrencyIcon type="primary" />
                 </p>
                 <Button type="primary" size="medium" onClick={openModal}>
@@ -59,5 +33,4 @@ export const BurgerConstructor = ({bur,ingredients,openModal}) => {
 BurgerConstructor.propTypes = {
     openModal: PropTypes.func.isRequired,
     bur: PropTypes.object.isRequired,
-    ingredients: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
 }

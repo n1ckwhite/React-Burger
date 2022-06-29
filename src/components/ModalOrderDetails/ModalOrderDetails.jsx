@@ -1,10 +1,11 @@
 import React from 'react'
 import stylesModalOrderDetails from './ModalOrderDetails.module.css';
 import doneImg from '../../images/order accpeted/done.png';
-export const ModalOrderDetails = () => {
+import PropTypes from "prop-types";
+export const ModalOrderDetails = ({number}) => {
     return (
         <>
-            <p className={`${stylesModalOrderDetails.title} text text_type_digits-large  mt-30`}>034536</p>
+            <p className={`${stylesModalOrderDetails.title} text text_type_digits-large  mt-30`}>{number}</p>
             <p className="text text_type_main-medium mt-8">
                 Индентификатор заказа
             </p>
@@ -16,5 +17,13 @@ export const ModalOrderDetails = () => {
                 Дождитесь готовности на орбитальной станции
             </p>
         </>
+    )
+}
+
+ModalOrderDetails.propTypes = {
+    number: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]
     )
 }

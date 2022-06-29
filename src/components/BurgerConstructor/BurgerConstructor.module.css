@@ -10,34 +10,21 @@
     flex-direction: column;
     align-items: stretch;
     list-style-type: none;
-    padding: 0;
     margin: 0;
-
-}
-
-.li {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 8px;
-}
-
-.liScroll {
-    display: flex;
-    flex-direction: column;
+    width: 584px;
+    padding-left: 16px;
     position: relative;
     left: 16px;
-    gap: 16px;
     max-height: 464px;
     overflow-y: scroll;
     scrollbar-color: var(--text-inactive-color) var(--colors-button-inactive);
 }
 
-.liScroll::-webkit-scrollbar {
+.ul::-webkit-scrollbar {
     background: var(--colors-button-inactive);
 }
 
-.liScroll::-webkit-scrollbar-thumb {
+.ul::-webkit-scrollbar-thumb {
     background: var(--text-inactive-color);
 }
 
