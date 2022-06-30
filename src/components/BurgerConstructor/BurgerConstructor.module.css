@@ -1,58 +1,50 @@
 .section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    min-height: 912px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 912px;
 }
 
 .ul {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  list-style-type: none;
+  margin: 0;
+  width: 584px;
+  padding-left: 16px;
+  position: relative;
+  left: 16px;
+  max-height: 464px;
+  overflow-y: scroll;
+  scrollbar-color: var(--text-inactive-color) var(--colors-button-inactive);
 }
 
-.li {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 8px;
+.ul::-webkit-scrollbar {
+  background: var(--colors-button-inactive);
 }
 
-.liScroll {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    left: 16px;
-    gap: 16px;
-    max-height: 464px;
-    overflow-y: scroll;
-    scrollbar-color: var(--text-inactive-color) var(--colors-button-inactive);
-}
-
-.liScroll::-webkit-scrollbar {
-    background: var(--colors-button-inactive);
-}
-
-.liScroll::-webkit-scrollbar-thumb {
-    background: var(--text-inactive-color);
+.ul::-webkit-scrollbar-thumb {
+  background: var(--text-inactive-color);
 }
 
 .info {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .price {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .price > svg {
-    width: 36px;
-    height: 36px;
+  width: 36px;
+  height: 36px;
+}
+
+.ulUnder {
+  list-style-type: none;
+  padding: 0;
 }
