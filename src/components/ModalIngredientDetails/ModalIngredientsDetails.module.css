@@ -1,23 +1,23 @@
 .img {
-    width: 480px;
-    height: 240px;
-    object-fit: contain;
+  width: 480px;
+  height: 240px;
+  object-fit: contain;
 }
 
 .ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    margin-bottom: 0;
-    text-align: center;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  margin-bottom: 0;
+  text-align: center;
 }
 
 .li {
-    min-width: 112px;
-    color: var(--text-inactive-color);
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  min-width: 112px;
+  color: var(--text-inactive-color);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
