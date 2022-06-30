@@ -1,10 +1,8 @@
 import React from "react";
 import stylesModalOverlay from "./ModalOverlay.module.css";
-import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import { modal } from "../Modal/Modal";
 export const ModalOverlay = ({ children, open, closePopup }) => {
-  return ReactDOM.createPortal(
+  return (
     <div
       className={
         open
@@ -19,8 +17,7 @@ export const ModalOverlay = ({ children, open, closePopup }) => {
           closePopup();
         }}
       ></div>
-    </div>,
-    modal
+    </div>
   );
 };
 

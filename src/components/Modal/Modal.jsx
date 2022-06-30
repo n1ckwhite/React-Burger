@@ -4,7 +4,7 @@ import stylesModal from "./Modal.module.css";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-export const modal = document.getElementById("react-modals");
+const modal = document.getElementById("react-modals");
 export const Modal = ({
   children,
   isActive,
