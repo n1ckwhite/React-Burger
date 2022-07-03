@@ -11,7 +11,7 @@ export const ingredientReduce =(state = initialState,action) => {
         case GET_INGREDIENT: {
             return {
                 ...state,
-                ingredient: {...action.arr}
+                ingredient: {...state.ingredient,...action.arr}
             }
         }
         default:
