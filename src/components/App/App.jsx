@@ -3,59 +3,32 @@ import AppStyles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
-import { API_BURGERS } from "../../utils/data";
 import { Modal } from "../Modal/Modal";
 import { ModalOrderDetails } from "../ModalOrderDetails/ModalOrderDetails";
 import { ModalIngredientsDetails } from "../ModalIngredientDetails/ModalIngredientsDetails";
 import { IngredientsContext } from "../../services/IngredientsContext";
+import {useDispatch, useSelector} from "react-redux";
+import {getIngredients} from "../../services/action/ingredients";
+import {getOrder} from "../../services/action/order";
 
 function App() {
   const [priceModal, openPriceModal] = useState(false);
   const [currentModalIngridients, setCurrentModalIngridients] = useState({});
   const [ingredientsModal, openIngredientsModal] = useState(false);
-  const [number, setNumber] = useState("");
-  const [burgers, setBurgers] = useState([]);
+  const dispatch = useDispatch()
+  const burgers = useSelector(state => state.ingredients.ingredients)
+  const number = useSelector(state => state.order.order)
   useEffect(() => {
-    const getResponse = () => {
-      fetch(`${API_BURGERS}/ingredients`)
-        .then((response) => checkResponse(response))
-        .then((data) => {
-          return setBurgers(data.data);
-        })
-        .catch((error) => {
-          alert("Ошибка HTTP: " + error.message);
-        });
-    };
-    getResponse();
-  }, []);
-
+    dispatch(getIngredients())
+  }, [dispatch]);
   const handlePriceModal = () => {
     openPriceModal(!priceModal);
   };
 
   const handleOpenModal = () => {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ingredients: [...burgers.filter((i) => i._id)] }),
-    };
-    fetch(`${API_BURGERS}/orders`, requestOptions)
-      .then((response) => checkResponse(response))
-      .then((data) =>
-        data.success ? setNumber(data.order.number) : setNumber("")
-      )
-      .catch((error) => {
-        alert("Ошибка HTTP: " + error.message);
-      });
+    dispatch(getOrder(burgers))
     openPriceModal(true);
   };
-
-  function checkResponse(response) {
-    if (!response.ok) {
-      throw new Error("Ответ сети был не ok.");
-    }
-    return response.json();
-  }
 
   const handleOrderModal = (i) => {
     setCurrentModalIngridients(i);
