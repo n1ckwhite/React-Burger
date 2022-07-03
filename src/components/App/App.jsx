@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import AppStyles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
@@ -9,10 +9,10 @@ import { ModalIngredientsDetails } from "../ModalIngredientDetails/ModalIngredie
 import {useDispatch, useSelector} from "react-redux";
 import {getIngredients} from "../../services/action/ingredients";
 import {getOrder} from "../../services/action/order";
+import {getIngredient} from "../../services/action/ingredient";
 
 function App() {
   const [priceModal, openPriceModal] = useState(false);
-  const [currentModalIngridients, setCurrentModalIngridients] = useState({});
   const [ingredientsModal, openIngredientsModal] = useState(false);
   const dispatch = useDispatch()
   const burgers = useSelector(state => state.ingredients.ingredients)
@@ -29,7 +29,7 @@ function App() {
   };
 
   const handleOrderModal = (i) => {
-    setCurrentModalIngridients(i);
+    dispatch(getIngredient(i))
     openIngredientsModal((v) => !v);
   };
   const closeOrderModal = () => {
@@ -54,7 +54,7 @@ function App() {
           closePopup={closeOrderModal}
           title="Детали ингредиента"
         >
-          <ModalIngredientsDetails ingredient={currentModalIngridients} />
+          <ModalIngredientsDetails/>
         </Modal>
         <AppHeader />
         <main className={AppStyles.container}>

@@ -1,6 +1,6 @@
 export const GET_INGREDIENTS = 'GET_INGREDIENTS';
 export const GET_ORDER = 'GET_ORDER';
-
+export const GET_INGREDIENT = 'GET_INGREDIENT'
 
 export default function checkResponse(response) {
     if (!response.ok) {

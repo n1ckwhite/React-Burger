@@ -1,9 +1,9 @@
 import React from "react";
 import stylesModalIngredientsDetails from "./ModalIngredientsDetails.module.css";
-import PropTypes from "prop-types";
-import { menuItemPropTypes } from "../../utils/constans";
+import {useSelector} from "react-redux";
 
-export const ModalIngredientsDetails = ({ ingredient }) => {
+export const ModalIngredientsDetails = () => {
+  const ingredient = useSelector(state => state.ingredient.ingredient)
   return (
     <>
       <img
@@ -61,6 +61,3 @@ export const ModalIngredientsDetails = ({ ingredient }) => {
   );
 };
 
-ModalIngredientsDetails.propType = {
-  ingredient: PropTypes.objectOf(menuItemPropTypes.isRequired).isRequired,
-};

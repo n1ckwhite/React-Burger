@@ -1,15 +1,17 @@
-import {GET_INGREDIENTS} from "../action";
-const initialIngredients = {
-    ingredients: {}
+import {GET_INGREDIENT} from "../action";
 
+
+const initialState = {
+    ingredient: {}
 }
 
-export const ingredientsReduce = (state = initialIngredients,action) => {
+
+export const ingredientReduce =(state = initialState,action) => {
     switch (action.type) {
-        case GET_INGREDIENTS: {
+        case GET_INGREDIENT: {
             return {
                 ...state,
-                ingredients: action.resp
+                ingredient: {...action.arr}
             }
         }
         default:
