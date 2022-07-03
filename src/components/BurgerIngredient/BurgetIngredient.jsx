@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import stylesBurgerIngredient from "./BurgerIngredient.module.css";
 import { IngredientCard } from "../IngredientCard/IngredientCard";
-import { IngredientsContext } from "../../services/IngredientsContext";
 import PropTypes from "prop-types";
+import {useSelector} from "react-redux";
 export const BurgerIngredient = ({ handleModal }) => {
-  const [...burgers] = useContext(IngredientsContext);
+  const burgers = useSelector(state => state.ingredients.ingredients)
   return (
     <div className={stylesBurgerIngredient.card}>
       <div className="mt-10">

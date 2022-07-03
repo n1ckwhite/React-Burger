@@ -6,7 +6,6 @@ import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
 import { Modal } from "../Modal/Modal";
 import { ModalOrderDetails } from "../ModalOrderDetails/ModalOrderDetails";
 import { ModalIngredientsDetails } from "../ModalIngredientDetails/ModalIngredientsDetails";
-import { IngredientsContext } from "../../services/IngredientsContext";
 import {useDispatch, useSelector} from "react-redux";
 import {getIngredients} from "../../services/action/ingredients";
 import {getOrder} from "../../services/action/order";
@@ -17,7 +16,6 @@ function App() {
   const [ingredientsModal, openIngredientsModal] = useState(false);
   const dispatch = useDispatch()
   const burgers = useSelector(state => state.ingredients.ingredients)
-  const number = useSelector(state => state.order.order)
   useEffect(() => {
     dispatch(getIngredients())
   }, [dispatch]);
@@ -43,13 +41,12 @@ function App() {
 
   return (
     <div className={AppStyles.App}>
-      <IngredientsContext.Provider value={burgers}>
         <Modal
           isActive={priceModal}
           handleIsActive={handlePriceModal}
           closePopup={closePriseModal}
         >
-          <ModalOrderDetails number={number} />
+          <ModalOrderDetails />
         </Modal>
         <Modal
           isActive={ingredientsModal}
@@ -63,10 +60,9 @@ function App() {
         <main className={AppStyles.container}>
           {burgers.length && <BurgerIngredients openModal={handleOrderModal} />}
           {burgers.length && (
-            <BurgerConstructor bur={burgers[0]} openModal={handleOpenModal} />
+            <BurgerConstructor openModal={handleOpenModal} />
           )}
         </main>
-      </IngredientsContext.Provider>
     </div>
   );
 }
