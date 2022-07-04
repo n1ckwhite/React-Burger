@@ -7,8 +7,8 @@ export const BurgerIngredient = ({ handleModal }) => {
   const burgers = useSelector(state => state.ingredients.ingredients)
   return (
     <div className={stylesBurgerIngredient.card}>
-      <div className="mt-10">
-        <p className="text text_type_main-medium" id='bun'>Булки</p>
+      <div className="pt-10" id='bun'>
+        <p className="text text_type_main-medium">Булки</p>
         <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
           {burgers.map((item) => {
             if (item.type === "bun") {
@@ -23,8 +23,8 @@ export const BurgerIngredient = ({ handleModal }) => {
           })}
         </ul>
       </div>
-      <div className="mt-10">
-        <p className="text text_type_main-medium" id="souse">Соусы</p>
+      <div className="pt-10" id="souse">
+        <p className="text text_type_main-medium">Соусы</p>
         <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
           {burgers.map((item) => {
             if (item.type === "sauce") {
@@ -39,8 +39,8 @@ export const BurgerIngredient = ({ handleModal }) => {
           })}
         </ul>
       </div>
-      <div className="mt-10">
-        <p className="text text_type_main-medium" id='ingredient'>Начинки</p>
+      <div className="pt-10" id='ingredient'>
+        <p className="text text_type_main-medium">Начинки</p>
         <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
           {burgers.map((item) => {
             if (item.type === "main") {
