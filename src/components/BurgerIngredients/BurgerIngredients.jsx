@@ -10,15 +10,21 @@ export const BurgerIngredients = ({ openModal }) => {
     <section className={`${stylesBurgerIngridients.section} mt-10`}>
       <p className="text text_type_main-large">Собери бургер</p>
       <div className={`${stylesBurgerIngridients.nav} mt-5`}>
-        <Tab value="one" active={current === "one"} onClick={setCurrent}>
-          Булки
-        </Tab>
-        <Tab value="two" active={current === "two"} onClick={setCurrent}>
-          Соусы
-        </Tab>
-        <Tab value="three" active={current === "three"} onClick={setCurrent}>
-          Начинки
-        </Tab>
+          <a className={stylesBurgerIngridients.a} href="#bun">
+              <Tab value="one" active={current === "one"} onClick={setCurrent}>
+                  Булки
+              </Tab>
+          </a>
+          <a className={stylesBurgerIngridients.a} href="#souse">
+              <Tab value="two" active={current === "two"} onClick={setCurrent}>
+                  Соусы
+              </Tab>
+          </a>
+          <a className={stylesBurgerIngridients.a} href="#ingredient">
+              <Tab value="three" active={current === "three"} onClick={setCurrent}>
+                  Начинки
+              </Tab>
+          </a>
       </div>
       <BurgerIngredient handleModal={openModal} />
     </section>

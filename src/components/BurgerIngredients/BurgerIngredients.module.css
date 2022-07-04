@@ -3,6 +3,11 @@
   max-width: 600px;
 }
 
+.a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .nav {
   display: flex;
 }

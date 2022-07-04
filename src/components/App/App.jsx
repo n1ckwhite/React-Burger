@@ -9,7 +9,7 @@ import { ModalIngredientsDetails } from "../ModalIngredientDetails/ModalIngredie
 import {useDispatch, useSelector} from "react-redux";
 import {getIngredients} from "../../services/action/ingredients";
 import {getOrder} from "../../services/action/order";
-import {getIngredient} from "../../services/action/ingredient";
+import {clearIngredient, getIngredient} from "../../services/action/ingredient";
 
 function App() {
   const [priceModal, openPriceModal] = useState(false);
@@ -28,11 +28,12 @@ function App() {
     openPriceModal(true);
   };
 
-  const handleOrderModal = (i) => {
+  const openOrderModal = (i) => {
     dispatch(getIngredient(i))
-    openIngredientsModal((v) => !v);
+    openIngredientsModal(true);
   };
   const closeOrderModal = () => {
+    dispatch(clearIngredient())
     openIngredientsModal(false);
   };
   const closePriseModal = () => {
@@ -50,7 +51,7 @@ function App() {
         </Modal>
         <Modal
           isActive={ingredientsModal}
-          handleIsActive={handleOrderModal}
+          handleIsActive={openOrderModal}
           closePopup={closeOrderModal}
           title="Детали ингредиента"
         >
@@ -58,7 +59,7 @@ function App() {
         </Modal>
         <AppHeader />
         <main className={AppStyles.container}>
-          {burgers.length && <BurgerIngredients openModal={handleOrderModal} />}
+          {burgers.length && <BurgerIngredients openModal={openOrderModal} />}
           {burgers.length && (
             <BurgerConstructor openModal={handleOpenModal} />
           )}

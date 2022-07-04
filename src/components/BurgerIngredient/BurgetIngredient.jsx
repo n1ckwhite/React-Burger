@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, {useContext, useRef} from "react";
 import stylesBurgerIngredient from "./BurgerIngredient.module.css";
 import { IngredientCard } from "../IngredientCard/IngredientCard";
 import PropTypes from "prop-types";
@@ -8,7 +8,7 @@ export const BurgerIngredient = ({ handleModal }) => {
   return (
     <div className={stylesBurgerIngredient.card}>
       <div className="mt-10">
-        <p className="text text_type_main-medium">Булки</p>
+        <p className="text text_type_main-medium" id='bun'>Булки</p>
         <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
           {burgers.map((item) => {
             if (item.type === "bun") {
@@ -24,7 +24,7 @@ export const BurgerIngredient = ({ handleModal }) => {
         </ul>
       </div>
       <div className="mt-10">
-        <p className="text text_type_main-medium">Соусы</p>
+        <p className="text text_type_main-medium" id="souse">Соусы</p>
         <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
           {burgers.map((item) => {
             if (item.type === "sauce") {
@@ -40,7 +40,7 @@ export const BurgerIngredient = ({ handleModal }) => {
         </ul>
       </div>
       <div className="mt-10">
-        <p className="text text_type_main-medium">Начинки</p>
+        <p className="text text_type_main-medium" id='ingredient'>Начинки</p>
         <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
           {burgers.map((item) => {
             if (item.type === "main") {

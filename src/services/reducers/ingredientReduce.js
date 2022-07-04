@@ -1,4 +1,4 @@
-import {GET_INGREDIENT} from "../action";
+import {CLEAR_INGREDIENT, GET_INGREDIENT} from "../action";
 
 
 const initialState = {
@@ -8,6 +8,12 @@ const initialState = {
 
 export const ingredientReduce =(state = initialState,action) => {
     switch (action.type) {
+        case CLEAR_INGREDIENT: {
+            return {
+                ...state,
+                ingredient: {}
+            }
+        }
         case GET_INGREDIENT: {
             return {
                 ...state,
