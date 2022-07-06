@@ -8,7 +8,10 @@ import PropTypes from "prop-types";
 import { BurgerConstructorItem } from "../BurgetConstructorItem/BurgerConstructorItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
-import { DELETE_CONSTRUCTOR_ITEM} from "../../services/action";
+import {
+  DELETE_CONSTRUCTOR_ITEM,
+  SET_SORTED_ARRAY,
+} from "../../services/action";
 export const BurgerConstructor = ({ openModal }) => {
   const burgers = useSelector((state) => state.currentIngredient.ingredients);
   const bun = useSelector((state) => state.currentIngredient.bun);
@@ -26,6 +29,17 @@ export const BurgerConstructor = ({ openModal }) => {
     }),
   });
   const prices = burgers.reduce((a, b) => a + b.price, 0);
+
+  const moveIngredient = (dragIndex, hoverIndex) => {
+    const dragIngredient = burgers[dragIndex];
+    if (dragIngredient) {
+      const newIngredients = [...burgers];
+      newIngredients.splice(dragIndex, 1);
+      newIngredients.splice(hoverIndex, 0, dragIngredient);
+      dispatch({ type: SET_SORTED_ARRAY, sortedArray: newIngredients });
+    }
+  };
+
   return (
     <section className={`${stylesBurgerConstructor.section} mt-25`}>
       <ul className={stylesBurgerConstructor.ulUnder}>
@@ -47,13 +61,15 @@ export const BurgerConstructor = ({ openModal }) => {
           ref={dropRef}
           style={{ border: isHover ? "3px solid #4C4CFF" : "" }}
         >
-          {burgers.map((i) => {
+          {burgers.map((i, index) => {
             return (
               <BurgerConstructorItem
+                moveIngredient={moveIngredient}
                 key={i._id}
                 item={i}
                 type="middle"
                 drag={true}
+                index={index}
                 onDelete={() => onDelete(i._id)}
               />
             );
@@ -63,7 +79,7 @@ export const BurgerConstructor = ({ openModal }) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
-                 key={i._id}
+                key={i._id}
                 item={i}
                 type="bottom"
                 isLocked={true}
@@ -80,7 +96,12 @@ export const BurgerConstructor = ({ openModal }) => {
           {bun[0] ? prices + bun[0].price * 2 : prices}
           <CurrencyIcon type="primary" />
         </p>
-        <Button type="primary" size="medium" onClick={openModal} disabled={burgers.length ? false : true}>
+        <Button
+          type="primary"
+          size="medium"
+          onClick={openModal}
+          disabled={burgers.length && bun.length ? false : true}
+        >
           Оформить заказ
         </Button>
       </div>

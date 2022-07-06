@@ -7,6 +7,8 @@ export const CLEAR_INGREDIENT = "CLEAR_INGREDIENT";
 export const CREATE_CURRENT_INGREDIENT = "CREATE_CURRENT_INGREDIENT";
 export const REPLACE_BUN_INGREDIENT = "REPLACE_BUN_INGREDIENT";
 export const DELETE_CONSTRUCTOR_ITEM = "DELETE_CONSTRUCTOR_ITEM";
+export const TARGET_CARD_INGREDIENT = "TARGET_CARD_INGREDIENT";
+export const SET_SORTED_ARRAY = "SET_SORTED_ARRAY";
 export default function checkResponse(response) {
   if (!response.ok) {
     throw new Error("Ответ сети был не ok.");
