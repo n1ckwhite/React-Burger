@@ -6,6 +6,8 @@
 }
 
 .ul {
+  min-height: 80px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: stretch;

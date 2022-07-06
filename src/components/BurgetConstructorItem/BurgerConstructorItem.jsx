@@ -6,11 +6,13 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import { menuItemPropTypes } from "../../utils/constans";
+import { useSelector } from "react-redux";
 export const BurgerConstructorItem = ({
   item,
   isLocked,
   type,
   position,
+  onDelete,
   drag,
 }) => {
   let pos;
@@ -21,6 +23,7 @@ export const BurgerConstructorItem = ({
   } else {
     pos = "(низ)";
   }
+
   return (
     <li className={`${styleBurgerConstructorItem.li} mb-4`}>
       {drag && <DragIcon type="primary" />}
@@ -30,6 +33,7 @@ export const BurgerConstructorItem = ({
         text={`${item.name} ${pos}`}
         price={item.price}
         thumbnail={item.image}
+        handleClose={onDelete}
       />
     </li>
   );

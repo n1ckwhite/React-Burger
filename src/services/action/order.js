@@ -8,7 +8,7 @@ export const getOrder = (burgers) => {
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ingredients: [...burgers.filter((i) => i._id)] }),
+            body: JSON.stringify({ ingredients: [...burgers.filter(item => item._id)] }),
         };
         fetch(`${API_BURGERS}/orders`, requestOptions)
             .then((response) => checkResponse(response))

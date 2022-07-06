@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import AppStyles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
@@ -12,6 +12,7 @@ import {getOrder} from "../../services/action/order";
 import {clearIngredient, getIngredient} from "../../services/action/ingredient";
 
 function App() {
+  const ingredients = useSelector(state => state.currentIngredient.ingredients)
   const [priceModal, openPriceModal] = useState(false);
   const [ingredientsModal, openIngredientsModal] = useState(false);
   const dispatch = useDispatch()
@@ -24,7 +25,7 @@ function App() {
   };
 
   const handleOpenModal = () => {
-    dispatch(getOrder(burgers))
+    dispatch(getOrder(ingredients))
     openPriceModal(true);
   };
 
