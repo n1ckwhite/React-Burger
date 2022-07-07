@@ -8,11 +8,13 @@ import PropTypes from "prop-types";
 import { BurgerConstructorItem } from "../BurgetConstructorItem/BurgerConstructorItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
+import { v4 as uuidv4 } from "uuid";
 import {
   DELETE_CONSTRUCTOR_ITEM,
   SET_SORTED_ARRAY,
 } from "../../services/action";
 export const BurgerConstructor = ({ openModal }) => {
+  const { v4: uuidv4 } = require("uuid");
   const burgers = useSelector((state) => state.currentIngredient.ingredients);
   const bun = useSelector((state) => state.currentIngredient.bun);
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ export const BurgerConstructor = ({ openModal }) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
-                key={i._id}
+                key={uuidv4()}
                 item={i}
                 type="top"
                 isLocked={true}
@@ -65,7 +67,7 @@ export const BurgerConstructor = ({ openModal }) => {
             return (
               <BurgerConstructorItem
                 moveIngredient={moveIngredient}
-                key={i._id}
+                key={uuidv4()}
                 item={i}
                 type="middle"
                 drag={true}
@@ -79,7 +81,7 @@ export const BurgerConstructor = ({ openModal }) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
-                key={i._id}
+                key={uuidv4()}
                 item={i}
                 type="bottom"
                 isLocked={true}
