@@ -13,6 +13,7 @@ import {clearIngredient, getIngredient} from "../../services/action/ingredient";
 
 function App() {
   const ingredients = useSelector(state => state.currentIngredient.ingredients)
+  const buns = useSelector(state => state.currentIngredient.bun)
   const [priceModal, openPriceModal] = useState(false);
   const [ingredientsModal, openIngredientsModal] = useState(false);
   const dispatch = useDispatch()
@@ -25,7 +26,7 @@ function App() {
   };
 
   const handleOpenModal = () => {
-    dispatch(getOrder(ingredients))
+    dispatch(getOrder(ingredients.filter((item) => item._id),buns[0]._id))
     openPriceModal(true);
   };
 
