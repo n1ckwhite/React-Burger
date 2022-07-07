@@ -27,6 +27,7 @@ export const ingredientsReduce = (state = initialIngredients, action) => {
     case GET_INGREDIENTS_ERROR: {
       return {
         ...state,
+        pending: false,
         ingredients: state.ingredients,
         error: action.err,
       };
