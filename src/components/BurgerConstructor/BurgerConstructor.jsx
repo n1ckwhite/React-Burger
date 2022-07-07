@@ -61,7 +61,11 @@ export const BurgerConstructor = ({ openModal }) => {
         <ul
           className={stylesBurgerConstructor.ul}
           ref={dropRef}
-          style={{ border: isHover ? "3px solid #4C4CFF" : "" }}
+          style={{
+            border: isHover ? "3px solid #4C4CFF" : "",
+            outline:
+              burgers.length === 0 && bun.length === 0 ? "1px dashed #fff" : "",
+          }}
         >
           {burgers.map((i, index) => {
             return (
