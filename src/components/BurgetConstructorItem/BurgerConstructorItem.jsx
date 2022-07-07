@@ -84,8 +84,11 @@ export const BurgerConstructorItem = ({
 
 BurgerConstructorItem.propTypes = {
   item: menuItemPropTypes.isRequired,
+  index: PropTypes.number,
   type: PropTypes.string.isRequired,
   drag: PropTypes.bool,
   position: PropTypes.bool,
   isLocked: PropTypes.bool,
+  onDelete: PropTypes.func,
+  moveIngredient: PropTypes.func,
 };
