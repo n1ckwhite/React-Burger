@@ -17,6 +17,7 @@ export const BurgerConstructorItem = ({
   onDelete,
   drag,
 }) => {
+  const ref = useRef(null);
   let pos;
   if (position) {
     pos = "(верх)";
@@ -25,7 +26,6 @@ export const BurgerConstructorItem = ({
   } else {
     pos = "(низ)";
   }
-  const ref = useRef(null);
   const [, drop] = useDrop({
     accept: "ingredient",
     hover: (item, monitor) => {
@@ -65,7 +65,7 @@ export const BurgerConstructorItem = ({
 
   return (
     <li
-      ref={ref}
+      ref={!isLocked ? ref : null}
       className={`${styleBurgerConstructorItem.li} mb-4`}
       style={{ opacity }}
     >
