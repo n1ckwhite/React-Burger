@@ -1,9 +1,9 @@
 import React from "react";
 import stylesModalOrderDetails from "./ModalOrderDetails.module.css";
 import doneImg from "../../images/order accpeted/done.png";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 export const ModalOrderDetails = () => {
-    const number = useSelector(state => state.order.order)
+  const number = useSelector((state) => state.order.order);
   return (
     <>
       <p
@@ -26,4 +26,3 @@ export const ModalOrderDetails = () => {
     </>
   );
 };
-

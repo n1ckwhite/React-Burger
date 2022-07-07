@@ -1,4 +1,4 @@
-import {GET_ORDER_REQUEST,GET_ORDER_SUCCESSFUL,GET_ORDER_ERROR} from "../action";
+import {CLEAR_ORDER_NUMBER,GET_ORDER_REQUEST,GET_ORDER_SUCCESSFUL,GET_ORDER_ERROR} from "../action";
 
 const initialState = {
     order: 0,
@@ -25,6 +25,12 @@ export const orderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 order: action.number
+            }
+        }
+        case CLEAR_ORDER_NUMBER: {
+            return {
+                ...state,
+                order: 0,
             }
         }
         default:

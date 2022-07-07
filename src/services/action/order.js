@@ -2,12 +2,14 @@ import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESSFUL,
   GET_ORDER_ERROR,
+  CLEAR_ORDER_NUMBER,
 } from "./index";
 import checkResponse from "./index";
 import { API_BURGERS } from "../../utils/data";
 
 export const getOrder = (burgers) => {
   return (dispatch) => {
+    dispatch({type: CLEAR_ORDER_NUMBER})
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
