@@ -33,7 +33,7 @@ function App() {
   const handleOpenModal = () => {
     dispatch(
       getOrder(
-        ingredients.filter((item) => item._id),
+        ingredients.map((item) => item._id),
         buns[0]._id
       )
     );

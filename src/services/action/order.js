@@ -7,14 +7,14 @@ import {
 import checkResponse from "./index";
 import { API_BURGERS } from "../../utils/data";
 
-export const getOrder = (burgers,bun) => {
+export const getOrder = (burgers, bun) => {
   return (dispatch) => {
-    dispatch({type: CLEAR_ORDER_NUMBER})
+    dispatch({ type: CLEAR_ORDER_NUMBER });
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        ingredients: [bun,...burgers,bun],
+        ingredients: [bun, ...burgers, bun],
       }),
     };
     dispatch({
