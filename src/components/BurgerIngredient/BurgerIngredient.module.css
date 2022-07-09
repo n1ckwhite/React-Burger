@@ -1,6 +1,8 @@
 .card {
   max-height: calc(664px + 52px);
   overflow-y: scroll;
+  scroll-behavior: smooth;
+
   scrollbar-color: var(--text-inactive-color) var(--colors-button-inactive);
   outline: none;
 }

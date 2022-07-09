@@ -1,8 +1,9 @@
 import React from "react";
 import stylesModalOrderDetails from "./ModalOrderDetails.module.css";
 import doneImg from "../../images/order accpeted/done.png";
-import PropTypes from "prop-types";
-export const ModalOrderDetails = ({ number }) => {
+import { useSelector } from "react-redux";
+export const ModalOrderDetails = () => {
+  const number = useSelector((state) => state.order.order);
   return (
     <>
       <p
@@ -24,8 +25,4 @@ export const ModalOrderDetails = ({ number }) => {
       </p>
     </>
   );
-};
-
-ModalOrderDetails.propTypes = {
-  number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };

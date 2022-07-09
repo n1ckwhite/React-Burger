@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React, {useContext, useRef} from "react";
 import stylesBurgerIngredient from "./BurgerIngredient.module.css";
 import { IngredientCard } from "../IngredientCard/IngredientCard";
-import { IngredientsContext } from "../../services/IngredientsContext";
 import PropTypes from "prop-types";
+import {useSelector} from "react-redux";
 export const BurgerIngredient = ({ handleModal }) => {
-  const [...burgers] = useContext(IngredientsContext);
+  const burgers = useSelector(state => state.ingredients.ingredients)
   return (
     <div className={stylesBurgerIngredient.card}>
-      <div className="mt-10">
+      <div className="pt-10" id='bun'>
         <p className="text text_type_main-medium">Булки</p>
         <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
           {burgers.map((item) => {
@@ -23,7 +23,7 @@ export const BurgerIngredient = ({ handleModal }) => {
           })}
         </ul>
       </div>
-      <div className="mt-10">
+      <div className="pt-10" id="souse">
         <p className="text text_type_main-medium">Соусы</p>
         <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
           {burgers.map((item) => {
@@ -39,7 +39,7 @@ export const BurgerIngredient = ({ handleModal }) => {
           })}
         </ul>
       </div>
-      <div className="mt-10">
+      <div className="pt-10" id='ingredient'>
         <p className="text text_type_main-medium">Начинки</p>
         <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
           {burgers.map((item) => {

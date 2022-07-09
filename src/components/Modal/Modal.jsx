@@ -33,7 +33,7 @@ export const Modal = ({
             <p className="text text_type_main-large">{title}</p>
             <button
               className={`${stylesModal.button}`}
-              onClick={handleIsActive}
+              onClick={closePopup}
             >
               <CloseIcon type="primary" />
             </button>
