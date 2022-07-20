@@ -6,7 +6,7 @@
 }
 
 .ul {
-  min-height: 464px;
+  min-height: 100px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
