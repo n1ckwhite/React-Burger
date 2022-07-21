@@ -5,12 +5,15 @@ import { RegisterPage } from "../../pages/RegisterPage/RegisterPage";
 import { ForgotPage } from "../../pages/ForgotPage/ForgotPage";
 import { ResetPage } from "../../pages/ResetPage/ResetPage";
 import { AppHeader } from "../AppHeader/AppHeader";
+import { ProfilePage } from "../../pages/ProfilePage/ProfilePage";
+import { ProfileOrdersPage } from "../../pages/ProfileOrdersPage/ProfileOrdersPage";
+import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 
 export const App = () => {
   return (
     <div>
-      <AppHeader />
       <Router>
+        <AppHeader />
         <Switch>
           <Route path="/" exact={true}>
             <MainPage />
@@ -22,10 +25,16 @@ export const App = () => {
             <RegisterPage />
           </Route>
           <Route path="/forgot-password" exact={true}>
-            <ForgotPage />
+          <ForgotPage />
           </Route>
           <Route path="/reset-password" exact={true}>
-            <ResetPage />
+          <ResetPage />
+          </Route>
+          <ProtectedRoute route="/login">
+          <ProfilePage/>
+          </ProtectedRoute>
+          <Route path="/profile/orders" exact={true}>
+          <ProfileOrdersPage/>
           </Route>
         </Switch>
       </Router>

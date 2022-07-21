@@ -4,13 +4,19 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../services/action/users";
+import { useHistory } from "react-router-dom";
 export const LoginPage = () => {
   const [value, setValue] = React.useState("");
+  const dispatch = useDispatch()
+  const history = useHistory()
   const inputRef = React.useRef(null);
   const [valuePassword, setValuePassword] = React.useState("");
   const onChange = (e) => {
     setValuePassword(e.target.value);
   };
+
   return (
     <>
       <Form
@@ -22,6 +28,7 @@ export const LoginPage = () => {
         textTwo="Забыли пароль?"
         linkTextTwo="Восстановить пароль"
         linkHrefTwo="/forgot-password"
+        buttonFunc={() => dispatch(loginUser(value,valuePassword,history))}
       >
         <li className="mt-6">
           <Input

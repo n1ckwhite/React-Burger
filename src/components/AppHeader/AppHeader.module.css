@@ -37,6 +37,7 @@
 }
 
 .button {
+  text-decoration: none;
   gap: 8px;
   background: transparent;
   border: 0;

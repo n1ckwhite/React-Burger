@@ -5,6 +5,12 @@ import {
   FORGOT_PASSWORD_SUCCESSFUL,
   RESET_PASSWORD_SUCCESSFUL,
   REGISTER_USER_SUCCESSFUL,
+  LOGIN_USER,
+  LOGIN_USER_SUCCESSFUL,
+  GET_USER_INFO,
+  GET_USER_INFO_SUCCESSFUL,
+  PATCH_USER_INFO,
+  PATCH_USER_INFO_SUCCESSFUL,
 } from "../action/users";
 
 const initialState = {
@@ -58,6 +64,47 @@ export const usersReduce = (state = initialState, action) => {
         pending: false,
         success: true,
       };
+    }
+    case LOGIN_USER: {
+      return {
+        ...state,
+        email: action.email,
+        password: action.password,
+      };
+    }
+    case LOGIN_USER_SUCCESSFUL: {
+      return {
+        ...state,
+        pending: false,
+        success: true,
+      };
+    }
+    case GET_USER_INFO: {
+      return {
+        ...state,
+        pending: false,
+        success: true,
+      };
+    }
+    case GET_USER_INFO_SUCCESSFUL: {
+      return {
+        email: action.email,
+        name: action.name,
+      };
+    }
+    case PATCH_USER_INFO: {
+      return {
+        ...state,
+        email: action.email,
+        name: action.name,
+      }
+    }
+    case PATCH_USER_INFO_SUCCESSFUL: {
+      return {
+        ...state,
+        success: true,
+        pending: false,
+      }
     }
     default: {
       return {

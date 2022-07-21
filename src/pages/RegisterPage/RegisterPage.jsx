@@ -6,11 +6,13 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../services/action/users";
+import { useHistory } from "react-router-dom";
 
 export const RegisterPage = () => {
   const [value, setValue] = React.useState("");
   const inputRef = React.useRef(null);
   const dispatch = useDispatch();
+  const history = useHistory();
   const [valuePassword, setValuePassword] = React.useState("");
   const [name, setName] = React.useState("");
   const onChangeEmail = (e) => {
@@ -32,7 +34,9 @@ export const RegisterPage = () => {
         text="Уже зарегистрированы?"
         linkText="Войти"
         linkHref="/login"
-        buttonFunc={() => dispatch(registerUser(value, valuePassword, name))}
+        buttonFunc={() =>
+          dispatch(registerUser(value, valuePassword, name, history))
+        }
       >
         <li className="mt-6">
           <Input
