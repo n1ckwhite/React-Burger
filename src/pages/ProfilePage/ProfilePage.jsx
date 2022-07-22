@@ -9,16 +9,16 @@ import { getUserInfo, patchUserInfo} from "../../services/action/users";
 import { ProfileMenu } from "../../components/App/ProfileMenu/ProfileMenu";
 export const ProfilePage = () => {
   const emailUser= useSelector((state) => state.users.email)
-  const nameUser= useSelector((state) => state.users.name)
+  const nameUser = useSelector((state) => state.users.name)
   const [value, setValue] = useState('');
   const [name, setName] = useState('');
   const dispatch = useDispatch()
   const [password, setPassword] = useState("");
   useEffect(() => {
     dispatch(getUserInfo())
-    setValue(emailUser)
     setName(nameUser)
-}, []);
+    setValue(emailUser)
+}, [dispatch]);
 
   const cancelFunc = () => {
     setValue(emailUser)

@@ -79,7 +79,7 @@ export const registerUser = (email, password, name, history) => {
     dispatch({
       type: REGISTER_USER_SUCCESSFUL,
     });
-    fetch("https://norma.nomoreparties.space/api/auth/register", requestOptions)
+    fetch(`${API_BURGERS}/auth/register`, requestOptions)
       .then((response) => checkResponse(response))
       .then((data) =>
         data.success
@@ -110,12 +110,14 @@ export const loginUser = (email, password, history) => {
     dispatch({
       type: LOGIN_USER_SUCCESSFUL,
     });
-    fetch("https://norma.nomoreparties.space/api/auth/login", requestOptions)
+    fetch(`${API_BURGERS}/auth/login`, requestOptions)
       .then((res) => checkResponse(res))
       .then((data) => {
         if (data.success) {
-          localStorage.setItem("accessToken", data.accessToken);
-          localStorage.setItem("refreshToken", data.refreshToken);
+          if(!localStorage.length) {
+            localStorage.setItem("accessToken", data.accessToken);
+            localStorage.setItem("refreshToken", data.refreshToken);
+          }
           history.replace({ pathname: "/" });
         }
       });
@@ -134,7 +136,7 @@ export const getUserInfo = () => {
         Authorization: window.localStorage.getItem("accessToken"),
       },
     };
-    fetch("https://norma.nomoreparties.space/api/auth/user", requestOptions)
+    fetch(`${API_BURGERS}/auth/user`, requestOptions)
       .then((response) => checkResponse(response))
       .then((data) => {
         if (data.success) {
@@ -171,7 +173,7 @@ export const patchUserInfo = (email,name) => {
       email: email,
       name: name,
     })
-    fetch('https://norma.nomoreparties.space/api/auth/user',requestOptions)
+    fetch(`${API_BURGERS}/auth/user`,requestOptions)
     .then((response) => checkResponse(response))
     .then((data) => console.log(data))
   }

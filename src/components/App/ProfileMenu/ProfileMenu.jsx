@@ -1,7 +1,10 @@
 import stylesProfileMenu from "./ProfileMenu.module.css";
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 export const ProfileMenu = ({ children,history,profile }) => {
+  const exitUser = () => {
+    window.localStorage.removeItem('accessToken')
+    window.localStorage.removeItem('refreshToken')
+  }
   return (
     <div className={stylesProfileMenu.block}>
       <div>
@@ -24,8 +27,9 @@ export const ProfileMenu = ({ children,history,profile }) => {
           </li>
           <li className={stylesProfileMenu.li}>
             <NavLink
-              to="/profile/orders/:id"
+              to="/login"
               className={stylesProfileMenu.link}
+              onClick= {() => exitUser()}
             >
               <p className="text text_type_main-medium">Выход</p>
             </NavLink>
