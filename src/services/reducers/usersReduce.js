@@ -11,6 +11,7 @@ import {
   GET_USER_INFO_SUCCESSFUL,
   PATCH_USER_INFO,
   PATCH_USER_INFO_SUCCESSFUL,
+  EXIT_USER,
 } from "../action/users";
 
 const initialState = {
@@ -96,17 +97,24 @@ export const usersReduce = (state = initialState, action) => {
       return {
         email: action.email,
         name: action.name,
-      }
+      };
     }
     case PATCH_USER_INFO_SUCCESSFUL: {
       return {
         ...state,
         success: true,
         pending: false,
-      }
+      };
+    }
+    case EXIT_USER: {
+      return {
+        ...state,
+        success: true,
+        pending: false,
+      };
     }
     default: {
-      return state
+      return state;
     }
   }
 };

@@ -1,10 +1,9 @@
 import stylesProfileMenu from "./ProfileMenu.module.css";
 import { NavLink } from "react-router-dom";
-export const ProfileMenu = ({ children,history,profile }) => {
-  const exitUser = () => {
-    window.localStorage.removeItem('accessToken')
-    window.localStorage.removeItem('refreshToken')
-  }
+import { exitUser } from "../../../services/action/users";
+import { useDispatch } from "react-redux";
+export const ProfileMenu = ({ children, history, profile }) => {
+  const dispatch = useDispatch();
   return (
     <div className={stylesProfileMenu.block}>
       <div>
@@ -12,7 +11,9 @@ export const ProfileMenu = ({ children,history,profile }) => {
           <li className={stylesProfileMenu.li}>
             <NavLink
               to="/profile"
-              className={`${stylesProfileMenu.link} ${profile && stylesProfileMenu.link_active}`}
+              className={`${stylesProfileMenu.link} ${
+                profile && stylesProfileMenu.link_active
+              }`}
             >
               <p className="text text_type_main-medium">Профиль</p>
             </NavLink>
@@ -20,7 +21,9 @@ export const ProfileMenu = ({ children,history,profile }) => {
           <li className={stylesProfileMenu.li}>
             <NavLink
               to="/profile/orders"
-              className={`${stylesProfileMenu.link} ${history && stylesProfileMenu.link_active}`}
+              className={`${stylesProfileMenu.link} ${
+                history && stylesProfileMenu.link_active
+              }`}
             >
               <p className="text text_type_main-medium">История заказов</p>
             </NavLink>
@@ -29,7 +32,7 @@ export const ProfileMenu = ({ children,history,profile }) => {
             <NavLink
               to="/login"
               className={stylesProfileMenu.link}
-              onClick= {() => exitUser()}
+              onClick={() => dispatch(exitUser())}
             >
               <p className="text text_type_main-medium">Выход</p>
             </NavLink>

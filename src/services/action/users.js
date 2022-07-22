@@ -12,6 +12,7 @@ export const GET_USER_INFO = "GET_USER_INFO";
 export const GET_USER_INFO_SUCCESSFUL = "GET_USER_INFO_SUCCESSFUL";
 export const PATCH_USER_INFO = "PATH_USER_INFO";
 export const PATCH_USER_INFO_SUCCESSFUL = "PATH_USER_INFO_SUCCESSFUL";
+export const EXIT_USER = "EXIT_USER";
 export const forgotPassword = (email, history) => {
   return (dispatch) => {
     dispatch({
@@ -176,6 +177,27 @@ export const patchUserInfo = (email, name) => {
     });
     fetch(`${API_BURGERS}/auth/user`, requestOptions)
       .then((response) => checkResponse(response))
+      .catch((error) => alert("Ошибка HTTP: ", error.type));
+  };
+};
+
+export const exitUser = () => {
+  return (dispatch) => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: window.localStorage.getItem("refreshToken"),
+      }),
+    };
+    fetch(`${API_BURGERS}/auth/logout`, requestOptions)
+      .then((response) => checkResponse(response))
+      .then((data) => {
+        if (data.success) {
+          window.localStorage.removeItem("accessToken");
+          window.localStorage.removeItem("refreshToken");
+        }
+      })
       .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
