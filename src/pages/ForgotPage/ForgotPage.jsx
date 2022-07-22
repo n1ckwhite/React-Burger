@@ -22,7 +22,7 @@ export const ForgotPage = () => {
         button="Восстановить"
         text="Вспомнили пароль?"
         linkText="Войти"
-        linkHref="/login"
+        linkHref="/reset-password"
         buttonFunc={() => dispatch(forgotPassword(value, history))}
       >
         <li className="mt-6">

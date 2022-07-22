@@ -14,6 +14,7 @@ import { useDrag } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 
 export const IngredientCard = ({ ingredient, openModal }) => {
+  const {v4: uuidv4} = require('uuid')
   const ingredients = useSelector(
     (state) => state.currentIngredient.ingredients
   );
@@ -34,11 +35,13 @@ export const IngredientCard = ({ ingredient, openModal }) => {
       dispatch({
         type: REPLACE_BUN_INGREDIENT,
         bun: ingredient,
+        key: uuidv4()
       });
     } else {
       dispatch({
         type: CREATE_CURRENT_INGREDIENT,
         it: ingredient,
+        key: uuidv4()
       });
     }
   };
