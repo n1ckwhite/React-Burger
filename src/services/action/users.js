@@ -10,8 +10,8 @@ export const LOGIN_USER = "LOGIN_USER";
 export const LOGIN_USER_SUCCESSFUL = "LOGIN_USER_SUCCESSFUL";
 export const GET_USER_INFO = "GET_USER_INFO";
 export const GET_USER_INFO_SUCCESSFUL = "GET_USER_INFO_SUCCESSFUL";
-export const PATCH_USER_INFO = 'PATH_USER_INFO'
-export const PATCH_USER_INFO_SUCCESSFUL = 'PATH_USER_INFO_SUCCESSFUL'
+export const PATCH_USER_INFO = "PATH_USER_INFO";
+export const PATCH_USER_INFO_SUCCESSFUL = "PATH_USER_INFO_SUCCESSFUL";
 export const forgotPassword = (email, history) => {
   return (dispatch) => {
     dispatch({
@@ -55,7 +55,7 @@ export const resetPassword = (password, token) => {
     });
     fetch(`${API_BURGERS}/password-reset/reset`, requestOptions)
       .then((response) => checkResponse(response))
-      .then((data) => console.log(data));
+      .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
@@ -88,7 +88,8 @@ export const registerUser = (email, password, name, history) => {
       )
       .catch((error) => {
         alert("Ошибка HTTP: ", error.type);
-      });
+      })
+      .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
@@ -114,13 +115,14 @@ export const loginUser = (email, password, history) => {
       .then((res) => checkResponse(res))
       .then((data) => {
         if (data.success) {
-          if(!localStorage.length) {
+          if (!localStorage.length) {
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refreshToken", data.refreshToken);
           }
           history.replace({ pathname: "/" });
         }
-      });
+      })
+      .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
@@ -146,16 +148,18 @@ export const getUserInfo = () => {
             name: data.user.name,
           });
         }
-      });
+      })
+      .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
-
-export const patchUserInfo = (email,name) => {
-  return dispatch => {
+export const patchUserInfo = (email, name) => {
+  return (dispatch) => {
     dispatch({
-      type: PATCH_USER_INFO
-    })
+      type: PATCH_USER_INFO,
+      email: email,
+      name: name,
+    });
     const requestOptions = {
       method: "PATCH",
       headers: {
@@ -163,18 +167,15 @@ export const patchUserInfo = (email,name) => {
         Authorization: window.localStorage.getItem("accessToken"),
       },
       body: JSON.stringify({
-        "email": email,
-        "name": name,
-      })
-
-    }
+        email: email,
+        name: name,
+      }),
+    };
     dispatch({
       type: PATCH_USER_INFO_SUCCESSFUL,
-      email: email,
-      name: name,
-    })
-    fetch(`${API_BURGERS}/auth/user`,requestOptions)
-    .then((response) => checkResponse(response))
-    .then((data) => console.log(data))
-  }
-}
+    });
+    fetch(`${API_BURGERS}/auth/user`, requestOptions)
+      .then((response) => checkResponse(response))
+      .catch((error) => alert("Ошибка HTTP: ", error.type));
+  };
+};

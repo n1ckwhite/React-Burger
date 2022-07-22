@@ -94,7 +94,6 @@ export const usersReduce = (state = initialState, action) => {
     }
     case PATCH_USER_INFO: {
       return {
-        ...state,
         email: action.email,
         name: action.name,
       }
@@ -107,9 +106,7 @@ export const usersReduce = (state = initialState, action) => {
       }
     }
     default: {
-      return {
-        ...state,
-      };
+      return state
     }
   }
 };
