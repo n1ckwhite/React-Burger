@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form } from "../../components/Form/Form";
 import {
   Input,
@@ -6,15 +6,23 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
 import { resetPassword } from "../../services/action/users";
+import { useHistory } from "react-router-dom";
 
 export const ResetPage = () => {
   const [value, setValue] = React.useState("");
   const inputRef = React.useRef(null);
+  const history = useHistory()
   const [valuePassword, setValuePassword] = React.useState("");
   const dispatch = useDispatch();
+  const user = window.localStorage.length
   const onChange = (e) => {
     setValuePassword(e.target.value);
   };
+  useEffect(() => {
+    if(user !== 0) {
+      return history.replace({pathname: '/'})
+    }
+  }) 
   return (
     <>
       <Form

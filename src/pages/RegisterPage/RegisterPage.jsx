@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form } from "../../components/Form/Form";
 import {
   Input,
@@ -15,6 +15,7 @@ export const RegisterPage = () => {
   const history = useHistory();
   const [valuePassword, setValuePassword] = React.useState("");
   const [name, setName] = React.useState("");
+  const user = window.localStorage.length
   const onChangeEmail = (e) => {
     setValue(e.target.value);
   };
@@ -25,6 +26,12 @@ export const RegisterPage = () => {
   const onChangeName = (e) => {
     setName(e.target.value);
   };
+
+  useEffect(() => {
+    if(user !== 0) {
+      return history.replace({pathname: '/'})
+    }
+  })
 
   return (
     <>
