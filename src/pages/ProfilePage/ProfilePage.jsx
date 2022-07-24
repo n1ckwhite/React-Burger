@@ -6,7 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo, patchUserInfo} from "../../services/action/users";
-import { ProfileMenu } from "../../components/App/ProfileMenu/ProfileMenu";
+import { ProfileMenu } from "../../components/ProfileMenu/ProfileMenu";
 export const ProfilePage = () => {
   const emailUser= useSelector((state) => state.users.email)
   const nameUser = useSelector((state) => state.users.name)

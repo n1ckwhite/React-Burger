@@ -1,5 +1,4 @@
-import { ProfileMenu } from "../../components/App/ProfileMenu/ProfileMenu"
-
+import { ProfileMenu } from "../../components/ProfileMenu/ProfileMenu"
 export const ProfileOrdersPage = () => {
     return (
         <ProfileMenu history={'active'}>

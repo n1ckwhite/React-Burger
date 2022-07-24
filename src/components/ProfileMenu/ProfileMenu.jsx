@@ -1,6 +1,6 @@
 import stylesProfileMenu from "./ProfileMenu.module.css";
 import { NavLink } from "react-router-dom";
-import { exitUser } from "../../../services/action/users";
+import { exitUser } from "../../services/action/users";
 import { useDispatch } from "react-redux";
 export const ProfileMenu = ({ children, history, profile }) => {
   const dispatch = useDispatch();
