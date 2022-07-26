@@ -1,4 +1,4 @@
-import { CLEAR_INGREDIENT, GET_INGREDIENT } from "../action";
+import { CLEAR_INGREDIENT, GET_INGREDIENT, SET_INGREDIENT } from "../action";
 
 const initialState = {
   ingredient: {},

@@ -4,7 +4,7 @@ import {
   GET_INGREDIENTS_SUCCESSFUL,
 } from "../action";
 const initialIngredients = {
-  ingredients: {},
+  ingredients: [],
   error: "",
   pending: false,
 };

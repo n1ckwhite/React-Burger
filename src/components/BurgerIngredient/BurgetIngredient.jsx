@@ -15,7 +15,7 @@ export const BurgerIngredient = ({ handleModal }) => {
           {burgers.map((item) => {
             if (item.type === "bun") {
               return (
-                <Link className={stylesBurgerIngredient.link} to={{pathname: `/ingredients/:${item._id}`, state:{background: location}}} key={item._id}>
+                <Link className={stylesBurgerIngredient.link} to={{pathname: `/ingredients/${item._id}`, state:{background: location}}} key={item._id}>
                 <IngredientCard
                   ingredient={item}
                   openModal={handleModal}
@@ -32,7 +32,7 @@ export const BurgerIngredient = ({ handleModal }) => {
           {burgers.map((item) => {
             if (item.type === "sauce") {
               return (
-            <Link className={stylesBurgerIngredient.link} to={{pathname: `/ingredients/:${item._id}`, state:{background: location}}} key={item._id}>
+            <Link className={stylesBurgerIngredient.link} to={{pathname: `/ingredients/${item._id}`, state:{background: location}}} key={item._id}>
                 <IngredientCard
                   ingredient={item}
                   openModal={handleModal}
@@ -49,7 +49,7 @@ export const BurgerIngredient = ({ handleModal }) => {
           {burgers.map((item) => {
             if (item.type === "main") {
               return (
-            <Link className={stylesBurgerIngredient.link} to={{pathname: `/ingredients/:${item._id}`, state:{background: location}}} key={item._id}>
+            <Link className={stylesBurgerIngredient.link} to={{pathname: `/ingredients/${item._id}`, state:{background: location}}} key={item._id}>
                 <IngredientCard
                   ingredient={item}
                   openModal={handleModal}

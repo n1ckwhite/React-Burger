@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MainPageStyles from "./MainPage.module.css";
 import {BurgerIngredients} from "../../components/BurgerIngredients/BurgerIngredients";
 import {BurgerConstructor} from "../../components/BurgerConstructor/BurgerConstructor";
 import {Modal} from "../../components/Modal/Modal";
 import {ModalOrderDetails} from "../../components/ModalOrderDetails/ModalOrderDetails";
 import { useDispatch, useSelector } from "react-redux";
-import { getIngredients } from "../../services/action/ingredients";
 import { getOrder } from "../../services/action/order";
 function MainPage({openModal}) {
   const ingredients = useSelector(
@@ -15,9 +14,7 @@ function MainPage({openModal}) {
   const [priceModal, openPriceModal] = useState(false);
   const dispatch = useDispatch();
   const burgers = useSelector((state) => state.ingredients.ingredients);
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
+
   const handlePriceModal = () => {
     openPriceModal(!priceModal);
   };

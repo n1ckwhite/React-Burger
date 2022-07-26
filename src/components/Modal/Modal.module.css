@@ -10,6 +10,7 @@
     0px 0px 1px rgba(0, 0, 0, 0.04);
   border-radius: 40px;
   position: relative;
+  text-align: center;
 }
 
 .row {

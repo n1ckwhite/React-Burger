@@ -1,5 +1,5 @@
 import MainPage from "../../pages/MainPage/MainPage";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,16 +18,20 @@ import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { ModalIngredientsDetails } from "../ModalIngredientDetails/ModalIngredientsDetails";
 import { Modal } from "../Modal/Modal";
 import { useDispatch } from "react-redux";
-import { getIngredient } from "../../services/action/ingredient";
 import { clearIngredient } from "../../services/action/ingredient";
+import { getIngredients } from "../../services/action/ingredients";
 const ModalSwitch = () => {
   const [ingredientsModal, openIngredientsModal] = useState(false);
   const location = useLocation();
   const history = useHistory();
   const background = location.state && location.state.background;
   const dispatch = useDispatch();
-  const openOrderModal = (i) => {
-    dispatch(getIngredient(i));
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch]);
+
+  const openOrderModal = () => {
     openIngredientsModal(true);
   };
   const closeOrderModal = () => {
