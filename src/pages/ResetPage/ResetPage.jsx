@@ -31,7 +31,11 @@ export const ResetPage = () => {
         text="Вспомнили пароль?"
         linkText="Войти"
         linkHref="/login"
-        buttonFunc={() => dispatch(resetPassword(valuePassword, value))}
+        buttonFunc={() => {
+          dispatch(resetPassword(valuePassword, value))
+          history.replace('/login')
+          }
+          }
       >
         <li className="mt-6">
           <PasswordInput
