@@ -1,5 +1,12 @@
 import MainPage from "../../pages/MainPage/MainPage";
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
 import { LoginPage } from "../../pages/LoginPage/LoginPage";
 import { RegisterPage } from "../../pages/RegisterPage/RegisterPage";
 import { ForgotPage } from "../../pages/ForgotPage/ForgotPage";
@@ -8,14 +15,32 @@ import { AppHeader } from "../AppHeader/AppHeader";
 import { ProfilePage } from "../../pages/ProfilePage/ProfilePage";
 import { ProfileOrdersPage } from "../../pages/ProfileOrdersPage/ProfileOrdersPage";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
-
+import { ModalIngredientsDetails } from "../ModalIngredientDetails/ModalIngredientsDetails";
+import { Modal } from "../Modal/Modal";
+import { useDispatch } from "react-redux";
+import { getIngredient } from "../../services/action/ingredient";
+import { clearIngredient } from "../../services/action/ingredient";
 const ModalSwitch = () => {
+  const [ingredientsModal, openIngredientsModal] = useState(false);
+  const location = useLocation();
+  const history = useHistory();
+  const background = location.state && location.state.background;
+  const dispatch = useDispatch();
+  const openOrderModal = (i) => {
+    dispatch(getIngredient(i));
+    openIngredientsModal(true);
+  };
+  const closeOrderModal = () => {
+    dispatch(clearIngredient());
+    openIngredientsModal(false);
+    history.goBack();
+  };
   return (
     <div>
       <AppHeader />
-      <Switch>
+      <Switch location={background || location}>
         <Route path="/" exact={true}>
-          <MainPage />
+          <MainPage openModal={openOrderModal} />
         </Route>
         <Route path="/login" exact={true}>
           <LoginPage />
@@ -24,31 +49,42 @@ const ModalSwitch = () => {
           <RegisterPage />
         </Route>
         <Route path="/forgot-password" exact={true}>
-        <ForgotPage />
+          <ForgotPage />
         </Route>
         <Route path="/reset-password" exact={true}>
-        <ResetPage />
+          <ResetPage />
+        </Route>
+        <Route path="/ingredients/:id" exact={true}>
+          <ModalIngredientsDetails />
         </Route>
         <ProtectedRoute route="/login">
-        <ProfilePage/>
+          <ProfilePage />
         </ProtectedRoute>
         <Route path="/profile/orders" exact={true}>
-        <ProfileOrdersPage/>
+          <ProfileOrdersPage />
         </Route>
       </Switch>
-  </div> 
-  )
-}
-
-
-
+      {background && (
+        <Route path="/ingredients/:id">
+          <Modal
+            isActive={ingredientsModal}
+            handleIsActive={openOrderModal}
+            closePopup={closeOrderModal}
+            title="Детали ингредиента"
+          >
+            <ModalIngredientsDetails />
+          </Modal>
+        </Route>
+      )}
+    </div>
+  );
+};
 
 export const App = () => {
   return (
     <Router>
-    <ModalSwitch/>
+      <ModalSwitch />
     </Router>
-
   );
 };
 

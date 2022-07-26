@@ -4,25 +4,25 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../../services/action/users";
 import { useHistory } from "react-router-dom";
 
 export const ResetPage = () => {
+  const successEmail = useSelector((state) => state.users.success);
   const [value, setValue] = React.useState("");
   const inputRef = React.useRef(null);
-  const history = useHistory()
+  const history = useHistory();
   const [valuePassword, setValuePassword] = React.useState("");
   const dispatch = useDispatch();
-  const user = window.localStorage.length
   const onChange = (e) => {
     setValuePassword(e.target.value);
   };
   useEffect(() => {
-    if(user !== 0) {
-      return history.replace({pathname: '/'})
+    if (!successEmail) {
+      return history.replace({ pathname: "/forgot-password" });
     }
-  }) 
+  });
   return (
     <>
       <Form

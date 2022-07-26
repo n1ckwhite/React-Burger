@@ -4,21 +4,15 @@ import {BurgerIngredients} from "../../components/BurgerIngredients/BurgerIngred
 import {BurgerConstructor} from "../../components/BurgerConstructor/BurgerConstructor";
 import {Modal} from "../../components/Modal/Modal";
 import {ModalOrderDetails} from "../../components/ModalOrderDetails/ModalOrderDetails";
-import {ModalIngredientsDetails} from "../../components/ModalIngredientDetails/ModalIngredientsDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { getIngredients } from "../../services/action/ingredients";
 import { getOrder } from "../../services/action/order";
-import {
-  clearIngredient,
-  getIngredient,
-} from "../../services/action/ingredient";
-function MainPage() {
+function MainPage({openModal}) {
   const ingredients = useSelector(
     (state) => state.currentIngredient.ingredients
   );
   const buns = useSelector((state) => state.currentIngredient.bun);
   const [priceModal, openPriceModal] = useState(false);
-  const [ingredientsModal, openIngredientsModal] = useState(false);
   const dispatch = useDispatch();
   const burgers = useSelector((state) => state.ingredients.ingredients);
   useEffect(() => {
@@ -38,14 +32,6 @@ function MainPage() {
     openPriceModal(true);
   };
 
-  const openOrderModal = (i) => {
-    dispatch(getIngredient(i));
-    openIngredientsModal(true);
-  };
-  const closeOrderModal = () => {
-    dispatch(clearIngredient());
-    openIngredientsModal(false);
-  };
   const closePriseModal = () => {
     openPriceModal(false);
   };
@@ -59,16 +45,9 @@ function MainPage() {
       >
         <ModalOrderDetails />
       </Modal>
-      <Modal
-        isActive={ingredientsModal}
-        handleIsActive={openOrderModal}
-        closePopup={closeOrderModal}
-        title="Детали ингредиента"
-      >
-        <ModalIngredientsDetails />
-      </Modal>
+
       <main className={MainPageStyles.container}>
-        {burgers.length && <BurgerIngredients openModal={openOrderModal} />}
+        {burgers.length && <BurgerIngredients openModal={openModal} />}
         {burgers.length && <BurgerConstructor openModal={handleOpenModal} />}
       </main>
     </div>

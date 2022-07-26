@@ -11,8 +11,8 @@ export const ForgotPage = () => {
   const history = useHistory();
   const inputRef = React.useRef(null);
   useEffect(() => {
-    if(user !== 0) {
-      return history.replace({pathname: '/'})
+    if (user !== 0) {
+      return history.replace({ pathname: '/' })
     }
   })
   return (
