@@ -19,7 +19,7 @@ export const LoginPage = () => {
   };
   useEffect(() => {
     if (user !== 0) {
-      return history.replace({ pathname: "/" });
+      return history.replace({ pathname: history.location?.state?.from || '/' });
     }
   });
   return (
