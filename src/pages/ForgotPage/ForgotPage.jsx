@@ -7,14 +7,14 @@ import { useHistory } from "react-router-dom";
 export const ForgotPage = () => {
   const [value, setValue] = React.useState("");
   const dispatch = useDispatch();
-  const user = window.localStorage.length
+  const user = window.localStorage.length;
   const history = useHistory();
   const inputRef = React.useRef(null);
   useEffect(() => {
     if (user !== 0) {
-      return history.replace({ pathname: '/' })
+      return history.replace({ pathname: "/" });
     }
-  })
+  });
   return (
     <>
       <Form
@@ -23,7 +23,10 @@ export const ForgotPage = () => {
         text="Вспомнили пароль?"
         linkText="Войти"
         linkHref="/reset-password"
-        buttonFunc={() => dispatch(forgotPassword(value, history))}
+        buttonFunc={(e) => {
+          e.preventDefault();
+          dispatch(forgotPassword(value, history));
+        }}
       >
         <li className="mt-6">
           <Input

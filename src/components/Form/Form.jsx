@@ -15,12 +15,12 @@ export const Form = ({
   buttonFunc,
 }) => {
   return (
-    <div className={stylesForm.container}>
+    <form className={stylesForm.container} onSubmit={buttonFunc}>
       <p className="text text_type_main-medium">{title}</p>
       <ul className={stylesForm.ul}>
         {children}
         <li className={`${stylesForm.li} ${stylesForm.btn}`}>
-          <Button type="primary" size="medium" onClick={buttonFunc}>
+          <Button type="primary" size="medium">
             {button}
           </Button>
         </li>
@@ -41,6 +41,6 @@ export const Form = ({
           </Link>
         </p>
       )}
-    </div>
+    </form>
   );
 };

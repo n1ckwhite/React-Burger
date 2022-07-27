@@ -18,7 +18,7 @@ export const ProfilePage = () => {
     dispatch(getUserInfo())
     setName(nameUser)
     setValue(emailUser)
-}, [dispatch]);
+}, [dispatch,emailUser,nameUser]);
 
   const cancelFunc = () => {
     setValue(emailUser)
@@ -27,6 +27,10 @@ export const ProfilePage = () => {
 
   return (
       <ProfileMenu profile={'active'}>
+      <form onSubmit={(e) => {
+          e.preventDefault()
+          dispatch(patchUserInfo(value,name))
+      }}>
       <ul className={`${stylesProfilePage.form}`}>
         <li className={stylesProfilePage.form_li}>
           <Input
@@ -72,12 +76,13 @@ export const ProfilePage = () => {
             <Button type="secondary" size="medium" onClick={() =>cancelFunc()}>
               Отмена
             </Button>
-            <Button type="primary" size="medium" onClick={() => dispatch(patchUserInfo(value,name))}>
+            <Button type="primary" size="medium">
               Сохранить
             </Button>
           </div>
         </li>
       </ul>
+      </form>
       </ProfileMenu>
   );
 };

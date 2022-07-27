@@ -15,7 +15,7 @@ export const RegisterPage = () => {
   const history = useHistory();
   const [valuePassword, setValuePassword] = React.useState("");
   const [name, setName] = React.useState("");
-  const user = window.localStorage.length
+  const user = window.localStorage.length;
   const onChangeEmail = (e) => {
     setValue(e.target.value);
   };
@@ -28,10 +28,10 @@ export const RegisterPage = () => {
   };
 
   useEffect(() => {
-    if(user !== 0) {
-      return history.replace({pathname: '/'})
+    if (user !== 0) {
+      return history.replace({ pathname: "/" });
     }
-  })
+  });
 
   return (
     <>
@@ -41,9 +41,10 @@ export const RegisterPage = () => {
         text="Уже зарегистрированы?"
         linkText="Войти"
         linkHref="/login"
-        buttonFunc={() =>
-          dispatch(registerUser(value, valuePassword, name, history))
-        }
+        buttonFunc={(e) => {
+          e.preventDefault();
+          dispatch(registerUser(value, valuePassword, name, history));
+        }}
       >
         <li className="mt-6">
           <Input
