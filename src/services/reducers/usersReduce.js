@@ -21,6 +21,7 @@ const initialState = {
   name: "",
   pending: true,
   success: false,
+  isLoggedIn: false,
 };
 
 export const usersReduce = (state = initialState, action) => {
@@ -78,6 +79,7 @@ export const usersReduce = (state = initialState, action) => {
         ...state,
         pending: false,
         success: true,
+        isLoggedIn: true,
       };
     }
     case GET_USER_INFO: {
