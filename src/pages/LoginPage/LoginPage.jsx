@@ -23,7 +23,6 @@ export const LoginPage = () => {
     }
   })
   return (
-    <>
       <Form
         title="Вход"
         button="Войти"
@@ -55,6 +54,5 @@ export const LoginPage = () => {
           />
         </li>
       </Form>
-    </>
   );
 };
