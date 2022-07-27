@@ -1,5 +1,5 @@
 import MainPage from "../../pages/MainPage/MainPage";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,20 +17,16 @@ import { ProfileOrdersPage } from "../../pages/ProfileOrdersPage/ProfileOrdersPa
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { ModalIngredientsDetails } from "../ModalIngredientDetails/ModalIngredientsDetails";
 import { Modal } from "../Modal/Modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearIngredient } from "../../services/action/ingredient";
 import { getIngredients } from "../../services/action/ingredients";
 const ModalSwitch = () => {
   const [ingredientsModal, openIngredientsModal] = useState(false);
+  const ingredient = useSelector((state) => state.ingredient.ingredient);
   const location = useLocation();
+  const dispatch = useDispatch();
   const history = useHistory();
   const background = location.state && location.state.background;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
-
   const openOrderModal = () => {
     openIngredientsModal(true);
   };
@@ -39,6 +35,12 @@ const ModalSwitch = () => {
     openIngredientsModal(false);
     history.goBack();
   };
+
+  useEffect(() => {
+    if (ingredient) {
+      openIngredientsModal(true);
+    }
+  }, [ingredient]);
   return (
     <div>
       <AppHeader />
@@ -58,7 +60,7 @@ const ModalSwitch = () => {
         <Route path="/reset-password" exact={true}>
           <ResetPage />
         </Route>
-        <Route path="/ingredients/:id" exact={true}>
+        <Route path="/ingredients/123" exact={true}>
           <ModalIngredientsDetails />
         </Route>
         <ProtectedRoute route="/login">
@@ -85,6 +87,11 @@ const ModalSwitch = () => {
 };
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch]);
   return (
     <Router>
       <ModalSwitch />
