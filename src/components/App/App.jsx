@@ -60,7 +60,7 @@ const ModalSwitch = () => {
         <Route path="/reset-password" exact={true}>
           <ResetPage />
         </Route>
-        <Route path="/ingredients/123" exact={true}>
+        <Route path="/ingredients/:id" exact={true}>
           <ModalIngredientsDetails />
         </Route>
         <ProtectedRoute route="/login">

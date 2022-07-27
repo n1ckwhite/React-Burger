@@ -27,7 +27,9 @@ export const AppHeader = () => {
             </NavLink>
           </li>
           <li className={`${stylesHeader.li} ${stylesHeader.logo}`}>
+          <NavLink to="/">
             <Logo />
+            </NavLink>
           </li>
           <li className={`${stylesHeader.li}`}>
               <NavLink to="/profile" onClick={() => setClassLink('profile')} className={`${stylesHeader.button} ${classLink === '/profile' ? stylesHeader.button_active : ''} pt-4 pb-4 pl-5 pr-5`}> 
