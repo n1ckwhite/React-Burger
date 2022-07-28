@@ -12,10 +12,12 @@ import {
   DELETE_CONSTRUCTOR_ITEM,
   SET_SORTED_ARRAY,
 } from "../../services/action";
+import { useHistory } from "react-router-dom";
 export const BurgerConstructor = ({ openModal }) => {
   const burgers = useSelector((state) => state.currentIngredient.ingredients);
   const bun = useSelector((state) => state.currentIngredient.bun);
   const dispatch = useDispatch();
+  const history = useHistory()
   const onDelete = (item) => {
     dispatch({
       type: DELETE_CONSTRUCTOR_ITEM,
@@ -29,7 +31,7 @@ export const BurgerConstructor = ({ openModal }) => {
     }),
   });
   const prices = burgers.reduce((a, b) => a + b.price, 0);
-
+  const user = window.localStorage.length
   const moveIngredient = (dragIndex, hoverIndex) => {
     const dragIngredient = burgers[dragIndex];
     if (dragIngredient) {
@@ -39,6 +41,14 @@ export const BurgerConstructor = ({ openModal }) => {
       dispatch({ type: SET_SORTED_ARRAY, sortedArray: newIngredients });
     }
   };
+
+  const openModalUser = () => {
+    if(user !== 0) {
+      openModal()
+    } else {
+      history.replace({pathname: '/login'})
+    }
+  }
 
   return (
     <section className={`${stylesBurgerConstructor.section} mt-25`}>
@@ -103,7 +113,7 @@ export const BurgerConstructor = ({ openModal }) => {
         <Button
           type="primary"
           size="medium"
-          onClick={openModal}
+          onClick={() => openModalUser()}
           disabled={burgers.length && bun.length ? false : true}
         >
           Оформить заказ

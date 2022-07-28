@@ -1,0 +1,42 @@
+.block {
+    max-width: 1280px;
+    margin: 120px auto 0 auto;
+    display: flex;
+}
+
+.ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-width: 320px;
+    min-height: 192px;
+}
+
+.li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 64px;
+}
+
+.text {
+    max-width: 320px;
+    color: #8585AD;
+    opacity: .4;
+}
+
+
+.link {
+    color: #8585AD;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.link:hover {
+    color: #fff;
+}
+
+.link_active {
+    color: #fff;
+}

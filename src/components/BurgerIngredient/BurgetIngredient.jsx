@@ -3,8 +3,10 @@ import stylesBurgerIngredient from "./BurgerIngredient.module.css";
 import { IngredientCard } from "../IngredientCard/IngredientCard";
 import PropTypes from "prop-types";
 import {useSelector} from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 export const BurgerIngredient = ({ handleModal }) => {
   const burgers = useSelector(state => state.ingredients.ingredients)
+  const location = useLocation()
   return (
     <div className={stylesBurgerIngredient.card}>
       <div className="pt-10" id='bun'>
@@ -13,11 +15,12 @@ export const BurgerIngredient = ({ handleModal }) => {
           {burgers.map((item) => {
             if (item.type === "bun") {
               return (
+                <Link className={stylesBurgerIngredient.link} to={{pathname: `/ingredients/${item._id}`, state:{background: location}}} key={item._id}>
                 <IngredientCard
-                  key={item._id}
                   ingredient={item}
                   openModal={handleModal}
                 />
+                </Link>
               );
             }
           })}
@@ -29,11 +32,12 @@ export const BurgerIngredient = ({ handleModal }) => {
           {burgers.map((item) => {
             if (item.type === "sauce") {
               return (
+            <Link className={stylesBurgerIngredient.link} to={{pathname: `/ingredients/${item._id}`, state:{background: location}}} key={item._id}>
                 <IngredientCard
-                  key={item._id}
                   ingredient={item}
                   openModal={handleModal}
                 />
+            </Link>
               );
             }
           })}
@@ -45,11 +49,12 @@ export const BurgerIngredient = ({ handleModal }) => {
           {burgers.map((item) => {
             if (item.type === "main") {
               return (
+            <Link className={stylesBurgerIngredient.link} to={{pathname: `/ingredients/${item._id}`, state:{background: location}}} key={item._id}>
                 <IngredientCard
-                  key={item._id}
                   ingredient={item}
                   openModal={handleModal}
                 />
+                </Link>
               );
             }
           })}
