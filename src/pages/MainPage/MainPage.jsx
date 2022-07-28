@@ -1,12 +1,14 @@
 import { useState } from "react";
 import MainPageStyles from "./MainPage.module.css";
-import {BurgerIngredients} from "../../components/BurgerIngredients/BurgerIngredients";
-import {BurgerConstructor} from "../../components/BurgerConstructor/BurgerConstructor";
-import {Modal} from "../../components/Modal/Modal";
-import {ModalOrderDetails} from "../../components/ModalOrderDetails/ModalOrderDetails";
+import { BurgerIngredients } from "../../components/BurgerIngredients/BurgerIngredients";
+import { BurgerConstructor } from "../../components/BurgerConstructor/BurgerConstructor";
+import { Modal } from "../../components/Modal/Modal";
+import { ModalOrderDetails } from "../../components/ModalOrderDetails/ModalOrderDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrder } from "../../services/action/order";
-function MainPage({openModal}) {
+import PropTypes from "prop-types";
+
+function MainPage({ openModal }) {
   const ingredients = useSelector(
     (state) => state.currentIngredient.ingredients
   );
@@ -50,5 +52,9 @@ function MainPage({openModal}) {
     </div>
   );
 }
+
+MainPage.propTypes = {
+  openModal: PropTypes.func.isRequired,
+};
 
 export default MainPage;

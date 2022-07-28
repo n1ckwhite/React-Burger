@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Form } from "../../components/Form/Form";
 import {
   Input,
@@ -6,7 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../services/action/users";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 export const RegisterPage = () => {
   const [value, setValue] = React.useState("");
@@ -15,7 +15,7 @@ export const RegisterPage = () => {
   const history = useHistory();
   const [valuePassword, setValuePassword] = React.useState("");
   const [name, setName] = React.useState("");
-  const user = window.localStorage.length;
+  const user = window.localStorage.getItem("accessToken");
   const onChangeEmail = (e) => {
     setValue(e.target.value);
   };
@@ -27,11 +27,9 @@ export const RegisterPage = () => {
     setName(e.target.value);
   };
 
-  useEffect(() => {
-    if (user !== 0) {
-      return history.replace({ pathname: "/" });
-    }
-  });
+  if (user) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>

@@ -63,9 +63,10 @@ const ModalSwitch = () => {
         <Route path="/ingredients/:id" exact={true}>
           <ModalIngredientsDetails />
         </Route>
-        <ProtectedRoute route="/login">
+        <ProtectedRoute>
           <ProfilePage />
         </ProtectedRoute>
+
         <Route path="/profile/orders" exact={true}>
           <ProfileOrdersPage />
         </Route>

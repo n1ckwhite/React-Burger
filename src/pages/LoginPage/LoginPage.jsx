@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Form } from "../../components/Form/Form";
 import {
   Input,
@@ -6,22 +6,22 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../services/action/users";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 export const LoginPage = () => {
   const [value, setValue] = React.useState("");
   const dispatch = useDispatch();
   const history = useHistory();
-  const user = window.localStorage.length;
+  const user = window.localStorage.getItem("accessToken");
   const inputRef = React.useRef(null);
   const [valuePassword, setValuePassword] = React.useState("");
   const onChange = (e) => {
     setValuePassword(e.target.value);
   };
-  useEffect(() => {
-    if (user !== 0) {
-      return history.replace({ pathname: history.location?.state?.from || '/' });
-    }
-  });
+
+  if (user) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <Form
       title="Вход"

@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Form } from "../../components/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { forgotPassword } from "../../services/action/users";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 export const ForgotPage = () => {
   const [value, setValue] = React.useState("");
   const dispatch = useDispatch();
-  const user = window.localStorage.length;
   const history = useHistory();
+  const user = window.localStorage.getItem('accessToken')
   const inputRef = React.useRef(null);
-  useEffect(() => {
-    if (user !== 0) {
-      return history.replace({ pathname: "/" });
-    }
-  });
+  if(user) {
+    return (
+      <Redirect to="/"/>
+    )
+  }
   return (
     <>
       <Form

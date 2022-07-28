@@ -93,6 +93,8 @@ export const usersReduce = (state = initialState, action) => {
       return {
         email: action.email,
         name: action.name,
+        isLoggedIn: true,
+        pending: false,
       };
     }
     case PATCH_USER_INFO: {

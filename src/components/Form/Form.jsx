@@ -1,5 +1,6 @@
 import stylesForm from "./Form.module.css";
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 export const Form = ({
@@ -44,3 +45,15 @@ export const Form = ({
     </form>
   );
 };
+
+
+Form.propTypes = {
+  title: PropTypes.string.isRequired,
+  button: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  textTwo: PropTypes.string,
+  linkHref: PropTypes.string.isRequired,
+  linkHrefTwo: PropTypes.string,
+  linkTextTwo: PropTypes.string,
+  buttonFunc: PropTypes.func.isRequired,
+}
