@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, Dispatch } from "react";
 import { Form } from "../../components/Form/Form";
 import {
   Input,
@@ -9,12 +9,12 @@ import { loginUser } from "../../services/action/users";
 import { Redirect, useHistory } from "react-router-dom";
 export const LoginPage = () => {
   const [value, setValue] = React.useState("");
-  const dispatch : any = useDispatch();
+  const dispatch : Dispatch<any> = useDispatch();
   const history = useHistory();
   const user = window.localStorage.getItem("accessToken");
   const inputRef = React.useRef(null);
   const [valuePassword, setValuePassword] = React.useState("");
-  const onChange = (e : any) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValuePassword(e.target.value);
   };
 
@@ -32,7 +32,7 @@ export const LoginPage = () => {
       textTwo="Забыли пароль?"
       linkTextTwo="Восстановить пароль"
       linkHrefTwo="/forgot-password"
-      buttonFunc={(e : any) => {
+      buttonFunc={(e : ChangeEvent) => {
         e.preventDefault();
         dispatch(loginUser(value, valuePassword, history));
       }}
