@@ -1,4 +1,4 @@
-import React, { useRef,FC } from "react";
+import { useRef,FC } from "react";
 import styleBurgerConstructorItem from "./BurgerConstructorItem.module.css";
 import {
   ConstructorElement,
@@ -8,13 +8,13 @@ import { useDrag, useDrop, XYCoord } from "react-dnd";
 
 interface IProps {
   item: any,
-  index: number,
-  isLocked: boolean,
-  type: string | undefined,
+  index?: number,
+  isLocked?: boolean,
+  type: "top" | "bottom" | "middle" | any,
   position?: boolean,
-  moveIngredient: any,
-  onDelete: () => void,
-  drag: boolean,
+  moveIngredient?: any,
+  onDelete?: () => void,
+  drag?: boolean,
 }
 
 export const BurgerConstructorItem : FC<IProps> = ({
@@ -27,7 +27,7 @@ export const BurgerConstructorItem : FC<IProps> = ({
   onDelete,
   drag,
 }) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLLIElement>(null);
   let pos;
   if (position) {
     pos = "(верх)";
@@ -38,12 +38,12 @@ export const BurgerConstructorItem : FC<IProps> = ({
   }
   const [, drop] = useDrop({
     accept: "ingredient",
-    hover: (item, monitor) => {
+    hover: (item : any, monitor) => {
       if (!ref.current) {
         return;
       }
-      const dragIndex = item.index;
-      const hoverIndex = index;
+      const dragIndex: any = item.index;
+      const hoverIndex : any = index;
       if (dragIndex === hoverIndex) {
         return;
       }
@@ -75,7 +75,7 @@ export const BurgerConstructorItem : FC<IProps> = ({
 
   return (
     <li
-      ref={!isLocked ? ref : null}
+      ref={isLocked ? null : ref}
       className={`${styleBurgerConstructorItem.li} mb-4`}
       style={{ opacity }}
     >

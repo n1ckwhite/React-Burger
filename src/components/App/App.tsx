@@ -1,5 +1,5 @@
 import MainPage from "../../pages/MainPage/MainPage";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,11 +20,22 @@ import { Modal } from "../Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { clearIngredient } from "../../services/action/ingredient";
 import { getIngredients } from "../../services/action/ingredients";
-const ModalSwitch = () => {
+import { Dispatch, StateFromReducersMapObject } from "redux";
+
+
+interface IRootState {
+  ingredient: StateFromReducersMapObject<object | any>;
+}
+
+interface ILocation {
+  state?: {background: object | any},
+}
+
+const ModalSwitch =  () => {
   const [ingredientsModal, openIngredientsModal] = useState<boolean>(false);
-  const ingredient = useSelector((state : any) => state.ingredient.ingredient);
-  const location : any = useLocation();
-  const dispatch : any = useDispatch();
+  const ingredient = useSelector((state : IRootState) => state.ingredient.ingredient);
+  const location : ILocation = useLocation();
+  const dispatch : Dispatch<any> = useDispatch();
   const history = useHistory();
   const background = location.state && location?.state?.background;
   const openOrderModal = () => {
@@ -88,7 +99,7 @@ const ModalSwitch = () => {
 };
 
 export const App = () => {
-  const dispatch = useDispatch();
+  const dispatch : Dispatch<any> = useDispatch();
 
   useEffect(() => {
     dispatch(getIngredients());

@@ -12,6 +12,7 @@ import {
   SET_SORTED_ARRAY,
 } from "../../services/action";
 import { useHistory } from "react-router-dom";
+import { Dispatch } from "redux";
 
 interface IProps {
   openModal : () => void
@@ -20,7 +21,7 @@ interface IProps {
 export const BurgerConstructor : FC<IProps> = ({ openModal }) => {
   const burgers = useSelector((state: any) => state.currentIngredient.ingredients);
   const bun = useSelector((state: any) => state.currentIngredient.bun);
-  const dispatch = useDispatch();
+  const dispatch : Dispatch<any> = useDispatch();
   const history = useHistory()
   const onDelete = (item : object) => {
     dispatch({
@@ -34,7 +35,7 @@ export const BurgerConstructor : FC<IProps> = ({ openModal }) => {
       isHover: !!monitor.isOver(),
     }),
   });
-  const prices = burgers.reduce((a : number, b : any |object) => a + b.price, 0);
+  const prices = burgers.reduce((a : number, b : {price: string}) => a + b?.price, 0);
   const user = window.localStorage.length
   const moveIngredient = (dragIndex : number, hoverIndex : number) => {
     const dragIngredient = burgers[dragIndex];
