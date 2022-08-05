@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import { Form } from "../../components/Form/Form";
 import {
   Input,
@@ -7,6 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../../services/action/users";
 import { useHistory } from "react-router-dom";
+import { Dispatch } from "react";
 
 export const ResetPage = () => {
   const successEmail = useSelector((state : any) => state.users.success);
@@ -14,8 +15,8 @@ export const ResetPage = () => {
   const inputRef = React.useRef(null);
   const history = useHistory();
   const [valuePassword, setValuePassword] = React.useState("");
-  const dispatch : any = useDispatch();
-  const onChange = (e: any) => {
+  const dispatch : Dispatch<any> = useDispatch();
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValuePassword(e.target.value);
   };
   useEffect(() => {
@@ -31,7 +32,7 @@ export const ResetPage = () => {
         text="Вспомнили пароль?"
         linkText="Войти"
         linkHref="/login"
-        buttonFunc={(e : any) => {
+        buttonFunc={(e : SubmitEvent) => {
           e.preventDefault()
           dispatch(resetPassword(valuePassword, value))
           history.replace('/login')
