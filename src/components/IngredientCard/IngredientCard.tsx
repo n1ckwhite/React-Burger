@@ -10,9 +10,10 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
+import { IIngredient } from "../../utils/constans";
 
 interface IProps {
-  ingredient: any,
+  ingredient: IIngredient,
   openModal: any,
 }
 
@@ -27,7 +28,7 @@ export const IngredientCard :FC<IProps> = ({ ingredient, openModal }) => {
   const dispatch = useDispatch();
   const [, dragRef] = useDrag({
     type: "ingredient",
-    item: ingredient.id,
+    item: ingredient._id,
     end: () => {
       addIngredient();
     },

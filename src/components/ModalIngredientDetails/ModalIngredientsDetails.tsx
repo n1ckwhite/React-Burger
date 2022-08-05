@@ -1,18 +1,19 @@
 import stylesModalIngredientsDetails from "./ModalIngredientsDetails.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { Dispatch, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getIngredient } from "../../services/action/ingredient";
+import { IIngredient } from "../../utils/constans";
 
 export const ModalIngredientsDetails = () => {
   const ingredients = useSelector(
     (state: any) => state.ingredients.ingredients
   );
   const ingredient = useSelector((state: any) => state.ingredient.ingredient);
-  const dispatch: any = useDispatch();
-  const { id }: any = useParams();
+  const dispatch: Dispatch<any> = useDispatch();
+  const {id}: any = useParams();
   useEffect(() => {
-    const findItem = ingredients.find((i: any) => i._id === id);
+    const findItem = ingredients.find((i: IIngredient) => i._id === id);
     dispatch(getIngredient(findItem));
   }, [dispatch, id, ingredients]);
   return (

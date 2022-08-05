@@ -14,7 +14,7 @@ export const ProtectedRoute : FC<IProps> = ({children, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={({ location }) =>
+      render={({ location })  =>
         accessToken || userState.isLoggedIn || userState?.name ? (
           children
         ) : (

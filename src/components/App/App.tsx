@@ -20,12 +20,10 @@ import { Modal } from "../Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { clearIngredient } from "../../services/action/ingredient";
 import { getIngredients } from "../../services/action/ingredients";
-import { Dispatch, StateFromReducersMapObject } from "redux";
+import { Dispatch } from "redux";
+import { IIngredient } from "../../utils/constans";
 
 
-interface IRootState {
-  ingredient: StateFromReducersMapObject<object | any>;
-}
 
 interface ILocation {
   state?: {background: object | any},
@@ -33,7 +31,7 @@ interface ILocation {
 
 const ModalSwitch =  () => {
   const [ingredientsModal, openIngredientsModal] = useState<boolean>(false);
-  const ingredient = useSelector((state : IRootState) => state.ingredient.ingredient);
+  const ingredient  = useSelector((state : IIngredient) => state.ingredient.ingredient);
   const location : ILocation = useLocation();
   const dispatch : Dispatch<any> = useDispatch();
   const history = useHistory();

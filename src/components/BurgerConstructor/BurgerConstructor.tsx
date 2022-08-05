@@ -13,6 +13,7 @@ import {
 } from "../../services/action";
 import { useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
+import { IIngredient } from "../../utils/constans";
 
 interface IProps {
   openModal : () => void
@@ -58,7 +59,7 @@ export const BurgerConstructor : FC<IProps> = ({ openModal }) => {
   return (
     <section className={`${stylesBurgerConstructor.section} mt-25`}>
       <ul className={stylesBurgerConstructor.ulUnder}>
-        {bun.map((i : any) => {
+        {bun.map((i : IIngredient) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
@@ -80,7 +81,7 @@ export const BurgerConstructor : FC<IProps> = ({ openModal }) => {
               burgers.length === 0 && bun.length === 0 ? "1px dashed #fff" : "",
           }}
         >
-          {burgers.map((i : any, index : number) => {
+          {burgers.map((i : IIngredient, index : number) => {
             return (
               <BurgerConstructorItem
                 moveIngredient={moveIngredient}
@@ -94,7 +95,7 @@ export const BurgerConstructor : FC<IProps> = ({ openModal }) => {
             );
           })}
         </ul>
-        {bun.map((i : any) => {
+        {bun.map((i : IIngredient) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
