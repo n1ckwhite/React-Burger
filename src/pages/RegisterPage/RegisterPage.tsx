@@ -11,19 +11,19 @@ import { Redirect, useHistory } from "react-router-dom";
 export const RegisterPage = () => {
   const [value, setValue] = React.useState("");
   const inputRef = React.useRef(null);
-  const dispatch = useDispatch();
+  const dispatch : any = useDispatch();
   const history = useHistory();
   const [valuePassword, setValuePassword] = React.useState("");
   const [name, setName] = React.useState("");
   const user = window.localStorage.getItem("accessToken");
-  const onChangeEmail = (e) => {
+  const onChangeEmail = (e : any) => {
     setValue(e.target.value);
   };
-  const onChangePassword = (e) => {
+  const onChangePassword = (e : any) => {
     setValuePassword(e.target.value);
   };
 
-  const onChangeName = (e) => {
+  const onChangeName = (e : any) => {
     setName(e.target.value);
   };
 
@@ -39,11 +39,12 @@ export const RegisterPage = () => {
         text="Уже зарегистрированы?"
         linkText="Войти"
         linkHref="/login"
-        buttonFunc={(e) => {
+        buttonFunc={(e : any) => {
           e.preventDefault();
           dispatch(registerUser(value, valuePassword, name, history));
         }}
       >
+        <div>
         <li className="mt-6">
           <Input
             type={"text"}
@@ -75,6 +76,7 @@ export const RegisterPage = () => {
             name={"password"}
           />
         </li>
+        </div>
       </Form>
     </>
   );

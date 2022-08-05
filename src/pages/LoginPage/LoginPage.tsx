@@ -9,12 +9,12 @@ import { loginUser } from "../../services/action/users";
 import { Redirect, useHistory } from "react-router-dom";
 export const LoginPage = () => {
   const [value, setValue] = React.useState("");
-  const dispatch = useDispatch();
+  const dispatch : any = useDispatch();
   const history = useHistory();
   const user = window.localStorage.getItem("accessToken");
   const inputRef = React.useRef(null);
   const [valuePassword, setValuePassword] = React.useState("");
-  const onChange = (e) => {
+  const onChange = (e : any) => {
     setValuePassword(e.target.value);
   };
 
@@ -32,11 +32,12 @@ export const LoginPage = () => {
       textTwo="Забыли пароль?"
       linkTextTwo="Восстановить пароль"
       linkHrefTwo="/forgot-password"
-      buttonFunc={(e) => {
+      buttonFunc={(e : any) => {
         e.preventDefault();
         dispatch(loginUser(value, valuePassword, history));
       }}
     >
+      <div>
       <li className="mt-6">
         <Input
           type={"email"}
@@ -56,6 +57,7 @@ export const LoginPage = () => {
           name={"password"}
         />
       </li>
+      </div>
     </Form>
   );
 };

@@ -9,13 +9,13 @@ import { resetPassword } from "../../services/action/users";
 import { useHistory } from "react-router-dom";
 
 export const ResetPage = () => {
-  const successEmail = useSelector((state) => state.users.success);
+  const successEmail = useSelector((state : any) => state.users.success);
   const [value, setValue] = React.useState("");
   const inputRef = React.useRef(null);
   const history = useHistory();
   const [valuePassword, setValuePassword] = React.useState("");
-  const dispatch = useDispatch();
-  const onChange = (e) => {
+  const dispatch : any = useDispatch();
+  const onChange = (e: any) => {
     setValuePassword(e.target.value);
   };
   useEffect(() => {
@@ -31,13 +31,14 @@ export const ResetPage = () => {
         text="Вспомнили пароль?"
         linkText="Войти"
         linkHref="/login"
-        buttonFunc={(e) => {
+        buttonFunc={(e : any) => {
           e.preventDefault()
           dispatch(resetPassword(valuePassword, value))
           history.replace('/login')
           }
           }
       >
+        <div>
         <li className="mt-6">
           <PasswordInput
             placeholder={"Введите новый пароль"}
@@ -58,6 +59,7 @@ export const ResetPage = () => {
             size={"default"}
           />
         </li>
+        </div>
       </Form>
     </>
   );

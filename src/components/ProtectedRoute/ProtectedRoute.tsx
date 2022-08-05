@@ -1,7 +1,15 @@
-import { Route, Redirect } from "react-router-dom";
+import {FC} from "react";
+import { Route, Redirect, RouteComponentProps} from "react-router-dom";
 import { useSelector } from "react-redux";
-export const ProtectedRoute = ({ children, route, ...rest }) => {
-  const userState = useSelector((store) => store.users);
+import { HTMLProps } from "react";
+
+interface IProps  {
+  rest?: HTMLProps<RouteComponentProps>,
+  children: JSX.Element,
+}
+
+export const ProtectedRoute : FC<IProps> = ({children, ...rest }) => {
+  const userState = useSelector((store : any) => store.users);
   const accessToken = window.localStorage.getItem("accessToken");
   return (
     <Route

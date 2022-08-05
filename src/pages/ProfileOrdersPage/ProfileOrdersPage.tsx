@@ -1,7 +1,6 @@
 import { ProfileMenu } from "../../components/ProfileMenu/ProfileMenu"
 export const ProfileOrdersPage = () => {
     return (
-        <ProfileMenu history={'active'}>
-        </ProfileMenu>
+        <ProfileMenu history={'active'}/>
     )
 }

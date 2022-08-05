@@ -1,4 +1,4 @@
-import React from "react";
+import React,{FC} from "react";
 import stylesIngredientCard from "./IngredientCard.module.css";
 import {
   CREATE_CURRENT_INGREDIENT,
@@ -8,17 +8,20 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { menuItemPropTypes } from "../../utils/constans";
 import { useDrag } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 
-export const IngredientCard = ({ ingredient, openModal }) => {
+interface IProps {
+  ingredient: any,
+  openModal: any,
+}
+
+export const IngredientCard :FC<IProps> = ({ ingredient, openModal }) => {
   const {v4: uuidv4} = require('uuid')
   const ingredients = useSelector(
-    (state) => state.currentIngredient.ingredients
+    (state : any) => state.currentIngredient.ingredients
   );
-  const bun = useSelector((state) => state.currentIngredient.bun);
+  const bun = useSelector((state: any) => state.currentIngredient.bun);
   const arr = [...bun, ...bun, ...ingredients];
   const counter = arr.filter((item) => item._id === ingredient._id).length;
   const dispatch = useDispatch();
@@ -66,7 +69,3 @@ export const IngredientCard = ({ ingredient, openModal }) => {
   );
 };
 
-IngredientCard.propTypes = {
-  ingredient: menuItemPropTypes.isRequired,
-  openModal: PropTypes.func.isRequired,
-};

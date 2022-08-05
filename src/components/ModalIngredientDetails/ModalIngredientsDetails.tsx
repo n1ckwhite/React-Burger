@@ -5,12 +5,14 @@ import { useParams } from "react-router-dom";
 import { getIngredient } from "../../services/action/ingredient";
 
 export const ModalIngredientsDetails = () => {
-  const ingredients = useSelector((state) => state.ingredients.ingredients);
-  const ingredient = useSelector((state) => state.ingredient.ingredient);
-  const dispatch = useDispatch();
-  const { id } = useParams();
+  const ingredients = useSelector(
+    (state: any) => state.ingredients.ingredients
+  );
+  const ingredient = useSelector((state: any) => state.ingredient.ingredient);
+  const dispatch: any = useDispatch();
+  const { id }: any = useParams();
   useEffect(() => {
-    const findItem = ingredients.find((i) => i._id === id);
+    const findItem = ingredients.find((i: any) => i._id === id);
     dispatch(getIngredient(findItem));
   }, [dispatch, id, ingredients]);
   return (

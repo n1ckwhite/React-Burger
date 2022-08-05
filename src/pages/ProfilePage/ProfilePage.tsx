@@ -9,13 +9,13 @@ import { getUserInfo, patchUserInfo } from "../../services/action/users";
 import { ProfileMenu } from "../../components/ProfileMenu/ProfileMenu";
 import { useHistory } from "react-router-dom";
 export const ProfilePage = () => {
-  const emailUser = useSelector((state) => state.users.email);
-  const nameUser = useSelector((state) => state.users.name);
+  const emailUser = useSelector((state: any) => state.users.email);
+  const nameUser = useSelector((state: any) => state.users.name);
   const [value, setValue] = useState("");
   const [name, setName] = useState("");
   const history = useHistory()
   const user = window.localStorage.getItem("accessToken");
-  const dispatch = useDispatch();
+  const dispatch : any = useDispatch();
   const [password, setPassword] = useState("");
   useEffect(() => {
     if (user) {

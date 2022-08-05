@@ -1,13 +1,23 @@
-import React, { useRef } from "react";
+import React, { useRef,FC } from "react";
 import styleBurgerConstructorItem from "./BurgerConstructorItem.module.css";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { menuItemPropTypes } from "../../utils/constans";
-import { useDrag, useDrop } from "react-dnd";
-export const BurgerConstructorItem = ({
+import { useDrag, useDrop, XYCoord } from "react-dnd";
+
+interface IProps {
+  item: any,
+  index: number,
+  isLocked: boolean,
+  type: string | undefined,
+  position?: boolean,
+  moveIngredient: any,
+  onDelete: () => void,
+  drag: boolean,
+}
+
+export const BurgerConstructorItem : FC<IProps> = ({
   item,
   index,
   isLocked,
@@ -40,7 +50,7 @@ export const BurgerConstructorItem = ({
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      const clientOffset = monitor.getClientOffset();
+      const clientOffset : XYCoord | null | any = monitor.getClientOffset();
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
@@ -80,15 +90,4 @@ export const BurgerConstructorItem = ({
       />
     </li>
   );
-};
-
-BurgerConstructorItem.propTypes = {
-  item: menuItemPropTypes.isRequired,
-  index: PropTypes.number,
-  type: PropTypes.string.isRequired,
-  drag: PropTypes.bool,
-  position: PropTypes.bool,
-  isLocked: PropTypes.bool,
-  onDelete: PropTypes.func,
-  moveIngredient: PropTypes.func,
 };

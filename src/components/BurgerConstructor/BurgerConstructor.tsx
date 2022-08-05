@@ -1,10 +1,9 @@
-import React from "react";
+import {FC} from "react";
 import stylesBurgerConstructor from "./BurgerConstructor.module.css";
 import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 import { BurgerConstructorItem } from "../BurgetConstructorItem/BurgerConstructorItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
@@ -13,12 +12,17 @@ import {
   SET_SORTED_ARRAY,
 } from "../../services/action";
 import { useHistory } from "react-router-dom";
-export const BurgerConstructor = ({ openModal }) => {
-  const burgers = useSelector((state) => state.currentIngredient.ingredients);
-  const bun = useSelector((state) => state.currentIngredient.bun);
+
+interface IProps {
+  openModal : () => void
+}
+
+export const BurgerConstructor : FC<IProps> = ({ openModal }) => {
+  const burgers = useSelector((state: any) => state.currentIngredient.ingredients);
+  const bun = useSelector((state: any) => state.currentIngredient.bun);
   const dispatch = useDispatch();
   const history = useHistory()
-  const onDelete = (item) => {
+  const onDelete = (item : object) => {
     dispatch({
       type: DELETE_CONSTRUCTOR_ITEM,
       indx: item,
@@ -30,9 +34,9 @@ export const BurgerConstructor = ({ openModal }) => {
       isHover: !!monitor.isOver(),
     }),
   });
-  const prices = burgers.reduce((a, b) => a + b.price, 0);
+  const prices = burgers.reduce((a : number, b : any |object) => a + b.price, 0);
   const user = window.localStorage.length
-  const moveIngredient = (dragIndex, hoverIndex) => {
+  const moveIngredient = (dragIndex : number, hoverIndex : number) => {
     const dragIngredient = burgers[dragIndex];
     if (dragIngredient) {
       const newIngredients = [...burgers];
@@ -53,7 +57,7 @@ export const BurgerConstructor = ({ openModal }) => {
   return (
     <section className={`${stylesBurgerConstructor.section} mt-25`}>
       <ul className={stylesBurgerConstructor.ulUnder}>
-        {bun.map((i) => {
+        {bun.map((i : any) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
@@ -75,7 +79,7 @@ export const BurgerConstructor = ({ openModal }) => {
               burgers.length === 0 && bun.length === 0 ? "1px dashed #fff" : "",
           }}
         >
-          {burgers.map((i, index) => {
+          {burgers.map((i : any, index : number) => {
             return (
               <BurgerConstructorItem
                 moveIngredient={moveIngredient}
@@ -89,7 +93,7 @@ export const BurgerConstructor = ({ openModal }) => {
             );
           })}
         </ul>
-        {bun.map((i) => {
+        {bun.map((i : any) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
@@ -121,8 +125,4 @@ export const BurgerConstructor = ({ openModal }) => {
       </div>
     </section>
   );
-};
-
-BurgerConstructor.propTypes = {
-  openModal: PropTypes.func.isRequired,
 };

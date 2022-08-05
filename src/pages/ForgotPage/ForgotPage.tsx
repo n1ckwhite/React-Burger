@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 export const ForgotPage = () => {
   const [value, setValue] = React.useState("");
-  const dispatch = useDispatch();
+  const dispatch : any = useDispatch();
   const history = useHistory();
   const user = window.localStorage.getItem('accessToken')
   const inputRef = React.useRef(null);
@@ -23,7 +23,7 @@ export const ForgotPage = () => {
         text="Вспомнили пароль?"
         linkText="Войти"
         linkHref="/reset-password"
-        buttonFunc={(e) => {
+        buttonFunc ={(e: any) => {
           e.preventDefault();
           dispatch(forgotPassword(value, history));
         }}
