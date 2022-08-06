@@ -8,8 +8,15 @@ interface IProps  {
   children: JSX.Element,
 }
 
+interface IState {
+  users: {
+    isLoggedIn: boolean,
+    name: string,
+  }
+}
+
 export const ProtectedRoute : FC<IProps> = ({children, ...rest }) => {
-  const userState = useSelector((store : any) => store.users);
+  const userState = useSelector((store : IState) => store.users);
   const accessToken = window.localStorage.getItem("accessToken");
   return (
     <Route

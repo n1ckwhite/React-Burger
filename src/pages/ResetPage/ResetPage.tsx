@@ -9,8 +9,15 @@ import { resetPassword } from "../../services/action/users";
 import { useHistory } from "react-router-dom";
 import { Dispatch } from "react";
 
+
+interface IState {
+  users: {
+    success: boolean
+  }
+}
+
 export const ResetPage = () => {
-  const successEmail = useSelector((state : any) => state.users.success);
+  const successEmail = useSelector((state : IState) => state.users.success);
   const [value, setValue] = React.useState("");
   const inputRef = React.useRef(null);
   const history = useHistory();

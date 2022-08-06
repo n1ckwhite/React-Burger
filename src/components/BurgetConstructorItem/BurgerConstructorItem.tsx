@@ -1,13 +1,14 @@
-import { useRef,FC } from "react";
+import { useRef,FC} from "react";
 import styleBurgerConstructorItem from "./BurgerConstructorItem.module.css";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, useDrop, XYCoord } from "react-dnd";
+import { IIngredient } from "../../utils/constans";
 
 interface IProps {
-  item: any,
+  item: IIngredient,
   index?: number,
   isLocked?: boolean,
   type: "top" | "bottom" | "middle" | any,
@@ -16,6 +17,9 @@ interface IProps {
   onDelete?: () => void,
   drag?: boolean,
 }
+
+
+
 
 export const BurgerConstructorItem : FC<IProps> = ({
   item,
@@ -38,11 +42,11 @@ export const BurgerConstructorItem : FC<IProps> = ({
   }
   const [, drop] = useDrop({
     accept: "ingredient",
-    hover: (item : any, monitor) => {
+    hover: (item : IProps, monitor) => {
       if (!ref.current) {
         return;
       }
-      const dragIndex: any = item.index;
+      const dragIndex: any= item.index;
       const hoverIndex : any = index;
       if (dragIndex === hoverIndex) {
         return;

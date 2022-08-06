@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { Dispatch, FC } from "react";
 import stylesProfileMenu from "./ProfileMenu.module.css";
 import { NavLink } from "react-router-dom";
 import { exitUser } from "../../services/action/users";
@@ -11,7 +11,7 @@ interface IProps {
 }
 
 export const ProfileMenu: FC<IProps> = ({ children, history, profile }) => {
-  const dispatch: any = useDispatch();
+  const dispatch: Dispatch<any> = useDispatch();
   return (
     <div className={stylesProfileMenu.block}>
       <div>

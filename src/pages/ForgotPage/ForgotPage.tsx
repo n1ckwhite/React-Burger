@@ -24,7 +24,7 @@ export const ForgotPage = () => {
         text="Вспомнили пароль?"
         linkText="Войти"
         linkHref="/reset-password"
-        buttonFunc ={(e: SubmitEvent) => {
+        buttonFunc ={(e) => {
           e.preventDefault();
           dispatch(forgotPassword(value, history));
         }}

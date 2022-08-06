@@ -15,13 +15,27 @@ import { useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
 import { IIngredient } from "../../utils/constans";
 
+
+interface IIngredients {
+  currentIngredient: {
+    ingredients: any;
+  }
+}
+
+
+interface IBun {
+  currentIngredient: {
+    bun: any 
+  }
+}
+
 interface IProps {
   openModal : () => void
 }
 
 export const BurgerConstructor : FC<IProps> = ({ openModal }) => {
-  const burgers = useSelector((state: any) => state.currentIngredient.ingredients);
-  const bun = useSelector((state: any) => state.currentIngredient.bun);
+  const burgers = useSelector((state: IIngredients) => state.currentIngredient.ingredients);
+  const bun = useSelector((state: IBun) => state.currentIngredient.bun);
   const dispatch : Dispatch<any> = useDispatch();
   const history = useHistory()
   const onDelete = (item : object) => {

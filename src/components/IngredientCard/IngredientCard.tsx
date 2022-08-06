@@ -14,7 +14,7 @@ import { IIngredient } from "../../utils/constans";
 
 interface IProps {
   ingredient: IIngredient,
-  openModal: any,
+  openModal: (A: IIngredient) => IIngredient,
 }
 
 export const IngredientCard :FC<IProps> = ({ ingredient, openModal }) => {

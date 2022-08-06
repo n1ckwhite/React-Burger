@@ -25,13 +25,19 @@ import { IIngredient } from "../../utils/constans";
 
 
 
+interface IState {
+  ingredient: {
+    ingredient: IIngredient
+  }
+}
+
 interface ILocation {
   state?: {background: object | any},
 }
 
 const ModalSwitch =  () => {
   const [ingredientsModal, openIngredientsModal] = useState<boolean>(false);
-  const ingredient  = useSelector((state : IIngredient) => state.ingredient.ingredient);
+  const ingredient  = useSelector((state : IState) => state.ingredient.ingredient);
   const location : ILocation = useLocation();
   const dispatch : Dispatch<any> = useDispatch();
   const history = useHistory();

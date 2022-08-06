@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch, FormEvent } from "react";
+import React, { ChangeEvent, Dispatch} from "react";
 import { Form } from "../../components/Form/Form";
 import {
   Input,
@@ -32,7 +32,7 @@ export const LoginPage = () => {
       textTwo="Забыли пароль?"
       linkTextTwo="Восстановить пароль"
       linkHrefTwo="/forgot-password"
-      buttonFunc={(e : FormEvent) => {
+      buttonFunc={(e) => {
         e.preventDefault();
         dispatch(loginUser(value, valuePassword, history));
       }}
