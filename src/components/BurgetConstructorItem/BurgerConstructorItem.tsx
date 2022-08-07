@@ -1,4 +1,4 @@
-import { useRef,FC} from "react";
+import { useRef, FC } from "react";
 import styleBurgerConstructorItem from "./BurgerConstructorItem.module.css";
 import {
   ConstructorElement,
@@ -8,20 +8,17 @@ import { useDrag, useDrop, XYCoord } from "react-dnd";
 import { IIngredient } from "../../utils/constans";
 
 interface IProps {
-  item: IIngredient,
-  index?: number,
-  isLocked?: boolean,
-  type: "top" | "bottom" | "middle" | any,
-  position?: boolean,
-  moveIngredient?: any,
-  onDelete?: () => void,
-  drag?: boolean,
+  item: IIngredient;
+  index: number;
+  isLocked?: boolean;
+  type: "top" | "bottom" | "middle" | any;
+  position?: boolean;
+  onDelete?: () => void;
+  drag?: boolean;
+  moveIngredient:(A: number, B: number) => void
 }
 
-
-
-
-export const BurgerConstructorItem : FC<IProps> = ({
+export const BurgerConstructorItem: FC<IProps> = ({
   item,
   index,
   isLocked,
@@ -42,19 +39,19 @@ export const BurgerConstructorItem : FC<IProps> = ({
   }
   const [, drop] = useDrop({
     accept: "ingredient",
-    hover: (item : IProps, monitor) => {
+    hover: (item: IProps, monitor) => {
       if (!ref.current) {
         return;
       }
-      const dragIndex: any= item.index;
-      const hoverIndex : any = index;
+      const dragIndex = item.index;
+      const hoverIndex = index;
       if (dragIndex === hoverIndex) {
         return;
       }
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      const clientOffset : XYCoord | null | any = monitor.getClientOffset();
+      const clientOffset: XYCoord | null | any = monitor.getClientOffset();
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
@@ -76,7 +73,6 @@ export const BurgerConstructorItem : FC<IProps> = ({
   const opacity = isDragging ? 0 : 1;
 
   dragRef(drop(ref));
-
   return (
     <li
       ref={isLocked ? null : ref}

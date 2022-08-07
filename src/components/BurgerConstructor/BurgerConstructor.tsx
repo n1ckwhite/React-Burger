@@ -1,4 +1,4 @@
-import {FC} from "react";
+import { FC } from "react";
 import stylesBurgerConstructor from "./BurgerConstructor.module.css";
 import {
   CurrencyIcon,
@@ -15,30 +15,30 @@ import { useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
 import { IIngredient } from "../../utils/constans";
 
-
 interface IIngredients {
   currentIngredient: {
-    ingredients: any;
-  }
+    ingredients: [IIngredient];
+  };
 }
-
 
 interface IBun {
   currentIngredient: {
-    bun: any 
-  }
+    bun: [IIngredient];
+  };
 }
 
 interface IProps {
-  openModal : () => void
+  openModal: () => void;
 }
 
-export const BurgerConstructor : FC<IProps> = ({ openModal }) => {
-  const burgers = useSelector((state: IIngredients) => state.currentIngredient.ingredients);
+export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
+  const burgers = useSelector(
+    (state: IIngredients) => state.currentIngredient.ingredients
+  );
   const bun = useSelector((state: IBun) => state.currentIngredient.bun);
-  const dispatch : Dispatch<any> = useDispatch();
-  const history = useHistory()
-  const onDelete = (item : object) => {
+  const dispatch: Dispatch<any> = useDispatch();
+  const history = useHistory();
+  const onDelete = (item: object) => {
     dispatch({
       type: DELETE_CONSTRUCTOR_ITEM,
       indx: item,
@@ -50,9 +50,9 @@ export const BurgerConstructor : FC<IProps> = ({ openModal }) => {
       isHover: !!monitor.isOver(),
     }),
   });
-  const prices = burgers.reduce((a : number, b : {price: string}) => a + b?.price, 0);
-  const user = window.localStorage.length
-  const moveIngredient = (dragIndex : number, hoverIndex : number) => {
+  const prices = burgers.reduce((a, b) => a + b.price, 0);
+  const user = window.localStorage.length;
+  const moveIngredient = (dragIndex: number, hoverIndex: number): void => {
     const dragIngredient = burgers[dragIndex];
     if (dragIngredient) {
       const newIngredients = [...burgers];
@@ -63,20 +63,22 @@ export const BurgerConstructor : FC<IProps> = ({ openModal }) => {
   };
 
   const openModalUser = () => {
-    if(user !== 0) {
-      openModal()
+    if (user !== 0) {
+      openModal();
     } else {
-      history.replace({pathname: '/login'})
+      history.replace({ pathname: "/login" });
     }
-  }
+  };
 
   return (
     <section className={`${stylesBurgerConstructor.section} mt-25`}>
       <ul className={stylesBurgerConstructor.ulUnder}>
-        {bun.map((i : IIngredient) => {
+        {bun.map((i, index: number) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
+                moveIngredient={moveIngredient}
+                index={index}
                 key={i.key}
                 item={i}
                 type="top"
@@ -91,11 +93,9 @@ export const BurgerConstructor : FC<IProps> = ({ openModal }) => {
           ref={dropRef}
           style={{
             border: isHover ? "3px solid #4C4CFF" : "",
-            outline:
-              burgers.length === 0 && bun.length === 0 ? "1px dashed #fff" : "",
           }}
         >
-          {burgers.map((i : IIngredient, index : number) => {
+          {burgers.map((i, index: number) => {
             return (
               <BurgerConstructorItem
                 moveIngredient={moveIngredient}
@@ -109,10 +109,12 @@ export const BurgerConstructor : FC<IProps> = ({ openModal }) => {
             );
           })}
         </ul>
-        {bun.map((i : IIngredient) => {
+        {bun.map((i, index: number) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
+                moveIngredient={moveIngredient}
+                index={index}
                 key={i.key}
                 item={i}
                 type="bottom"
