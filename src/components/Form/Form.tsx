@@ -13,7 +13,7 @@ interface IProps {
   linkHrefTwo?: string,
   linkTextTwo?: string,
   children: JSX.Element,
-  buttonFunc: (A: SubmitEvent) => void
+  buttonFunc: any
 }
 
 export const Form :FC<IProps> = ({
@@ -30,7 +30,7 @@ export const Form :FC<IProps> = ({
 }) => {
 
   return (
-    <form className={stylesForm.container} onSubmit={() => buttonFunc}>
+    <form className={stylesForm.container} onSubmit={buttonFunc}>
       <p className="text text_type_main-medium">{title}</p>
       <ul className={stylesForm.ul}>
         {children}

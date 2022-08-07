@@ -40,7 +40,7 @@ export const RegisterPage = () => {
         text="Уже зарегистрированы?"
         linkText="Войти"
         linkHref="/login"
-        buttonFunc={(e) => {
+        buttonFunc={(e: SubmitEvent) => {
           e.preventDefault();
           dispatch(registerUser(value, valuePassword, name, history));
         }}

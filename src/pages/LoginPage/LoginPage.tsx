@@ -32,7 +32,7 @@ export const LoginPage = () => {
       textTwo="Забыли пароль?"
       linkTextTwo="Восстановить пароль"
       linkHrefTwo="/forgot-password"
-      buttonFunc={(e) => {
+      buttonFunc={(e: SubmitEvent) => {
         e.preventDefault();
         dispatch(loginUser(value, valuePassword, history));
       }}
