@@ -13,7 +13,7 @@ interface IProps {
   linkHrefTwo?: string,
   linkTextTwo?: string,
   children: JSX.Element,
-  buttonFunc: any
+  buttonFunc: (() => void) | any
 }
 
 export const Form :FC<IProps> = ({
