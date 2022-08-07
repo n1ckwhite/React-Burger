@@ -2,8 +2,16 @@ import React from "react";
 import stylesModalOrderDetails from "./ModalOrderDetails.module.css";
 import doneImg from "../../images/order accpeted/done.png";
 import { useSelector } from "react-redux";
+
+interface IState {
+  order: {
+    order: number
+  }
+}
+
+
 export const ModalOrderDetails = () => {
-  const number = useSelector((state) => state.order.order);
+  const number = useSelector((state : IState) => state.order.order);
   return (
     <>
       <p

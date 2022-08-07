@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
 import stylesProfilePage from "./ProfilePage.module.css";
 import {
   Input,
@@ -8,14 +8,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo, patchUserInfo } from "../../services/action/users";
 import { ProfileMenu } from "../../components/ProfileMenu/ProfileMenu";
 import { useHistory } from "react-router-dom";
+
+interface IState {
+  users: {
+    email: string,
+    name: string,
+  }
+}
+
 export const ProfilePage = () => {
-  const emailUser = useSelector((state) => state.users.email);
-  const nameUser = useSelector((state) => state.users.name);
+  const emailUser = useSelector((state: IState) => state.users.email);
+  const nameUser = useSelector((state: IState) => state.users.name);
   const [value, setValue] = useState("");
   const [name, setName] = useState("");
   const history = useHistory()
   const user = window.localStorage.getItem("accessToken");
-  const dispatch = useDispatch();
+  const dispatch : Dispatch<any> = useDispatch();
   const [password, setPassword] = useState("");
   useEffect(() => {
     if (user) {

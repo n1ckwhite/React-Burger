@@ -1,9 +1,22 @@
 import stylesForm from "./Form.module.css";
-import React from "react";
-import PropTypes from "prop-types";
+import {FC} from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-export const Form = ({
+
+interface IProps {
+  title: string,
+  button: string,
+  text: string,
+  textTwo?: string,
+  linkText: string,
+  linkHref: string,
+  linkHrefTwo?: string,
+  linkTextTwo?: string,
+  children: JSX.Element,
+  buttonFunc: (() => void) | any
+}
+
+export const Form :FC<IProps> = ({
   title,
   button,
   children,
@@ -15,6 +28,7 @@ export const Form = ({
   linkHrefTwo,
   buttonFunc,
 }) => {
+
   return (
     <form className={stylesForm.container} onSubmit={buttonFunc}>
       <p className="text text_type_main-medium">{title}</p>
@@ -37,7 +51,7 @@ export const Form = ({
       {textTwo && (
         <p className={`text text_type_main-small ${stylesForm.p}`}>
           {textTwo}
-          <Link to={linkHrefTwo} className={stylesForm.link}>
+          <Link to={linkHrefTwo ? linkHrefTwo : ''} className={stylesForm.link}>
             {linkTextTwo}
           </Link>
         </p>
@@ -47,13 +61,3 @@ export const Form = ({
 };
 
 
-Form.propTypes = {
-  title: PropTypes.string.isRequired,
-  button: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  textTwo: PropTypes.string,
-  linkHref: PropTypes.string.isRequired,
-  linkHrefTwo: PropTypes.string,
-  linkTextTwo: PropTypes.string,
-  buttonFunc: PropTypes.func.isRequired,
-}

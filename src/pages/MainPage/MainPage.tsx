@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, FC, useState } from "react";
 import MainPageStyles from "./MainPage.module.css";
 import { BurgerIngredients } from "../../components/BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../../components/BurgerConstructor/BurgerConstructor";
@@ -6,16 +6,35 @@ import { Modal } from "../../components/Modal/Modal";
 import { ModalOrderDetails } from "../../components/ModalOrderDetails/ModalOrderDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrder } from "../../services/action/order";
-import PropTypes from "prop-types";
+import { IIngredient } from "../../utils/constans";
 
-function MainPage({ openModal }) {
+interface Iprops {
+  openModal: () => void;
+}
+
+interface IBurgers {
+  currentIngredient: {
+    bun: [IIngredient];
+    ingredients: [IIngredient];
+  };
+}
+
+interface IBurgers {
+  ingredients: {
+    ingredients: [IIngredient];
+  };
+}
+
+const MainPage: FC<Iprops> = ({ openModal }) => {
   const ingredients = useSelector(
-    (state) => state.currentIngredient.ingredients
+    (state: IBurgers) => state.currentIngredient.ingredients
   );
-  const buns = useSelector((state) => state.currentIngredient.bun);
+  const buns = useSelector((state: IBurgers) => state.currentIngredient.bun);
   const [priceModal, openPriceModal] = useState(false);
-  const dispatch = useDispatch();
-  const burgers = useSelector((state) => state.ingredients.ingredients);
+  const dispatch: Dispatch<any> = useDispatch();
+  const burgers = useSelector(
+    (state: IBurgers) => state.ingredients.ingredients
+  );
 
   const handlePriceModal = () => {
     openPriceModal(!priceModal);
@@ -51,10 +70,6 @@ function MainPage({ openModal }) {
       </main>
     </div>
   );
-}
-
-MainPage.propTypes = {
-  openModal: PropTypes.func.isRequired,
 };
 
 export default MainPage;

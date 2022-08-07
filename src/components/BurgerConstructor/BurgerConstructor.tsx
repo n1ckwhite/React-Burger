@@ -1,10 +1,9 @@
-import React from "react";
+import { FC } from "react";
 import stylesBurgerConstructor from "./BurgerConstructor.module.css";
 import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 import { BurgerConstructorItem } from "../BurgetConstructorItem/BurgerConstructorItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
@@ -13,12 +12,33 @@ import {
   SET_SORTED_ARRAY,
 } from "../../services/action";
 import { useHistory } from "react-router-dom";
-export const BurgerConstructor = ({ openModal }) => {
-  const burgers = useSelector((state) => state.currentIngredient.ingredients);
-  const bun = useSelector((state) => state.currentIngredient.bun);
-  const dispatch = useDispatch();
-  const history = useHistory()
-  const onDelete = (item) => {
+import { Dispatch } from "redux";
+import { IIngredient } from "../../utils/constans";
+
+interface IIngredients {
+  currentIngredient: {
+    ingredients: [IIngredient];
+  };
+}
+
+interface IBun {
+  currentIngredient: {
+    bun: [IIngredient];
+  };
+}
+
+interface IProps {
+  openModal: () => void;
+}
+
+export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
+  const burgers = useSelector(
+    (state: IIngredients) => state.currentIngredient.ingredients
+  );
+  const bun = useSelector((state: IBun) => state.currentIngredient.bun);
+  const dispatch: Dispatch<any> = useDispatch();
+  const history = useHistory();
+  const onDelete = (item: object) => {
     dispatch({
       type: DELETE_CONSTRUCTOR_ITEM,
       indx: item,
@@ -31,8 +51,8 @@ export const BurgerConstructor = ({ openModal }) => {
     }),
   });
   const prices = burgers.reduce((a, b) => a + b.price, 0);
-  const user = window.localStorage.length
-  const moveIngredient = (dragIndex, hoverIndex) => {
+  const user = window.localStorage.length;
+  const moveIngredient = (dragIndex: number, hoverIndex: number): void => {
     const dragIngredient = burgers[dragIndex];
     if (dragIngredient) {
       const newIngredients = [...burgers];
@@ -43,20 +63,22 @@ export const BurgerConstructor = ({ openModal }) => {
   };
 
   const openModalUser = () => {
-    if(user !== 0) {
-      openModal()
+    if (user !== 0) {
+      openModal();
     } else {
-      history.replace({pathname: '/login'})
+      history.replace({ pathname: "/login" });
     }
-  }
+  };
 
   return (
     <section className={`${stylesBurgerConstructor.section} mt-25`}>
       <ul className={stylesBurgerConstructor.ulUnder}>
-        {bun.map((i) => {
+        {bun.map((i, index: number) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
+                moveIngredient={moveIngredient}
+                index={index}
                 key={i.key}
                 item={i}
                 type="top"
@@ -71,11 +93,9 @@ export const BurgerConstructor = ({ openModal }) => {
           ref={dropRef}
           style={{
             border: isHover ? "3px solid #4C4CFF" : "",
-            outline:
-              burgers.length === 0 && bun.length === 0 ? "1px dashed #fff" : "",
           }}
         >
-          {burgers.map((i, index) => {
+          {burgers.map((i, index: number) => {
             return (
               <BurgerConstructorItem
                 moveIngredient={moveIngredient}
@@ -89,10 +109,12 @@ export const BurgerConstructor = ({ openModal }) => {
             );
           })}
         </ul>
-        {bun.map((i) => {
+        {bun.map((i, index: number) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
+                moveIngredient={moveIngredient}
+                index={index}
                 key={i.key}
                 item={i}
                 type="bottom"
@@ -121,8 +143,4 @@ export const BurgerConstructor = ({ openModal }) => {
       </div>
     </section>
   );
-};
-
-BurgerConstructor.propTypes = {
-  openModal: PropTypes.func.isRequired,
 };

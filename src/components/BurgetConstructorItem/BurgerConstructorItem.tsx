@@ -1,13 +1,24 @@
-import React, { useRef } from "react";
+import { useRef, FC } from "react";
 import styleBurgerConstructorItem from "./BurgerConstructorItem.module.css";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { menuItemPropTypes } from "../../utils/constans";
-import { useDrag, useDrop } from "react-dnd";
-export const BurgerConstructorItem = ({
+import { useDrag, useDrop, XYCoord } from "react-dnd";
+import { IIngredient } from "../../utils/constans";
+
+interface IProps {
+  item: IIngredient;
+  index: number;
+  isLocked?: boolean;
+  type: "top" | "bottom" | "middle" | any;
+  position?: boolean;
+  onDelete?: () => void;
+  drag?: boolean;
+  moveIngredient:(A: number, B: number) => void
+}
+
+export const BurgerConstructorItem: FC<IProps> = ({
   item,
   index,
   isLocked,
@@ -17,7 +28,7 @@ export const BurgerConstructorItem = ({
   onDelete,
   drag,
 }) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLLIElement>(null);
   let pos;
   if (position) {
     pos = "(верх)";
@@ -28,7 +39,7 @@ export const BurgerConstructorItem = ({
   }
   const [, drop] = useDrop({
     accept: "ingredient",
-    hover: (item, monitor) => {
+    hover: (item: IProps, monitor) => {
       if (!ref.current) {
         return;
       }
@@ -40,7 +51,7 @@ export const BurgerConstructorItem = ({
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      const clientOffset = monitor.getClientOffset();
+      const clientOffset: XYCoord | null | any = monitor.getClientOffset();
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
@@ -62,10 +73,9 @@ export const BurgerConstructorItem = ({
   const opacity = isDragging ? 0 : 1;
 
   dragRef(drop(ref));
-
   return (
     <li
-      ref={!isLocked ? ref : null}
+      ref={isLocked ? null : ref}
       className={`${styleBurgerConstructorItem.li} mb-4`}
       style={{ opacity }}
     >
@@ -80,15 +90,4 @@ export const BurgerConstructorItem = ({
       />
     </li>
   );
-};
-
-BurgerConstructorItem.propTypes = {
-  item: menuItemPropTypes.isRequired,
-  index: PropTypes.number,
-  type: PropTypes.string.isRequired,
-  drag: PropTypes.bool,
-  position: PropTypes.bool,
-  isLocked: PropTypes.bool,
-  onDelete: PropTypes.func,
-  moveIngredient: PropTypes.func,
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { Form } from "../../components/Form/Form";
 import {
   Input,
@@ -7,23 +7,24 @@ import {
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../services/action/users";
 import { Redirect, useHistory } from "react-router-dom";
+import { Dispatch } from "react";
 
 export const RegisterPage = () => {
   const [value, setValue] = React.useState("");
   const inputRef = React.useRef(null);
-  const dispatch = useDispatch();
+  const dispatch : Dispatch<any> = useDispatch();
   const history = useHistory();
   const [valuePassword, setValuePassword] = React.useState("");
   const [name, setName] = React.useState("");
   const user = window.localStorage.getItem("accessToken");
-  const onChangeEmail = (e) => {
+  const onChangeEmail = (e : ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
-  const onChangePassword = (e) => {
+  const onChangePassword = (e : ChangeEvent<HTMLInputElement>) => {
     setValuePassword(e.target.value);
   };
 
-  const onChangeName = (e) => {
+  const onChangeName = (e : ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
@@ -39,11 +40,12 @@ export const RegisterPage = () => {
         text="Уже зарегистрированы?"
         linkText="Войти"
         linkHref="/login"
-        buttonFunc={(e) => {
+        buttonFunc={(e: SubmitEvent) => {
           e.preventDefault();
           dispatch(registerUser(value, valuePassword, name, history));
         }}
       >
+        <div>
         <li className="mt-6">
           <Input
             type={"text"}
@@ -75,6 +77,7 @@ export const RegisterPage = () => {
             name={"password"}
           />
         </li>
+        </div>
       </Form>
     </>
   );

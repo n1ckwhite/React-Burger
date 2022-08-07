@@ -4,9 +4,10 @@ import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { forgotPassword } from "../../services/action/users";
 import { useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
+import { Dispatch } from "react";
 export const ForgotPage = () => {
   const [value, setValue] = React.useState("");
-  const dispatch = useDispatch();
+  const dispatch : Dispatch<any> = useDispatch();
   const history = useHistory();
   const user = window.localStorage.getItem('accessToken')
   const inputRef = React.useRef(null);
@@ -23,7 +24,7 @@ export const ForgotPage = () => {
         text="Вспомнили пароль?"
         linkText="Войти"
         linkHref="/reset-password"
-        buttonFunc={(e) => {
+        buttonFunc ={(e: SubmitEvent) => {
           e.preventDefault();
           dispatch(forgotPassword(value, history));
         }}

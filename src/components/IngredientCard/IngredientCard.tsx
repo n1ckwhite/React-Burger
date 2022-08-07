@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import stylesIngredientCard from "./IngredientCard.module.css";
 import {
   CREATE_CURRENT_INGREDIENT,
@@ -8,23 +8,34 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { menuItemPropTypes } from "../../utils/constans";
 import { useDrag } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
+import { IIngredient } from "../../utils/constans";
 
-export const IngredientCard = ({ ingredient, openModal }) => {
-  const {v4: uuidv4} = require('uuid')
+interface IProps {
+  ingredient: IIngredient;
+  openModal: (A: IIngredient) => void;
+}
+
+interface IState {
+  currentIngredient: {
+    bun: [IIngredient];
+    ingredients: [IIngredient];
+  };
+}
+
+export const IngredientCard: FC<IProps> = ({ ingredient, openModal }) => {
+  const { v4: uuidv4 } = require("uuid");
   const ingredients = useSelector(
-    (state) => state.currentIngredient.ingredients
+    (state: IState) => state.currentIngredient.ingredients
   );
-  const bun = useSelector((state) => state.currentIngredient.bun);
+  const bun = useSelector((state: IState) => state.currentIngredient.bun);
   const arr = [...bun, ...bun, ...ingredients];
   const counter = arr.filter((item) => item._id === ingredient._id).length;
   const dispatch = useDispatch();
   const [, dragRef] = useDrag({
     type: "ingredient",
-    item: ingredient.id,
+    item: ingredient._id,
     end: () => {
       addIngredient();
     },
@@ -35,13 +46,13 @@ export const IngredientCard = ({ ingredient, openModal }) => {
       dispatch({
         type: REPLACE_BUN_INGREDIENT,
         bun: ingredient,
-        key: uuidv4()
+        key: uuidv4(),
       });
     } else {
       dispatch({
         type: CREATE_CURRENT_INGREDIENT,
         it: ingredient,
-        key: uuidv4()
+        key: uuidv4(),
       });
     }
   };
@@ -64,9 +75,4 @@ export const IngredientCard = ({ ingredient, openModal }) => {
       <p className="text text_type_main-default">{ingredient.name}</p>
     </li>
   );
-};
-
-IngredientCard.propTypes = {
-  ingredient: menuItemPropTypes.isRequired,
-  openModal: PropTypes.func.isRequired,
 };

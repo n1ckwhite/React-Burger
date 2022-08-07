@@ -1,5 +1,5 @@
 import MainPage from "../../pages/MainPage/MainPage";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,18 +20,33 @@ import { Modal } from "../Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { clearIngredient } from "../../services/action/ingredient";
 import { getIngredients } from "../../services/action/ingredients";
-const ModalSwitch = () => {
-  const [ingredientsModal, openIngredientsModal] = useState(false);
-  const ingredient = useSelector((state) => state.ingredient.ingredient);
-  const location = useLocation();
-  const dispatch = useDispatch();
+import { Dispatch } from "redux";
+import { IIngredient } from "../../utils/constans";
+
+
+
+interface IState {
+  ingredient: {
+    ingredient: IIngredient
+  }
+}
+
+interface ILocation {
+  state?: {background: object | any},
+}
+
+const ModalSwitch =  () => {
+  const [ingredientsModal, openIngredientsModal] = useState<boolean>(false);
+  const ingredient  = useSelector((state : IState) => state.ingredient.ingredient);
+  const location : ILocation = useLocation();
+  const dispatch : Dispatch<any> = useDispatch();
   const history = useHistory();
-  const background = location.state && location.state.background;
+  const background = location.state && location?.state?.background;
   const openOrderModal = () => {
     openIngredientsModal(true);
   };
   const closeOrderModal = () => {
-    dispatch(clearIngredient());
+    dispatch (clearIngredient());
     openIngredientsModal(false);
     history.goBack();
   };
@@ -88,7 +103,7 @@ const ModalSwitch = () => {
 };
 
 export const App = () => {
-  const dispatch = useDispatch();
+  const dispatch : Dispatch<any> = useDispatch();
 
   useEffect(() => {
     dispatch(getIngredients());

@@ -1,7 +1,13 @@
-import React from "react";
+import { FC } from "react";
 import stylesModalOverlay from "./ModalOverlay.module.css";
-import PropTypes from "prop-types";
-export const ModalOverlay = ({ children, open, closePopup }) => {
+
+interface IProps {
+  children: JSX.Element;
+  open: boolean;
+  closePopup: () => void;
+}
+
+export const ModalOverlay: FC<IProps> = ({ children, open, closePopup }) => {
   return (
     <div
       className={
@@ -19,10 +25,4 @@ export const ModalOverlay = ({ children, open, closePopup }) => {
       ></div>
     </div>
   );
-};
-
-ModalOverlay.propTypes = {
-  children: PropTypes.node.isRequired,
-  open: PropTypes.bool.isRequired,
-  closePopup: PropTypes.func.isRequired,
 };

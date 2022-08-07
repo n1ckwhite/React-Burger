@@ -1,10 +1,13 @@
-import React from "react";
+import React, {FC} from "react";
 import stylesBurgerIngridients from "./BurgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "../BurgerIngredient/BurgetIngredient";
-import PropTypes from "prop-types";
 
-export const BurgerIngredients = ({ openModal }) => {
+interface IProps {
+  openModal: () => void
+}
+
+export const BurgerIngredients :FC<IProps>  = ({ openModal }) => {
   const [current, setCurrent] = React.useState("one");
   return (
     <section className={`${stylesBurgerIngridients.section} mt-10`}>
@@ -31,6 +34,3 @@ export const BurgerIngredients = ({ openModal }) => {
   );
 };
 
-BurgerIngredients.propTypes = {
-  openModal: PropTypes.func.isRequired,
-};
