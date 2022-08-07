@@ -1,19 +1,20 @@
-import { useEffect,FC} from "react";
+import { useEffect, FC } from "react";
 import ReactDOM from "react-dom";
 import stylesModal from "./Modal.module.css";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-const modal: any = document.getElementById("react-modals");
-
+const modal: HTMLDivElement = document.getElementById(
+  "react-modals"
+) as HTMLDivElement;
 interface IProps {
-  children: JSX.Element,
-  isActive: boolean,
-  handleIsActive: () => void,
-  closePopup: () => void,
-  title?: string
+  children: JSX.Element;
+  isActive: boolean;
+  handleIsActive: () => void;
+  closePopup: () => void;
+  title?: string;
 }
 
-export const Modal :FC<IProps> = ({
+export const Modal: FC<IProps> = ({
   children,
   isActive,
   handleIsActive,
@@ -27,7 +28,7 @@ export const Modal :FC<IProps> = ({
     };
   });
 
-  const handleOpenModal = (e : KeyboardEvent) => {
+  const handleOpenModal = (e: KeyboardEvent) => {
     if (e.key === "Escape") {
       closePopup();
     }
@@ -39,10 +40,7 @@ export const Modal :FC<IProps> = ({
         {title ? (
           <div className={`${stylesModal.row} mt-10`}>
             <p className="text text_type_main-large">{title}</p>
-            <button
-              className={`${stylesModal.button}`}
-              onClick={closePopup}
-            >
+            <button className={`${stylesModal.button}`} onClick={closePopup}>
               <CloseIcon type="primary" />
             </button>
           </div>
@@ -60,4 +58,3 @@ export const Modal :FC<IProps> = ({
     modal
   );
 };
-

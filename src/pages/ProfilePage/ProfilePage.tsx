@@ -8,9 +8,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo, patchUserInfo } from "../../services/action/users";
 import { ProfileMenu } from "../../components/ProfileMenu/ProfileMenu";
 import { useHistory } from "react-router-dom";
+
+interface IState {
+  users: {
+    email: string,
+    name: string,
+  }
+}
+
 export const ProfilePage = () => {
-  const emailUser = useSelector((state: any) => state.users.email);
-  const nameUser = useSelector((state: any) => state.users.name);
+  const emailUser = useSelector((state: IState) => state.users.email);
+  const nameUser = useSelector((state: IState) => state.users.name);
   const [value, setValue] = useState("");
   const [name, setName] = useState("");
   const history = useHistory()

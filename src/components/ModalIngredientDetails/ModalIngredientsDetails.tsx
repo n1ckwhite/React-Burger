@@ -5,11 +5,24 @@ import { useParams } from "react-router-dom";
 import { getIngredient } from "../../services/action/ingredient";
 import { IIngredient } from "../../utils/constans";
 
+
+interface Iingredients {
+  ingredients: {
+    ingredients: [IIngredient]
+  }
+}
+
+interface Iingredient {
+ingredient: {
+    ingredient: IIngredient,
+  }
+}
+
 export const ModalIngredientsDetails = () => {
   const ingredients = useSelector(
-    (state: any) => state.ingredients.ingredients
+    (state: Iingredients) => state.ingredients.ingredients
   );
-  const ingredient = useSelector((state: any) => state.ingredient.ingredient);
+  const ingredient = useSelector((state: Iingredient) => state.ingredient.ingredient);
   const dispatch: Dispatch<any> = useDispatch();
   const {id}: any = useParams();
   useEffect(() => {
@@ -27,7 +40,6 @@ export const ModalIngredientsDetails = () => {
       <ul className={`${stylesModalIngredientsDetails.ul} mt-8`}>
         <li
           className={`${stylesModalIngredientsDetails.li} mr-5`}
-          key={ingredient.id}
         >
           <p className="text text_type_main-default text_color_inactive">
             Каллории,ккал
@@ -38,7 +50,6 @@ export const ModalIngredientsDetails = () => {
         </li>
         <li
           className={`${stylesModalIngredientsDetails.li} mr-5`}
-          key={ingredient.id}
         >
           <p className="text text_type_main-default text_color_inactive">
             Белки,г
@@ -49,7 +60,6 @@ export const ModalIngredientsDetails = () => {
         </li>
         <li
           className={`${stylesModalIngredientsDetails.li} mr-5`}
-          key={ingredient.id}
         >
           <p className="text text_type_main-default text_color_inactive">
             Жиры,г
@@ -58,7 +68,6 @@ export const ModalIngredientsDetails = () => {
         </li>
         <li
           className={`${stylesModalIngredientsDetails.li}`}
-          key={ingredient.id}
         >
           <p className="text text_type_main-default text_color_inactive">
             Углеводы,г

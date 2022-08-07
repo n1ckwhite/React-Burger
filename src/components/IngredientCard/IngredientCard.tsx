@@ -1,4 +1,4 @@
-import React,{FC} from "react";
+import React, { FC } from "react";
 import stylesIngredientCard from "./IngredientCard.module.css";
 import {
   CREATE_CURRENT_INGREDIENT,
@@ -13,16 +13,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { IIngredient } from "../../utils/constans";
 
 interface IProps {
-  ingredient: IIngredient,
-  openModal: (A: IIngredient) => IIngredient,
+  ingredient: IIngredient;
+  openModal: (A: IIngredient) => void;
 }
 
-export const IngredientCard :FC<IProps> = ({ ingredient, openModal }) => {
-  const {v4: uuidv4} = require('uuid')
+interface IState {
+  currentIngredient: {
+    bun: [IIngredient];
+    ingredients: [IIngredient];
+  };
+}
+
+export const IngredientCard: FC<IProps> = ({ ingredient, openModal }) => {
+  const { v4: uuidv4 } = require("uuid");
   const ingredients = useSelector(
-    (state : any) => state.currentIngredient.ingredients
+    (state: IState) => state.currentIngredient.ingredients
   );
-  const bun = useSelector((state: any) => state.currentIngredient.bun);
+  const bun = useSelector((state: IState) => state.currentIngredient.bun);
   const arr = [...bun, ...bun, ...ingredients];
   const counter = arr.filter((item) => item._id === ingredient._id).length;
   const dispatch = useDispatch();
@@ -39,13 +46,13 @@ export const IngredientCard :FC<IProps> = ({ ingredient, openModal }) => {
       dispatch({
         type: REPLACE_BUN_INGREDIENT,
         bun: ingredient,
-        key: uuidv4()
+        key: uuidv4(),
       });
     } else {
       dispatch({
         type: CREATE_CURRENT_INGREDIENT,
         it: ingredient,
-        key: uuidv4()
+        key: uuidv4(),
       });
     }
   };
@@ -69,4 +76,3 @@ export const IngredientCard :FC<IProps> = ({ ingredient, openModal }) => {
     </li>
   );
 };
-

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { Dispatch, FC, useState } from "react";
 import MainPageStyles from "./MainPage.module.css";
 import { BurgerIngredients } from "../../components/BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../../components/BurgerConstructor/BurgerConstructor";
@@ -6,20 +6,35 @@ import { Modal } from "../../components/Modal/Modal";
 import { ModalOrderDetails } from "../../components/ModalOrderDetails/ModalOrderDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrder } from "../../services/action/order";
-
+import { IIngredient } from "../../utils/constans";
 
 interface Iprops {
-  openModal: () => void
+  openModal: () => void;
 }
 
-const MainPage : FC<Iprops> = ({ openModal }) => {
+interface IBurgers {
+  currentIngredient: {
+    bun: [IIngredient];
+    ingredients: [IIngredient];
+  };
+}
+
+interface IBurgers {
+  ingredients: {
+    ingredients: [IIngredient];
+  };
+}
+
+const MainPage: FC<Iprops> = ({ openModal }) => {
   const ingredients = useSelector(
-    (state : any) => state.currentIngredient.ingredients
+    (state: IBurgers) => state.currentIngredient.ingredients
   );
-  const buns = useSelector((state : any) => state.currentIngredient.bun);
+  const buns = useSelector((state: IBurgers) => state.currentIngredient.bun);
   const [priceModal, openPriceModal] = useState(false);
-  const dispatch : any = useDispatch();
-  const burgers = useSelector((state : any) => state.ingredients.ingredients);
+  const dispatch: Dispatch<any> = useDispatch();
+  const burgers = useSelector(
+    (state: IBurgers) => state.ingredients.ingredients
+  );
 
   const handlePriceModal = () => {
     openPriceModal(!priceModal);
@@ -27,8 +42,8 @@ const MainPage : FC<Iprops> = ({ openModal }) => {
 
   const handleOpenModal = () => {
     dispatch(
-       getOrder(
-        ingredients.map((item : any) => item._id),
+      getOrder(
+        ingredients.map((item) => item._id),
         buns[0]._id
       )
     );
@@ -55,7 +70,6 @@ const MainPage : FC<Iprops> = ({ openModal }) => {
       </main>
     </div>
   );
-}
-
+};
 
 export default MainPage;

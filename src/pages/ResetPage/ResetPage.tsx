@@ -39,7 +39,7 @@ export const ResetPage = () => {
         text="Вспомнили пароль?"
         linkText="Войти"
         linkHref="/login"
-        buttonFunc={(e : SubmitEvent) => {
+        buttonFunc={(e) => {
           e.preventDefault()
           dispatch(resetPassword(valuePassword, value))
           history.replace('/login')
