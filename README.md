@@ -7,6 +7,7 @@
 ## Технологии проекта
 - HTML,
 - flexbox верстка,
+- переходы, 
 - Css modules,
 - React,
 - React Router,
@@ -14,7 +15,7 @@
 - Redux,
 - TypeScript,
 - Web Socket
-- переходы, 
+
 ## Планы по доработке:
 - Добавить дефолтный border для Burger Constructor,
 - Исправить табы,
