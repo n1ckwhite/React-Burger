@@ -1,5 +1,5 @@
 import MainPage from "../../pages/MainPage/MainPage";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,31 +22,32 @@ import { clearIngredient } from "../../services/action/ingredient";
 import { getIngredients } from "../../services/action/ingredients";
 import { Dispatch } from "redux";
 import { IIngredient } from "../../utils/constans";
-
-
+import { FeedPage } from "../../pages/FeedPage/FeedPage";
 
 interface IState {
   ingredient: {
-    ingredient: IIngredient
-  }
+    ingredient: IIngredient;
+  };
 }
 
 interface ILocation {
-  state?: {background: object | any},
+  state?: { background: object | any };
 }
 
-const ModalSwitch =  () => {
+const ModalSwitch = () => {
   const [ingredientsModal, openIngredientsModal] = useState<boolean>(false);
-  const ingredient  = useSelector((state : IState) => state.ingredient.ingredient);
-  const location : ILocation = useLocation();
-  const dispatch : Dispatch<any> = useDispatch();
+  const ingredient = useSelector(
+    (state: IState) => state.ingredient.ingredient
+  );
+  const location: ILocation = useLocation();
+  const dispatch: Dispatch<any> = useDispatch();
   const history = useHistory();
   const background = location.state && location?.state?.background;
   const openOrderModal = () => {
     openIngredientsModal(true);
   };
   const closeOrderModal = () => {
-    dispatch (clearIngredient());
+    dispatch(clearIngredient());
     openIngredientsModal(false);
     history.goBack();
   };
@@ -75,13 +76,18 @@ const ModalSwitch =  () => {
         <Route path="/reset-password" exact={true}>
           <ResetPage />
         </Route>
+        <Route path="/feed" exact={true}>
+          <FeedPage />
+        </Route>
         <Route path="/ingredients/:id" exact={true}>
           <ModalIngredientsDetails />
+        </Route>
+        <Route path="/feed/:id" exact={true}>
+          <h1>123</h1>
         </Route>
         <ProtectedRoute>
           <ProfilePage />
         </ProtectedRoute>
-
         <Route path="/profile/orders" exact={true}>
           <ProfileOrdersPage />
         </Route>
@@ -103,7 +109,7 @@ const ModalSwitch =  () => {
 };
 
 export const App = () => {
-  const dispatch : Dispatch<any> = useDispatch();
+  const dispatch: Dispatch<any> = useDispatch();
 
   useEffect(() => {
     dispatch(getIngredients());

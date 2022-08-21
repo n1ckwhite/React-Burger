@@ -28,7 +28,7 @@ export const AppHeader = () => {
               <p className="text text_type_main-default">Конструктор</p>
             </NavLink>
             <NavLink
-              to="/"
+              to="/feed"
               onClick={() => setClassLink("lenta")}
               className={`${stylesHeader.button} ${
                 classLink === "lenta" ? stylesHeader.button_active : ""
