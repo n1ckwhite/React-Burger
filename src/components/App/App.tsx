@@ -76,21 +76,22 @@ const ModalSwitch = () => {
         <Route path="/reset-password" exact={true}>
           <ResetPage />
         </Route>
-        <Route path="/feed" exact={true}>
-          <FeedPage />
-        </Route>
+
         <Route path="/ingredients/:id" exact={true}>
           <ModalIngredientsDetails />
+        </Route>
+        <Route path="/feed" exact={true}>
+          <FeedPage />
         </Route>
         <Route path="/feed/:id" exact={true}>
           <h1>123</h1>
         </Route>
-        <ProtectedRoute>
-          <ProfilePage />
-        </ProtectedRoute>
         <Route path="/profile/orders" exact={true}>
           <ProfileOrdersPage />
         </Route>
+        <ProtectedRoute>
+          <ProfilePage />
+        </ProtectedRoute>
       </Switch>
       {background && (
         <Route path="/ingredients/:id">
