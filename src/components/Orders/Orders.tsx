@@ -1,11 +1,14 @@
-import { FC} from "react";
+import { FC } from "react";
 import stylesOrders from "./Orders.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useParams } from "react-router-dom";
 export const Orders: FC<{}> = () => {
-  const {id}: any = useParams()
-  console.log(id)
-  const burgers : any = [{image: 'https://code.s3.yandex.net/react/code/bun-02.png'},1,2,3,{image: 'https://code.s3.yandex.net/react/code/meat-01.png'}]
+  const burgers: any = [
+    { image: "https://code.s3.yandex.net/react/code/bun-02.png" },
+    1,
+    2,
+    3,
+    { image: "https://code.s3.yandex.net/react/code/meat-01.png" },
+  ];
   return (
     <ul className={stylesOrders.ul}>
       <li className={stylesOrders.li}>

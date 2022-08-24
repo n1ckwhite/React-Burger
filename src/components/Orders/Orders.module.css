@@ -17,6 +17,8 @@
 }
 
 .li {
+  text-decoration: none;
+  color: #fff;
   box-sizing: border-box;
   cursor: pointer;
   display: flex;
@@ -125,4 +127,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.text {
+  color: #8585ad;
 }

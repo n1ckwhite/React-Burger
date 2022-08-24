@@ -2,7 +2,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { FC } from "react";
 import stylesOrdersDetails from "./OrdersDetails.module.css";
 
-export const OrdersDetails: FC<{}> = () => {
+export const OrdersDetails: FC<any> = ({tal}) => {
   const burgers: any = [
     { image: "https://code.s3.yandex.net/react/code/bun-02.png" },
     { image: "https://code.s3.yandex.net/react/code/meat-01.png" },
@@ -10,7 +10,7 @@ export const OrdersDetails: FC<{}> = () => {
   return (
     <div className={stylesOrdersDetails.block}>
       <p
-        className={`text text_type_digits-default ${stylesOrdersDetails.title}`}
+        className={`text text_type_digits-default ${stylesOrdersDetails.title} ${tal && stylesOrdersDetails.tal}`}
       >
         #034533
       </p>

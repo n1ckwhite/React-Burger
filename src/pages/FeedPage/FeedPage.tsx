@@ -1,12 +1,25 @@
 import { FC } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Orders } from "../../components/Orders/Orders";
 import stylesFeedPage from "./FeedPage.module.css";
-export const FeedPage: FC<{}> = () => {
+export const FeedPage: FC<any> = ({ handleModal }) => {
+  const location = useLocation();
   return (
     <div className={stylesFeedPage.feed}>
       <p className="text text_type_main-large">Лента заказов</p>
       <div className={stylesFeedPage.feed_flex}>
-        <Orders/>
+        <ul className={stylesFeedPage.ul}>
+          <li>
+            <Link
+              className={stylesFeedPage.li}
+              to={{ pathname: `/feed/123`, state: { background: location } }}
+              key={123}
+              onClick={handleModal}
+            >
+              <Orders />
+            </Link>
+          </li>
+        </ul>
         <div style={{ marginTop: 20 }}>
           <div className={stylesFeedPage.status}>
             <div>

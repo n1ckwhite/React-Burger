@@ -5,6 +5,17 @@
   flex-direction: column;
 }
 
+.ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.li {
+  text-decoration: none;
+}
+
 .feed_flex {
   display: flex;
   gap: 0 60px;

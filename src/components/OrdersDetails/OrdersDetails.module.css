@@ -103,3 +103,8 @@
   gap: 0 8px;
   align-items: center;
 }
+
+.tal {
+  text-align: left;
+  margin-top: 40px;
+}

@@ -47,7 +47,7 @@ export const Modal: FC<IProps> = ({
         ) : (
           <button
             className={`${stylesModal.button} ${stylesModal.button_a}`}
-            onClick={handleIsActive}
+            onClick={closePopup}
           >
             <CloseIcon type="primary" />
           </button>

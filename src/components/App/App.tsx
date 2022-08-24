@@ -23,7 +23,6 @@ import { getIngredients } from "../../services/action/ingredients";
 import { Dispatch } from "redux";
 import { IIngredient } from "../../utils/constans";
 import { FeedPage } from "../../pages/FeedPage/FeedPage";
-import { Orders } from "../Orders/Orders";
 import { OrdersDetails } from "../OrdersDetails/OrdersDetails";
 
 interface IState {
@@ -38,6 +37,7 @@ interface ILocation {
 
 const ModalSwitch = () => {
   const [ingredientsModal, openIngredientsModal] = useState<boolean>(false);
+  const [orderDetailsModal, openOrderDetailsModal] = useState<boolean>(false);
   const ingredient = useSelector(
     (state: IState) => state.ingredient.ingredient
   );
@@ -51,6 +51,14 @@ const ModalSwitch = () => {
   const closeOrderModal = () => {
     dispatch(clearIngredient());
     openIngredientsModal(false);
+    history.goBack();
+  };
+
+  const openOrderDetails = () => {
+    openOrderDetailsModal(true);
+  };
+  const closeOrderDetails = () => {
+    openOrderDetailsModal(false);
     history.goBack();
   };
 
@@ -82,7 +90,7 @@ const ModalSwitch = () => {
           <ModalIngredientsDetails />
         </Route>
         <Route path="/feed" exact={true}>
-          <FeedPage />
+          <FeedPage handleModal={openOrderDetails} />
         </Route>
         <Route path="/feed/:id" exact={true}>
           <>
@@ -91,10 +99,13 @@ const ModalSwitch = () => {
           </>
         </Route>
         <Route path="/profile/orders" exact={true}>
-          <ProfileOrdersPage />
+          <ProfileOrdersPage handleModal={openOrderDetails} />
         </Route>
         <Route path="/profile/orders/:id" exact={true}>
-          <Orders />
+          <>
+            <div style={{ marginBottom: 122 }}></div>
+            <OrdersDetails />
+          </>
         </Route>
         <ProtectedRoute>
           <ProfilePage />
@@ -110,6 +121,24 @@ const ModalSwitch = () => {
               title="Детали ингредиента"
             >
               <ModalIngredientsDetails />
+            </Modal>
+          </Route>
+          <Route path="/feed/:id">
+            <Modal
+              isActive={orderDetailsModal}
+              handleIsActive={openOrderDetails}
+              closePopup={closeOrderDetails}
+            >
+              <OrdersDetails tal={true} />
+            </Modal>
+          </Route>
+          <Route path="/profile/orders/:id">
+            <Modal
+              isActive={orderDetailsModal}
+              handleIsActive={openOrderModal}
+              closePopup={closeOrderDetails}
+            >
+              <OrdersDetails tal={true} />
             </Modal>
           </Route>
         </>
