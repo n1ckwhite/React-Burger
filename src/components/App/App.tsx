@@ -23,6 +23,8 @@ import { getIngredients } from "../../services/action/ingredients";
 import { Dispatch } from "redux";
 import { IIngredient } from "../../utils/constans";
 import { FeedPage } from "../../pages/FeedPage/FeedPage";
+import { Orders } from "../Orders/Orders";
+import { OrdersDetails } from "../OrdersDetails/OrdersDetails";
 
 interface IState {
   ingredient: {
@@ -76,7 +78,6 @@ const ModalSwitch = () => {
         <Route path="/reset-password" exact={true}>
           <ResetPage />
         </Route>
-
         <Route path="/ingredients/:id" exact={true}>
           <ModalIngredientsDetails />
         </Route>
@@ -84,26 +85,34 @@ const ModalSwitch = () => {
           <FeedPage />
         </Route>
         <Route path="/feed/:id" exact={true}>
-          <h1>123</h1>
+          <>
+            <div style={{ marginBottom: 122 }}></div>
+            <OrdersDetails />
+          </>
         </Route>
         <Route path="/profile/orders" exact={true}>
           <ProfileOrdersPage />
+        </Route>
+        <Route path="/profile/orders/:id" exact={true}>
+          <Orders />
         </Route>
         <ProtectedRoute>
           <ProfilePage />
         </ProtectedRoute>
       </Switch>
       {background && (
-        <Route path="/ingredients/:id">
-          <Modal
-            isActive={ingredientsModal}
-            handleIsActive={openOrderModal}
-            closePopup={closeOrderModal}
-            title="Детали ингредиента"
-          >
-            <ModalIngredientsDetails />
-          </Modal>
-        </Route>
+        <>
+          <Route path="/ingredients/:id">
+            <Modal
+              isActive={ingredientsModal}
+              handleIsActive={openOrderModal}
+              closePopup={closeOrderModal}
+              title="Детали ингредиента"
+            >
+              <ModalIngredientsDetails />
+            </Modal>
+          </Route>
+        </>
       )}
     </div>
   );
