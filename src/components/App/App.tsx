@@ -24,6 +24,7 @@ import { Dispatch } from "redux";
 import { IIngredient } from "../../utils/constans";
 import { FeedPage } from "../../pages/FeedPage/FeedPage";
 import { OrdersDetails } from "../OrdersDetails/OrdersDetails";
+import { getData } from "../../services/action/data";
 
 interface IState {
   ingredient: {
@@ -63,10 +64,13 @@ const ModalSwitch = () => {
   };
 
   useEffect(() => {
+    dispatch(getData());
+
     if (ingredient) {
       openIngredientsModal(true);
     }
-  }, [ingredient]);
+  }, [ingredient, dispatch]);
+
   return (
     <div>
       <AppHeader />

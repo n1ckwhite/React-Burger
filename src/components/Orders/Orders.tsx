@@ -1,75 +1,49 @@
 import { FC } from "react";
 import stylesOrders from "./Orders.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-export const Orders: FC<{}> = () => {
-  const burgers: any = [
-    { image: "https://code.s3.yandex.net/react/code/bun-02.png" },
-    1,
-    2,
-    3,
-    { image: "https://code.s3.yandex.net/react/code/meat-01.png" },
-  ];
+import { useSelector } from "react-redux";
+export const Orders: FC<any> = ({ order }) => {
+  const day = new Date().getDate();
+  const ingredients = useSelector(
+    (state: any) => state.ingredients.ingredients
+  );
+  const newArr = order?.ingredients.map((i: any) => {
+    return ingredients.filter((ingredient: any) =>
+      ingredient._id === i ? ingredient.image : null
+    );
+  });
+  const { v4: uuidv4 } = require("uuid");
+
+  const newArr2 = newArr.map((i: any) => i[0].image);
+  const neaeae: any = new Set(newArr2);
+  const newArr3 = [...neaeae];
+  const dayOrder = order.createdAt.includes(`${day}T`);
   return (
     <ul className={stylesOrders.ul}>
       <li className={stylesOrders.li}>
         <span className={stylesOrders.header}>
-          <p className="text text_type_digits-default">#034535</p>
+          <p className="text text_type_digits-default">#{order?.number}</p>
           <p className={`text text_type_main-default ${stylesOrders.text}`}>
-            Сегодня, 16:20 i-GMT+3
+            {dayOrder ? "Сегодня" : "Вчера"}, {order.createdAt.slice(11, 16)}
           </p>
         </span>
-        <p className="text text_type_main-medium">
-          Death Star Starship Main бургер
-        </p>
+        <p className="text text_type_main-medium">{order?.name}</p>
         <div className={stylesOrders.flex}>
           <ul className={stylesOrders.ul_two}>
-            <li className={stylesOrders.li_img}>
-              <img
-                className={stylesOrders.img}
-                src={burgers[0].image}
-                alt="icon"
-              />
-            </li>
-            <li className={stylesOrders.li_img}>
-              <img
-                className={stylesOrders.img}
-                src={burgers[4].image}
-                alt="icon"
-              />
-            </li>
-            <li className={stylesOrders.li_img}>
-              <img
-                className={stylesOrders.img}
-                src={burgers[4].image}
-                alt="icon"
-              />
-            </li>
-            <li className={stylesOrders.li_img}>
-              <img
-                className={stylesOrders.img}
-                src={burgers[4].image}
-                alt="icon"
-              />
-            </li>
-            <li className={stylesOrders.li_img}>
-              <img
-                className={stylesOrders.img}
-                src={burgers[4].image}
-                alt="icon"
-              />
-            </li>
-            <li className={stylesOrders.li_img}>
-              <img
-                className={`${stylesOrders.img} ${stylesOrders.img_length}`}
-                src={burgers[4].image}
-                alt="icon"
-              />
-              <p
-                className={`${stylesOrders.text_length} text text_type_digits-default`}
-              >
-                +3
-              </p>
-            </li>
+            {newArr3.slice(0, 6).map((i: any, len: any) => {
+              return (
+                <li className={stylesOrders.li_img} key={uuidv4()}>
+                  <img className={stylesOrders.img} src={i} alt="icon" />
+                  {newArr3.length > 5 && len === 5 ? (
+                    <p
+                      className={`${stylesOrders.text_length} text text_type_digits-default`}
+                    >
+                      +3
+                    </p>
+                  ) : null}
+                </li>
+              );
+            })}
           </ul>
           <span className={stylesOrders.price}>
             <p className="text text_type_digits-default">480</p>

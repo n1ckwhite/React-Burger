@@ -10,6 +10,17 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  height: 870px;
+  overflow-y: scroll;
+  scrollbar-color: var(--text-inactive-color) var(--colors-button-inactive);
+}
+
+.ul::-webkit-scrollbar {
+  background: var(--colors-button-inactive);
+}
+
+.ul::-webkit-scrollbar-thumb {
+  background: var(--text-inactive-color);
 }
 
 .li {
@@ -30,11 +41,11 @@
   padding: 0;
   box-sizing: border-box;
   color: #00cccc;
-  min-width: 272px;
+  max-width: 272px;
   height: 153px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
   overflow: hidden;
   gap: 8px 24px;
   margin: 0;
