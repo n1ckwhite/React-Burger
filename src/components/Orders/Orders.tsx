@@ -7,17 +7,25 @@ export const Orders: FC<any> = ({ order }) => {
   const ingredients = useSelector(
     (state: any) => state.ingredients.ingredients
   );
-  const newArr = order?.ingredients.map((i: any) => {
+  const filterIngredients = order?.ingredients.map((i: any) => {
     return ingredients.filter((ingredient: any) =>
       ingredient._id === i ? ingredient.image : null
     );
   });
   const { v4: uuidv4 } = require("uuid");
-
-  const newArr2 = newArr.map((i: any) => i[0].image);
-  const neaeae: any = new Set(newArr2);
-  const newArr3 = [...neaeae];
+  const setIngredients: any = new Set(
+    filterIngredients.map((i: any) => i[0].image)
+  );
+  const images = [...setIngredients];
   const dayOrder = order.createdAt.includes(`${day}T`);
+  const bun = filterIngredients.filter((i: any) => i[0].type === "bun");
+  const notBunPrice = filterIngredients
+    .filter((i: any) => i[0].type !== "bun")
+    .reduce((a: any, b: any) => a + b[0].price, 0);
+  const bunPrice =
+    bun.length === 1
+      ? bun[0].map((i: any) => i.price * 2)[0]
+      : bun.reduce((a: any, b: any) => a + b[0].price, 0);
   return (
     <ul className={stylesOrders.ul}>
       <li className={stylesOrders.li}>
@@ -30,11 +38,11 @@ export const Orders: FC<any> = ({ order }) => {
         <p className="text text_type_main-medium">{order?.name}</p>
         <div className={stylesOrders.flex}>
           <ul className={stylesOrders.ul_two}>
-            {newArr3.slice(0, 6).map((i: any, len: any) => {
+            {images.slice(0, 6).map((i: any, len: any) => {
               return (
                 <li className={stylesOrders.li_img} key={uuidv4()}>
                   <img className={stylesOrders.img} src={i} alt="icon" />
-                  {newArr3.length > 5 && len === 5 ? (
+                  {images.length > 5 && len === 5 ? (
                     <p
                       className={`${stylesOrders.text_length} text text_type_digits-default`}
                     >
@@ -46,7 +54,9 @@ export const Orders: FC<any> = ({ order }) => {
             })}
           </ul>
           <span className={stylesOrders.price}>
-            <p className="text text_type_digits-default">480</p>
+            <p className="text text_type_digits-default">
+              {bunPrice + notBunPrice}
+            </p>
             <CurrencyIcon type="primary" />
           </span>
         </div>

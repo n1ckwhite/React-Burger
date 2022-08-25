@@ -28,7 +28,7 @@ export const FeedPage: FC<any> = ({ handleModal }) => {
                     <Link
                       className={stylesFeedPage.li}
                       to={{
-                        pathname: `/feed/123`,
+                        pathname: `/feed/${i._id}`,
                         state: { background: location },
                       }}
                       onClick={handleModal}
