@@ -10,7 +10,7 @@ const state = {
 
 
 
-export const dataReducer = (initalState = state, action) => {
+export const dataReducer = (initalState = state, action: any) => {
     switch (action.type) {
         case GET_DATA_REQUEST: {
             return {

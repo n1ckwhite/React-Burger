@@ -26,7 +26,7 @@ export const ModalIngredientsDetails = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const {id}: any = useParams();
   useEffect(() => {
-    const findItem = ingredients.find((i: IIngredient) => i._id === id);
+    const findItem: any = ingredients.find((i: IIngredient) => i._id === id);
     dispatch(getIngredient(findItem));
   }, [dispatch, id, ingredients]);
   return (

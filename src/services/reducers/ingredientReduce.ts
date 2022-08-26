@@ -1,10 +1,10 @@
-import { CLEAR_INGREDIENT, GET_INGREDIENT, SET_INGREDIENT } from "../action";
+import { CLEAR_INGREDIENT, GET_INGREDIENT} from "../action";
 
 const initialState = {
   ingredient: {},
 };
 
-export const ingredientReduce = (state = initialState, action) => {
+export const ingredientReduce = (state = initialState, action: any) => {
   switch (action.type) {
     case CLEAR_INGREDIENT: {
       return {

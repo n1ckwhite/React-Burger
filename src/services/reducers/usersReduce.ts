@@ -24,7 +24,7 @@ const initialState = {
   isLoggedIn: false,
 };
 
-export const usersReduce = (state = initialState, action) => {
+export const usersReduce = (state = initialState, action: any) => {
   switch (action.type) {
     case FORGOT_PASSWORD_SUCCESSFUL: {
       return {

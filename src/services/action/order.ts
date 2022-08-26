@@ -7,8 +7,9 @@ import {
 import checkResponse from "./index";
 import { API_BURGERS } from "../../utils/data";
 
-export const getOrder = (burgers, bun) => {
-  return (dispatch) => {
+
+export const getOrder = (burgers: any, bun: any) => {
+  return (dispatch: (A: Object)=> Object) => {
     dispatch({ type: CLEAR_ORDER_NUMBER });
     const requestOptions = {
       method: "POST",
@@ -26,7 +27,7 @@ export const getOrder = (burgers, bun) => {
     });
     fetch(`${API_BURGERS}/orders`, requestOptions)
       .then((response) => checkResponse(response))
-      .then((data) =>
+      .then((data: any) =>
         data.success
           ? dispatch({ type: GET_ORDER_SUCCESSFUL, number: data.order.number })
           : ""

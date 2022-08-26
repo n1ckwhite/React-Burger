@@ -9,7 +9,7 @@ const initialIngredients = {
   pending: false,
 };
 
-export const ingredientsReduce = (state = initialIngredients, action) => {
+export const ingredientsReduce = (state = initialIngredients, action: any) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {

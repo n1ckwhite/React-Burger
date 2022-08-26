@@ -13,8 +13,8 @@ export const GET_USER_INFO_SUCCESSFUL = "GET_USER_INFO_SUCCESSFUL";
 export const PATCH_USER_INFO = "PATH_USER_INFO";
 export const PATCH_USER_INFO_SUCCESSFUL = "PATH_USER_INFO_SUCCESSFUL";
 export const EXIT_USER = "EXIT_USER";
-export const forgotPassword = (email, history) => {
-  return (dispatch) => {
+export const forgotPassword = (email: any, history: any) => {
+  return (dispatch: (A: Object) => Object) => {
     dispatch({
       type: FORGOT_PASSWORD,
     });
@@ -28,20 +28,20 @@ export const forgotPassword = (email, history) => {
     });
     fetch(`${API_BURGERS}/password-reset`, requestOptions)
       .then((response) => checkResponse(response))
-      .then((data) => {
+      .then((data: any) => {
         if (data.success) {
           return history.replace({ pathname: "/reset-password" });
         }
         return null;
       })
-      .catch((error) => {
-        alert("Ошибка HTTP: ", error.type);
+      .catch((error: any) => {
+        // alert("Ошибка HTTP: ", error.type);
       });
   };
 };
 
-export const resetPassword = (password, token) => {
-  return (dispatch) => {
+export const resetPassword = (password: any, token: any) => {
+  return (dispatch: (A: Object) => Object) => {
     dispatch({
       type: RESET_PASSWORD,
       token: token,
@@ -56,12 +56,11 @@ export const resetPassword = (password, token) => {
     });
     fetch(`${API_BURGERS}/password-reset/reset`, requestOptions)
       .then((response) => checkResponse(response))
-      .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
-export const registerUser = (email, password, name, history) => {
-  return (dispatch) => {
+export const registerUser = (email: any, password: any, name: any, history: any) => {
+  return (dispatch: (A: Object) => Object) => {
     dispatch({
       type: REGISTER_USER,
       email: email,
@@ -82,20 +81,18 @@ export const registerUser = (email, password, name, history) => {
     });
     fetch(`${API_BURGERS}/auth/register`, requestOptions)
       .then((response) => checkResponse(response))
-      .then((data) =>
+      .then((data: any) =>
         data.success
           ? history.replace({ pathname: "/login" })
           : alert("Укажите корректную почту")
       )
-      .catch((error) => {
-        alert("Ошибка HTTP: ", error.type);
-      })
-      .catch((error) => alert("Ошибка HTTP: ", error.type));
+
+      // .catch((error: any) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
-export const loginUser = (email, password, history) => {
-  return (dispatch) => {
+export const loginUser = (email: any, password: any, history: any) => {
+  return (dispatch: (A: Object) => Object) => {
     dispatch({
       type: LOGIN_USER,
       email: email,
@@ -114,7 +111,7 @@ export const loginUser = (email, password, history) => {
     });
     fetch(`${API_BURGERS}/auth/login`, requestOptions)
       .then((res) => checkResponse(res))
-      .then((data) => {
+      .then((data: any) => {
         if (data.success) {
           if (!localStorage.length) {
             localStorage.setItem("accessToken", data.accessToken);
@@ -123,16 +120,16 @@ export const loginUser = (email, password, history) => {
           history.replace({ pathname: "/" });
         }
       })
-      .catch((error) => alert("Ошибка HTTP: ", error.type));
+      // .catch((error: any) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
 export const getUserInfo = () => {
-  return (dispatch) => {
+  return (dispatch: (A: Object) => Object) => {
     dispatch({
       type: GET_USER_INFO,
     });
-    const requestOptions = {
+    const requestOptions: any = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -141,7 +138,7 @@ export const getUserInfo = () => {
     };
     fetch(`${API_BURGERS}/auth/user`, requestOptions)
       .then((response) => checkResponse(response))
-      .then((data) => {
+      .then((data: any) => {
         if (data.success) {
           dispatch({
             type: GET_USER_INFO_SUCCESSFUL,
@@ -150,18 +147,18 @@ export const getUserInfo = () => {
           });
         }
       })
-      .catch((error) => alert("Ошибка HTTP: ", error.type));
+      // .catch((error: any) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
-export const patchUserInfo = (email, name) => {
-  return (dispatch) => {
+export const patchUserInfo = (email: any, name: any) => {
+  return (dispatch: (A: Object) => Object) => {
     dispatch({
       type: PATCH_USER_INFO,
       email: email,
       name: name,
     });
-    const requestOptions = {
+    const requestOptions:any = {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -177,12 +174,12 @@ export const patchUserInfo = (email, name) => {
     });
     fetch(`${API_BURGERS}/auth/user`, requestOptions)
       .then((response) => checkResponse(response))
-      .catch((error) => alert("Ошибка HTTP: ", error.type));
+      // .catch((error: any) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
 export const exitUser = () => {
-  return (dispatch) => {
+  return (dispatch: (A: Object) => Object) => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -192,12 +189,12 @@ export const exitUser = () => {
     };
     fetch(`${API_BURGERS}/auth/logout`, requestOptions)
       .then((response) => checkResponse(response))
-      .then((data) => {
+      .then((data: any) => {
         if (data.success) {
           window.localStorage.removeItem("accessToken");
           window.localStorage.removeItem("refreshToken");
         }
       })
-      .catch((error) => alert("Ошибка HTTP: ", error.type));
+      // .catch((error: any) => alert("Ошибка HTTP: ", error.type));
   };
 };

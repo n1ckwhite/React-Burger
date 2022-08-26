@@ -4,12 +4,14 @@ import {
   GET_DATA_REQUEST_SUCCESSEFUL,
 } from ".";
 
-export const getData = (token = '') => {
-  return (dispatch) => {
+export const getData = (token = "") => {
+  return (dispatch: (A: Object) => Object) => {
     dispatch({
       type: GET_DATA_REQUEST,
     });
-    const ws = new WebSocket(`wss://norma.nomoreparties.space/orders/all${token}`);
+    const ws = new WebSocket(
+      `wss://norma.nomoreparties.space/orders/all${token}`
+    );
     ws.onopen = () => {
       ws.onmessage = (event) => {
         if (event.data) {
@@ -21,8 +23,7 @@ export const getData = (token = '') => {
       };
     };
 
-    ws.onerror = (event) => {
-      alert("Ошибка соединения: ", event.message);
+    ws.onerror = (event: any) => {
       dispatch({
         type: GET_DATA_ERROR,
         error: event.message,

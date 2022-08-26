@@ -11,7 +11,7 @@ const initialState = {
   bun: [],
 };
 
-export const currentIngredientReduce = (state = initialState, action) => {
+export const currentIngredientReduce = (state = initialState, action: any) => {
   switch (action.type) {
     case CREATE_CURRENT_INGREDIENT: {
       return {
@@ -35,7 +35,7 @@ export const currentIngredientReduce = (state = initialState, action) => {
     case DELETE_CONSTRUCTOR_ITEM: {
       const newState = { ...state };
       const indexIngredient = newState.ingredients.findIndex(
-        (item) => item._id === action.indx
+        (item: any) => item._id === action.indx
       );
       if (indexIngredient !== -1) {
         newState.ingredients.splice(indexIngredient, 1);
