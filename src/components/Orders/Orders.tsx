@@ -14,18 +14,18 @@ export const Orders: FC<any> = ({ order }) => {
   });
   const { v4: uuidv4 } = require("uuid");
   const setIngredients: any = new Set(
-    filterIngredients.map((i: any) => i[0].image)
+    filterIngredients.map((i: any) => i[0]?.image)
   );
   const images = [...setIngredients];
   const dayOrder = order.createdAt.includes(`${day}T`);
-  const bun = filterIngredients.filter((i: any) => i[0].type === "bun");
+  const bun = filterIngredients.filter((i: any) => i[0]?.type === "bun");
   const notBunPrice = filterIngredients
-    .filter((i: any) => i[0].type !== "bun")
-    .reduce((a: any, b: any) => a + b[0].price, 0);
+    .filter((i: any) => i[0]?.type !== "bun")
+    .reduce((a: any, b: any) => a + b[0]?.price, 0);
   const bunPrice =
     bun.length === 1
-      ? bun[0].map((i: any) => i.price * 2)[0]
-      : bun.reduce((a: any, b: any) => a + b[0].price, 0);
+      ? bun[0].map((i: any) => i?.price * 2)[0]
+      : bun.reduce((a: any, b: any) => a + b[0]?.price, 0);
   return (
     <ul className={stylesOrders.ul}>
       <li className={stylesOrders.li}>
@@ -55,7 +55,7 @@ export const Orders: FC<any> = ({ order }) => {
           </ul>
           <span className={stylesOrders.price}>
             <p className="text text_type_digits-default">
-              {bunPrice + notBunPrice}
+              {`${bunPrice + notBunPrice}`}
             </p>
             <CurrencyIcon type="primary" />
           </span>
