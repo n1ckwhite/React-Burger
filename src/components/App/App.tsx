@@ -64,12 +64,12 @@ const ModalSwitch = () => {
   };
 
   useEffect(() => {
-    dispatch(getData());
-
     if (ingredient) {
       openIngredientsModal(true);
     }
-  }, [ingredient, dispatch]);
+  }, [ingredient]);
+
+
 
   return (
     <div>
@@ -153,8 +153,8 @@ const ModalSwitch = () => {
 
 export const App = () => {
   const dispatch: Dispatch<any> = useDispatch();
-
   useEffect(() => {
+    dispatch(getData());
     dispatch(getIngredients());
   }, [dispatch]);
   return (
