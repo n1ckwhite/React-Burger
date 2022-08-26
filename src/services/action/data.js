@@ -4,12 +4,12 @@ import {
   GET_DATA_REQUEST_SUCCESSEFUL,
 } from ".";
 
-export const getData = () => {
+export const getData = (token = '') => {
   return (dispatch) => {
     dispatch({
       type: GET_DATA_REQUEST,
     });
-    const ws = new WebSocket("wss://norma.nomoreparties.space/orders/all");
+    const ws = new WebSocket(`wss://norma.nomoreparties.space/orders/all${token}`);
     ws.onopen = () => {
       ws.onmessage = (event) => {
         if (event.data) {

@@ -1,13 +1,9 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC } from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import stylesOrdersDetails from "./OrdersDetails.module.css";
-
 export const OrdersDetails: FC<any> = ({ tal }) => {
-  const dispatch: any = useDispatch();
-
   const { id }: any = useParams();
   const { v4: uuidv4 } = require("uuid");
   const ingredients = useSelector(
@@ -24,7 +20,9 @@ export const OrdersDetails: FC<any> = ({ tal }) => {
   const notBun = filterIngredients?.filter((i: any) => i[0]?.type !== "bun");
   const bun = filterIngredients?.filter((i: any) => i[0]?.type === "bun")[0];
   const notBunPrice = notBun?.reduce((a: any, b: any) => a + b[0]?.price, 0);
-
+  if (!window.localStorage.getItem("accessToken")) {
+    return <Redirect to="/login" />;
+  }
   return (
     <div className={stylesOrdersDetails.block}>
       <p

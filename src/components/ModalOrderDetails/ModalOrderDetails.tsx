@@ -17,7 +17,7 @@ export const ModalOrderDetails = () => {
       <p
         className={`${stylesModalOrderDetails.title} text text_type_digits-large  mt-30`}
       >
-        {number}
+        {number === 0 ? '...' : number}
       </p>
       <p className="text text_type_main-medium mt-8">Индентификатор заказа</p>
       <img

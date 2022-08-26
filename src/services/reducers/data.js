@@ -21,7 +21,6 @@ export const dataReducer = (initalState = state, action) => {
         case GET_DATA_REQUEST_SUCCESSEFUL: {
             return {
                 ...state,
-                connecting: true,
                 data: action.data
             }
         }

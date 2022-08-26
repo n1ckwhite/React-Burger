@@ -12,7 +12,11 @@ export const getOrder = (burgers, bun) => {
     dispatch({ type: CLEAR_ORDER_NUMBER });
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Accept: "application/json",
+         "Content-Type": "application/json",
+         authorization: `${window.localStorage.getItem('accessToken')}`
+        },
       body: JSON.stringify({
         ingredients: [bun, ...burgers, bun],
       }),
