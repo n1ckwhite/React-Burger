@@ -120,7 +120,7 @@ const ModalSwitch = () => {
               handleIsActive={openOrderDetails}
               closePopup={closeOrderDetails}
             >
-              <OrdersDetails openOrder={openOrderDetails} tal={true} />
+              <OrdersDetails tal={true} />
             </Modal>
           </Route>
           <Route path="/profile/orders/:id">
@@ -129,7 +129,7 @@ const ModalSwitch = () => {
               handleIsActive={openOrderModal}
               closePopup={closeOrderDetails}
             >
-              <OrdersDetails openOrder={openOrderDetails} handleModal={orderDetailsModal} tal={true} />
+              <OrdersDetails handleModal={orderDetailsModal} tal={true} />
             </Modal>
           </Route>
         </>

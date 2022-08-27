@@ -3,8 +3,7 @@ import { FC} from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "../../services/types";
 import stylesOrdersDetails from "./OrdersDetails.module.css";
-export const OrdersDetails: FC<any> = ({openOrder, tal }) => {
-  openOrder()
+export const OrdersDetails: FC<any> = ({tal }) => {
   const { id }: any = useParams();
   const { v4: uuidv4 } = require("uuid");
   const ingredients = useSelector(
