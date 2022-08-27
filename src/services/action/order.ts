@@ -6,10 +6,10 @@ import {
 } from "./index";
 import checkResponse from "./index";
 import { API_BURGERS } from "../../utils/data";
+import { AppDispatch, IIngredient } from "../types";
 
-
-export const getOrder = (burgers: any, bun: any) => {
-  return (dispatch: (A: Object)=> Object) => {
+export const getOrder = (burgers: [IIngredient], bun: IIngredient) => {
+  return (dispatch: AppDispatch) => {
     dispatch({ type: CLEAR_ORDER_NUMBER });
     const requestOptions = {
       method: "POST",

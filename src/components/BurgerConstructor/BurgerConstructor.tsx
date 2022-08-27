@@ -13,7 +13,7 @@ import {
 } from "../../services/action";
 import { useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
-import { IIngredient } from "../../utils/constans";
+import { IIngredient } from "../../services/types";
 
 interface IIngredients {
   currentIngredient: {

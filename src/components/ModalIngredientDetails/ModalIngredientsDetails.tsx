@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getIngredient } from "../../services/action/ingredient";
-import { IIngredient } from "../../utils/constans";
+import { IIngredient } from "../../services/types";
 
 
 interface Iingredients {

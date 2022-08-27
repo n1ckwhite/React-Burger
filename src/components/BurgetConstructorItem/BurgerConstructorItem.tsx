@@ -5,8 +5,7 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, useDrop, XYCoord } from "react-dnd";
-import { IIngredient } from "../../utils/constans";
-
+import {IIngredient} from '../../services/types/index'
 interface IProps {
   item: IIngredient;
   index: number;

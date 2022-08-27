@@ -10,7 +10,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { IIngredient } from "../../utils/constans";
+import { IIngredient } from "../../services/types/index";
 
 interface IProps {
   ingredient: IIngredient;

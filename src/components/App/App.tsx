@@ -17,14 +17,12 @@ import { ProfileOrdersPage } from "../../pages/ProfileOrdersPage/ProfileOrdersPa
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { ModalIngredientsDetails } from "../ModalIngredientDetails/ModalIngredientsDetails";
 import { Modal } from "../Modal/Modal";
-import { useDispatch, useSelector } from "react-redux";
 import { clearIngredient } from "../../services/action/ingredient";
 import { getIngredients } from "../../services/action/ingredients";
 import { Dispatch } from "redux";
-import { IIngredient } from "../../utils/constans";
+import { IIngredient, useDispatch, useSelector } from '../../services/types/index';
 import { FeedPage } from "../../pages/FeedPage/FeedPage";
 import { OrdersDetails } from "../OrdersDetails/OrdersDetails";
-import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../../services/action";
 
 interface IState {
   ingredient: {
@@ -43,7 +41,7 @@ const ModalSwitch = () => {
     (state: IState) => state.ingredient.ingredient
   );
   const location: ILocation = useLocation();
-  const dispatch: Dispatch<any> = useDispatch();
+  const dispatch = useDispatch()
   const history = useHistory();
   const background = location.state && location?.state?.background;
   const openOrderModal = () => {

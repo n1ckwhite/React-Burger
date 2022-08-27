@@ -1,13 +1,11 @@
-import { Dispatch, FC, useState } from "react";
+import { FC, useState } from "react";
 import MainPageStyles from "./MainPage.module.css";
 import { BurgerIngredients } from "../../components/BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../../components/BurgerConstructor/BurgerConstructor";
 import { Modal } from "../../components/Modal/Modal";
 import { ModalOrderDetails } from "../../components/ModalOrderDetails/ModalOrderDetails";
-import { useDispatch, useSelector } from "react-redux";
 import { getOrder } from "../../services/action/order";
-import { IIngredient } from "../../utils/constans";
-
+import { IIngredient, useDispatch,useSelector } from "../../services/types/index";
 interface Iprops {
   openModal: () => void;
 }
@@ -27,13 +25,13 @@ interface IBurgers {
 
 const MainPage: FC<Iprops> = ({ openModal }) => {
   const ingredients = useSelector(
-    (state: IBurgers) => state.currentIngredient.ingredients
+    (state: any) => state.currentIngredient.ingredients
   );
-  const buns = useSelector((state: IBurgers) => state.currentIngredient.bun);
+  const buns = useSelector((state: any) => state.currentIngredient.bun);
   const [priceModal, openPriceModal] = useState(false);
-  const dispatch: Dispatch<any> = useDispatch();
+  const dispatch = useDispatch();
   const burgers = useSelector(
-    (state: IBurgers) => state.ingredients.ingredients
+    (state: any) => state.ingredients.ingredients
   );
 
   const handlePriceModal = () => {
@@ -43,7 +41,7 @@ const MainPage: FC<Iprops> = ({ openModal }) => {
   const handleOpenModal = () => {
     dispatch(
       getOrder(
-        ingredients.map((item) => item._id),
+        ingredients.map((item: any) => item._id),
         buns[0]._id
       )
     );
