@@ -90,11 +90,11 @@ export const FeedPage: FC<any> = ({ handleModal }) => {
           <p className="text text_type_main-medium mt-15">
             Выполнено за все время:
           </p>
-          <p className="text text_type_digits-large">{data[0].total}</p>
+          <p className="text text_type_digits-large">{data[0]?.total}</p>
           <p className="text text_type_main-medium mt-15">
             Выполнено за сегодня:
           </p>
-          <p className="text text_type_digits-large">{data[0].totalToday}</p>
+          <p className="text text_type_digits-large">{data[0]?.totalToday}</p>
         </div>
       </div>
     </div>
