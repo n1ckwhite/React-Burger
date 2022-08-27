@@ -29,7 +29,7 @@ interface ILocation {
 
 const ModalSwitch = () => {
   const [ingredientsModal, openIngredientsModal] = useState<boolean>(false);
-  const [orderDetailsModal, openOrderDetailsModal] = useState<boolean>(false);
+  const [orderDetailsModal, openOrderDetailsModal] = useState<boolean>(true);
   const ingredient = useSelector((state) => state.ingredient.ingredient);
   const location: ILocation = useLocation();
   const dispatch = useDispatch();
@@ -120,7 +120,7 @@ const ModalSwitch = () => {
               handleIsActive={openOrderDetails}
               closePopup={closeOrderDetails}
             >
-              <OrdersDetails tal={true} />
+              <OrdersDetails openOrder={openOrderDetails} tal={true} />
             </Modal>
           </Route>
           <Route path="/profile/orders/:id">
@@ -129,7 +129,7 @@ const ModalSwitch = () => {
               handleIsActive={openOrderModal}
               closePopup={closeOrderDetails}
             >
-              <OrdersDetails tal={true} />
+              <OrdersDetails openOrder={openOrderDetails} handleModal={orderDetailsModal} tal={true} />
             </Modal>
           </Route>
         </>

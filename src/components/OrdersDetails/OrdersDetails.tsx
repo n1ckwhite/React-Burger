@@ -1,9 +1,10 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { FC } from "react";
+import { FC} from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "../../services/types";
 import stylesOrdersDetails from "./OrdersDetails.module.css";
-export const OrdersDetails: FC<any> = ({ tal }) => {
+export const OrdersDetails: FC<any> = ({openOrder, tal }) => {
+  openOrder()
   const { id }: any = useParams();
   const { v4: uuidv4 } = require("uuid");
   const ingredients = useSelector(
