@@ -35,9 +35,12 @@ interface IOrderNumber {
   readonly type: typeof CLEAR_ORDER_NUMBER;
 }
 
-type TAction = IRequest | IError | ISuccessful | IOrderNumber;
+export type TActionOrder = IRequest | IError | ISuccessful | IOrderNumber;
 
-export const orderReducer = (state: IState = initialState, action: TAction) => {
+export const orderReducer = (
+  state: IState = initialState,
+  action: TActionOrder
+) => {
   switch (action.type) {
     case GET_ORDER_REQUEST: {
       return {

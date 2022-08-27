@@ -1,10 +1,12 @@
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Orders } from "../../components/Orders/Orders";
 import stylesFeedPage from "./FeedPage.module.css";
-import { useSelector } from "../../services/types";
+import { useDispatch, useSelector } from "../../services/types";
+import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../../services/action";
 export const FeedPage: FC<any> = ({ handleModal }) => {
   const { v4: uuidv4 } = require("uuid");
+  const dispatch = useDispatch()
   const location = useLocation();
   const data = useSelector((state: any) => state.data.messages);
   const done = useMemo(
@@ -19,6 +21,12 @@ export const FeedPage: FC<any> = ({ handleModal }) => {
       data[0]?.orders?.filter((i: any) => i.status === "pending"),
     [data]
   );
+  useEffect(() => {
+    dispatch({type: WS_CONNECTION_START})
+    return () => {
+      dispatch({type: WS_CONNECTION_CLOSED})
+    }
+  })
   return (
     <div className={stylesFeedPage.feed}>
       <p className="text text_type_main-large">Лента заказов</p>
@@ -82,11 +90,11 @@ export const FeedPage: FC<any> = ({ handleModal }) => {
           <p className="text text_type_main-medium mt-15">
             Выполнено за все время:
           </p>
-          <p className="text text_type_digits-large">{data.total}</p>
+          <p className="text text_type_digits-large">{data[0].total}</p>
           <p className="text text_type_main-medium mt-15">
             Выполнено за сегодня:
           </p>
-          <p className="text text_type_digits-large">{data.totalToday}</p>
+          <p className="text text_type_digits-large">{data[0].totalToday}</p>
         </div>
       </div>
     </div>

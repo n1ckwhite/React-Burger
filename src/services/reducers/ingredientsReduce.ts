@@ -28,11 +28,11 @@ interface IgetError {
   err: Event;
 }
 
-type TAction = IgetRequest | IgetSuccess | IgetError;
+export type TActionIngredients = IgetRequest | IgetSuccess | IgetError;
 
 export const ingredientsReduce = (
   state: IState = initialIngredients,
-  action: TAction
+  action: TActionIngredients
 ) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {

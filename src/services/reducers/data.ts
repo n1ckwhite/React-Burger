@@ -10,7 +10,7 @@ import {
 
 type TWSState = {
   wsConnected: boolean;
-  messages: any;
+  messages: Array<Object>;
 
   error?: Event;
 };
@@ -38,10 +38,13 @@ interface IgetMsg {
   payload: Event;
 }
 
-type TAction = IwsSucc | IwsConnErr | IwsClosed | IgetMsg;
+export type TActionData = IwsSucc | IwsConnErr | IwsClosed | IgetMsg;
 
 // Создадим редьюсер для WebSocket
-export const wsReducer = (state: TWSState = initialState, action: TAction) => {
+export const wsReducer = (
+  state: TWSState = initialState,
+  action: TActionData
+) => {
   switch (action.type) {
     // Опишем обработку экшена с типом WS_CONNECTION_SUCCESS
     // Установим флаг wsConnected в состояние true

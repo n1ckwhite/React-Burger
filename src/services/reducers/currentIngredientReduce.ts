@@ -17,6 +17,11 @@ type IState = {
   bun: Array<IIngredient> | any;
 };
 
+
+interface Iitem {
+  _id: number,
+  indx: number,
+}
 interface Icreate {
   readonly type: typeof CREATE_CURRENT_INGREDIENT;
   it: IIngredient;
@@ -36,7 +41,7 @@ interface Ireplace {
 
 interface Idelete {
   readonly type: typeof DELETE_CONSTRUCTOR_ITEM;
-  indx: () => number;
+  indx: IIngredient;
 }
 
 interface Itarget {
@@ -44,11 +49,16 @@ interface Itarget {
   targetCard: IIngredient;
 }
 
-export type TAction = Icreate | ISetSort | Ireplace | Idelete | Itarget;
+export type TActionCurrentIngredient =
+  | Icreate
+  | ISetSort
+  | Ireplace
+  | Idelete
+  | Itarget;
 
 export const currentIngredientReduce = (
   state: IState = initialState,
-  action: TAction
+  action: TActionCurrentIngredient
 ) => {
   switch (action.type) {
     case CREATE_CURRENT_INGREDIENT: {
@@ -76,7 +86,7 @@ export const currentIngredientReduce = (
     case DELETE_CONSTRUCTOR_ITEM: {
       const newState = { ...state };
       const indexIngredient = newState.ingredients.findIndex(
-        (item: any) => item._id === action.indx
+        (item: any) => item._id === action.indx 
       );
       if (indexIngredient !== -1) {
         newState.ingredients.splice(indexIngredient, 1);

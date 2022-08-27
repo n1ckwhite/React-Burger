@@ -19,11 +19,11 @@ interface Iget {
   arr: IIngredient;
 }
 
-export type IAction = Iclear | Iget;
+export type TActionIngredient = Iclear | Iget;
 
 export const ingredientReduce = (
   state: IState = initialState,
-  action: IAction
+  action: TActionIngredient
 ) => {
   switch (action.type) {
     case CLEAR_INGREDIENT: {

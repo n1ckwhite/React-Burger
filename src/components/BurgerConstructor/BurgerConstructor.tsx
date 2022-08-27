@@ -36,7 +36,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
   const bun = useSelector((state: IBun) => state.currentIngredient.bun);
   const dispatch = useDispatch();
   const history = useHistory();
-  const onDelete = (item: object) => {
+  const onDelete = (item: IIngredient) => {
     dispatch({
       type: DELETE_CONSTRUCTOR_ITEM,
       indx: item,
@@ -93,7 +93,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
             border: isHover ? "3px solid #4C4CFF" : "",
           }}
         >
-          {burgers.map((i, index: number) => {
+          {burgers.map((i: any, index: number) => {
             return (
               <BurgerConstructorItem
                 moveIngredient={moveIngredient}

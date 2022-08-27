@@ -108,7 +108,7 @@ interface Iexit {
   pending: boolean;
 }
 
-type TAction =
+export type TActionUsers =
   | IpassSucc
   | IforgotPass
   | IresetPass
@@ -123,7 +123,7 @@ type TAction =
   | IpathUserInfoSuccess
   | Iexit;
 
-export const usersReduce = (state: IState = initialState, action: TAction) => {
+export const usersReduce = (state: IState = initialState, action: TActionUsers) => {
   switch (action.type) {
     case FORGOT_PASSWORD_SUCCESSFUL: {
       return {
