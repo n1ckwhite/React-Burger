@@ -71,7 +71,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
   return (
     <section className={`${stylesBurgerConstructor.section} mt-25`}>
       <ul className={stylesBurgerConstructor.ulUnder}>
-        {bun.map((i, index: number) => {
+        {bun.map((i: IIngredient, index: number) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem

@@ -8,7 +8,7 @@ interface IProps {
 }
 
 export const BurgerIngredient: FC<IProps> = ({ handleModal }) => {
-  const burgers = useSelector((state: any) => state.ingredients.ingredients);
+  const burgers = useSelector((state) => state.ingredients.ingredients);
   const location = useLocation();
   return (
     <div className={stylesBurgerIngredient.card}>
