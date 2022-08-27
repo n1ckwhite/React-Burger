@@ -1,15 +1,16 @@
 import { FC, useMemo } from "react";
-import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { Orders } from "../../components/Orders/Orders";
 import stylesFeedPage from "./FeedPage.module.css";
+import { useSelector } from "../../services/types";
 export const FeedPage: FC<any> = ({ handleModal }) => {
   const { v4: uuidv4 } = require("uuid");
   const location = useLocation();
   const data = useSelector((state: any) => state.data.messages);
   const done = useMemo(
     () =>
-      data[0]?.orders && data[0]?.orders?.filter((i: any) => i.status === "done"),
+      data[0]?.orders &&
+      data[0]?.orders?.filter((i: any) => i.status === "done"),
     [data]
   );
   const pending = useMemo(

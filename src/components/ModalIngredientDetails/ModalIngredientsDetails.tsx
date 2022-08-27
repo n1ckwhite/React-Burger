@@ -1,30 +1,23 @@
 import stylesModalIngredientsDetails from "./ModalIngredientsDetails.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getIngredient } from "../../services/action/ingredient";
 import { IIngredient } from "../../services/types";
-
-
-interface Iingredients {
-  ingredients: {
-    ingredients: [IIngredient]
-  }
-}
+import { useDispatch, useSelector } from "../../services/types/index";
 
 interface Iingredient {
-ingredient: {
-    ingredient: IIngredient,
-  }
+  ingredient: {
+    ingredient: IIngredient;
+  };
 }
 
 export const ModalIngredientsDetails = () => {
-  const ingredients = useSelector(
-    (state: Iingredients) => state.ingredients.ingredients
+  const ingredients = useSelector((state) => state.ingredients.ingredients);
+  const ingredient = useSelector(
+    (state: Iingredient) => state.ingredient.ingredient
   );
-  const ingredient = useSelector((state: Iingredient) => state.ingredient.ingredient);
-  const dispatch: Dispatch<any> = useDispatch();
-  const {id}: any = useParams();
+  const dispatch = useDispatch();
+  const { id }: any = useParams();
   useEffect(() => {
     const findItem: any = ingredients.find((i: IIngredient) => i._id === id);
     dispatch(getIngredient(findItem));
@@ -38,9 +31,7 @@ export const ModalIngredientsDetails = () => {
       />
       <p className="text text_type_main-medium mt-4">{ingredient?.name}</p>
       <ul className={`${stylesModalIngredientsDetails.ul} mt-8`}>
-        <li
-          className={`${stylesModalIngredientsDetails.li} mr-5`}
-        >
+        <li className={`${stylesModalIngredientsDetails.li} mr-5`}>
           <p className="text text_type_main-default text_color_inactive">
             Каллории,ккал
           </p>
@@ -48,9 +39,7 @@ export const ModalIngredientsDetails = () => {
             {ingredient?.calories}
           </p>
         </li>
-        <li
-          className={`${stylesModalIngredientsDetails.li} mr-5`}
-        >
+        <li className={`${stylesModalIngredientsDetails.li} mr-5`}>
           <p className="text text_type_main-default text_color_inactive">
             Белки,г
           </p>
@@ -58,17 +47,13 @@ export const ModalIngredientsDetails = () => {
             {ingredient?.proteins}
           </p>
         </li>
-        <li
-          className={`${stylesModalIngredientsDetails.li} mr-5`}
-        >
+        <li className={`${stylesModalIngredientsDetails.li} mr-5`}>
           <p className="text text_type_main-default text_color_inactive">
             Жиры,г
           </p>
           <p className="text text_type_digits-default">{ingredient?.fat}</p>
         </li>
-        <li
-          className={`${stylesModalIngredientsDetails.li}`}
-        >
+        <li className={`${stylesModalIngredientsDetails.li}`}>
           <p className="text text_type_main-default text_color_inactive">
             Углеводы,г
           </p>

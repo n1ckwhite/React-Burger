@@ -5,22 +5,9 @@ import { BurgerConstructor } from "../../components/BurgerConstructor/BurgerCons
 import { Modal } from "../../components/Modal/Modal";
 import { ModalOrderDetails } from "../../components/ModalOrderDetails/ModalOrderDetails";
 import { getOrder } from "../../services/action/order";
-import { IIngredient, useDispatch,useSelector } from "../../services/types/index";
+import { useDispatch, useSelector } from "../../services/types/index";
 interface Iprops {
   openModal: () => void;
-}
-
-interface IBurgers {
-  currentIngredient: {
-    bun: [IIngredient];
-    ingredients: [IIngredient];
-  };
-}
-
-interface IBurgers {
-  ingredients: {
-    ingredients: [IIngredient];
-  };
 }
 
 const MainPage: FC<Iprops> = ({ openModal }) => {
@@ -30,9 +17,7 @@ const MainPage: FC<Iprops> = ({ openModal }) => {
   const buns = useSelector((state: any) => state.currentIngredient.bun);
   const [priceModal, openPriceModal] = useState(false);
   const dispatch = useDispatch();
-  const burgers = useSelector(
-    (state: any) => state.ingredients.ingredients
-  );
+  const burgers = useSelector((state: any) => state.ingredients.ingredients);
 
   const handlePriceModal = () => {
     openPriceModal(!priceModal);

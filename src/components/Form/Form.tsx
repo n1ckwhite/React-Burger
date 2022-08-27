@@ -1,22 +1,22 @@
 import stylesForm from "./Form.module.css";
-import {FC} from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
 interface IProps {
-  title: string,
-  button: string,
-  text: string,
-  textTwo?: string,
-  linkText: string,
-  linkHref: string,
-  linkHrefTwo?: string,
-  linkTextTwo?: string,
-  children: JSX.Element,
-  buttonFunc: (() => void) | any
+  title: string;
+  button: string;
+  text: string;
+  textTwo?: string;
+  linkText: string;
+  linkHref: string;
+  linkHrefTwo?: string;
+  linkTextTwo?: string;
+  children: JSX.Element;
+  buttonFunc: (() => void) | any;
 }
 
-export const Form :FC<IProps> = ({
+export const Form: FC<IProps> = ({
   title,
   button,
   children,
@@ -28,7 +28,6 @@ export const Form :FC<IProps> = ({
   linkHrefTwo,
   buttonFunc,
 }) => {
-
   return (
     <form className={stylesForm.container} onSubmit={buttonFunc}>
       <p className="text text_type_main-medium">{title}</p>
@@ -51,7 +50,7 @@ export const Form :FC<IProps> = ({
       {textTwo && (
         <p className={`text text_type_main-small ${stylesForm.p}`}>
           {textTwo}
-          <Link to={linkHrefTwo ? linkHrefTwo : ''} className={stylesForm.link}>
+          <Link to={linkHrefTwo ? linkHrefTwo : ""} className={stylesForm.link}>
             {linkTextTwo}
           </Link>
         </p>
@@ -59,5 +58,3 @@ export const Form :FC<IProps> = ({
     </form>
   );
 };
-
-

@@ -5,7 +5,7 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, useDrop, XYCoord } from "react-dnd";
-import {IIngredient} from '../../services/types/index'
+import { IIngredient } from "../../services/types/index";
 interface IProps {
   item: IIngredient;
   index: number;
@@ -14,7 +14,7 @@ interface IProps {
   position?: boolean;
   onDelete?: () => void;
   drag?: boolean;
-  moveIngredient:(A: number, B: number) => void
+  moveIngredient: (A: number, B: number) => void;
 }
 
 export const BurgerConstructorItem: FC<IProps> = ({

@@ -5,16 +5,14 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerConstructorItem } from "../BurgetConstructorItem/BurgerConstructorItem";
-import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import {
   DELETE_CONSTRUCTOR_ITEM,
   SET_SORTED_ARRAY,
 } from "../../services/action";
 import { useHistory } from "react-router-dom";
-import { Dispatch } from "redux";
 import { IIngredient } from "../../services/types";
-
+import { useDispatch, useSelector } from "../../services/types/index";
 interface IIngredients {
   currentIngredient: {
     ingredients: [IIngredient];
@@ -36,7 +34,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
     (state: IIngredients) => state.currentIngredient.ingredients
   );
   const bun = useSelector((state: IBun) => state.currentIngredient.bun);
-  const dispatch: Dispatch<any> = useDispatch();
+  const dispatch = useDispatch();
   const history = useHistory();
   const onDelete = (item: object) => {
     dispatch({

@@ -1,9 +1,8 @@
 import { FC } from "react";
 import stylesBurgerIngredient from "./BurgerIngredient.module.css";
 import { IngredientCard } from "../IngredientCard/IngredientCard";
-import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-
+import { useSelector } from "../../services/types/index";
 interface IProps {
   handleModal: () => void;
 }

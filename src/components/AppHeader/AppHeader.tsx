@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import stylesHeader from "./AppHeader.module.css";
 import { NavLink } from "react-router-dom";
 import {
@@ -9,7 +9,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export const AppHeader = () => {
-  const [classLink, setClassLink] = useState("constructor");
+  const [classLink, setClassLink] = useState<string>("constructor");
   return (
     <header className={stylesHeader.header}>
       <nav className={`${stylesHeader.nav}  pb-4 pt-4`}>

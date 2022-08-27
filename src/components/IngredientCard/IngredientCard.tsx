@@ -9,9 +9,8 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
 import { IIngredient } from "../../services/types/index";
-
+import { useDispatch, useSelector } from "../../services/types/index";
 interface IProps {
   ingredient: IIngredient;
   openModal: (A: IIngredient) => void;

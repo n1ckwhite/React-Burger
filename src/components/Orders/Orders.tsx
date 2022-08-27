@@ -1,7 +1,7 @@
 import { FC } from "react";
 import stylesOrders from "./Orders.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/types";
 export const Orders: FC<any> = ({ order }) => {
   const day = new Date().getDate();
   const ingredients = useSelector(

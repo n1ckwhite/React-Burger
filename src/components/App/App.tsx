@@ -19,7 +19,6 @@ import { ModalIngredientsDetails } from "../ModalIngredientDetails/ModalIngredie
 import { Modal } from "../Modal/Modal";
 import { clearIngredient } from "../../services/action/ingredient";
 import { getIngredients } from "../../services/action/ingredients";
-import { Dispatch } from "redux";
 import { IIngredient, useDispatch, useSelector } from '../../services/types/index';
 import { FeedPage } from "../../pages/FeedPage/FeedPage";
 import { OrdersDetails } from "../OrdersDetails/OrdersDetails";
@@ -148,7 +147,7 @@ const ModalSwitch = () => {
 };
 
 export const App = () => {
-  const dispatch: Dispatch<any> = useDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);

@@ -4,16 +4,15 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo, patchUserInfo } from "../../services/action/users";
 import { ProfileMenu } from "../../components/ProfileMenu/ProfileMenu";
 import { useHistory } from "react-router-dom";
-
+import { useSelector, useDispatch } from "../../services/types/index";
 interface IState {
   users: {
-    email: string,
-    name: string,
-  }
+    email: string;
+    name: string;
+  };
 }
 
 export const ProfilePage = () => {
@@ -21,9 +20,9 @@ export const ProfilePage = () => {
   const nameUser = useSelector((state: IState) => state.users.name);
   const [value, setValue] = useState("");
   const [name, setName] = useState("");
-  const history = useHistory()
+  const history = useHistory();
   const user = window.localStorage.getItem("accessToken");
-  const dispatch : Dispatch<any> = useDispatch();
+  const dispatch: Dispatch<any> = useDispatch();
   const [password, setPassword] = useState("");
   useEffect(() => {
     if (user) {
@@ -31,9 +30,9 @@ export const ProfilePage = () => {
       setName(nameUser);
       setValue(emailUser);
     } else {
-      history.replace({pathname: '/login'})
+      history.replace({ pathname: "/login" });
     }
-  }, [dispatch, emailUser, nameUser, user,history]);
+  }, [dispatch, emailUser, nameUser, user, history]);
 
   const cancelFunc = () => {
     setValue(emailUser);

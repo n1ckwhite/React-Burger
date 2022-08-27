@@ -1,7 +1,7 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC } from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useSelector } from "../../services/types";
 import stylesOrdersDetails from "./OrdersDetails.module.css";
 export const OrdersDetails: FC<any> = ({ tal }) => {
   const { id }: any = useParams();
