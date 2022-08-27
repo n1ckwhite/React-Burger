@@ -9,9 +9,9 @@ export const OrdersDetails: FC<any> = ({ tal }) => {
   const ingredients = useSelector(
     (state: any) => state.ingredients.ingredients
   );
-  const data = useSelector((state: any) => state.data.data);
+  const data = useSelector((state: any) => state.data.messages);
   const dataSearchItem =
-    data.orders && data.orders.filter((i: any) => i?._id === id)[0];
+    data[0]?.orders && data[0]?.orders.filter((i: any) => i?._id === id)[0];
   const day = new Date().getDate();
   const dayOrder = dataSearchItem?.createdAt.includes(`${day}T`);
   const filterIngredients = dataSearchItem?.ingredients.map((i: any) => {

@@ -6,13 +6,16 @@ import stylesFeedPage from "./FeedPage.module.css";
 export const FeedPage: FC<any> = ({ handleModal }) => {
   const { v4: uuidv4 } = require("uuid");
   const location = useLocation();
-  const data = useSelector((state: any) => state.data.data);
+  const data = useSelector((state: any) => state.data.messages);
   const done = useMemo(
-    () => data.orders && data.orders.filter((i: any) => i.status === "done"),
+    () =>
+      data[0]?.orders && data[0]?.orders?.filter((i: any) => i.status === "done"),
     [data]
   );
   const pending = useMemo(
-    () => data.orders && data.orders.filter((i: any) => i.status === "pending"),
+    () =>
+      data[0]?.orders &&
+      data[0]?.orders?.filter((i: any) => i.status === "pending"),
     [data]
   );
   return (
@@ -21,8 +24,8 @@ export const FeedPage: FC<any> = ({ handleModal }) => {
       <div className={stylesFeedPage.feed_flex}>
         <div style={{ width: 608 }}>
           <ul className={stylesFeedPage.ul}>
-            {data.orders &&
-              data.orders.map((i: any) => {
+            {data[0]?.orders &&
+              data[0]?.orders.map((i: any) => {
                 return (
                   <li key={i._id}>
                     <Link
