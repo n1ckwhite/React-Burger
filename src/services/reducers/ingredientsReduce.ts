@@ -3,13 +3,37 @@ import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESSFUL,
 } from "../action";
+import { IIngredient } from "../types";
 const initialIngredients = {
   ingredients: [],
-  error: "",
   pending: false,
 };
 
-export const ingredientsReduce = (state = initialIngredients, action: any) => {
+interface IState {
+  ingredients: Array<IIngredient>;
+  error?: Event;
+  pending: boolean;
+}
+
+interface IgetRequest {
+  readonly type: typeof GET_INGREDIENTS_REQUEST;
+}
+interface IgetSuccess {
+  readonly type: typeof GET_INGREDIENTS_SUCCESSFUL;
+  resp: [IIngredient];
+}
+
+interface IgetError {
+  readonly type: typeof GET_INGREDIENTS_ERROR;
+  err: Event;
+}
+
+type TAction = IgetRequest | IgetSuccess | IgetError;
+
+export const ingredientsReduce = (
+  state: IState = initialIngredients,
+  action: TAction
+) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {

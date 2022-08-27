@@ -16,19 +16,12 @@ interface IProps {
   openModal: (A: IIngredient) => void;
 }
 
-interface IState {
-  currentIngredient: {
-    bun: [IIngredient];
-    ingredients: [IIngredient];
-  };
-}
-
 export const IngredientCard: FC<IProps> = ({ ingredient, openModal }) => {
   const { v4: uuidv4 } = require("uuid");
   const ingredients = useSelector(
-    (state: IState) => state.currentIngredient.ingredients
+    (state) => state.currentIngredient.ingredients
   );
-  const bun = useSelector((state: IState) => state.currentIngredient.bun);
+  const bun = useSelector((state) => state.currentIngredient.bun);
   const arr = [...bun, ...bun, ...ingredients];
   const counter = arr.filter((item) => item._id === ingredient._id).length;
   const dispatch = useDispatch();

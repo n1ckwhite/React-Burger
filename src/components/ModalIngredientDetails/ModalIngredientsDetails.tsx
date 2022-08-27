@@ -5,21 +5,15 @@ import { getIngredient } from "../../services/action/ingredient";
 import { IIngredient } from "../../services/types";
 import { useDispatch, useSelector } from "../../services/types/index";
 
-interface Iingredient {
-  ingredient: {
-    ingredient: IIngredient;
-  };
-}
-
 export const ModalIngredientsDetails = () => {
   const ingredients = useSelector((state) => state.ingredients.ingredients);
-  const ingredient = useSelector(
-    (state: Iingredient) => state.ingredient.ingredient
-  );
+  const ingredient = useSelector((state: any) => state.ingredient.ingredient);
   const dispatch = useDispatch();
   const { id } = useParams() as any;
   useEffect(() => {
-    const findItem = ingredients.find((i: IIngredient) => i._id === id);
+    const findItem = ingredients.find(
+      (i: IIngredient) => i._id === id
+    ) as IIngredient;
     dispatch(getIngredient(findItem));
   }, [dispatch, id, ingredients]);
   return (

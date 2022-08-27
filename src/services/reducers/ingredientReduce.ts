@@ -1,10 +1,30 @@
-import { CLEAR_INGREDIENT, GET_INGREDIENT} from "../action";
+import { CLEAR_INGREDIENT, GET_INGREDIENT } from "../action";
+import { IIngredient } from "../types";
 
 const initialState = {
   ingredient: {},
 };
 
-export const ingredientReduce = (state = initialState, action: any) => {
+type IState = {
+  ingredient: Object;
+};
+
+interface Iclear {
+  readonly type: typeof CLEAR_INGREDIENT;
+  ingredient: IIngredient;
+}
+
+interface Iget {
+  readonly type: typeof GET_INGREDIENT;
+  arr: IIngredient;
+}
+
+export type IAction = Iclear | Iget;
+
+export const ingredientReduce = (
+  state: IState = initialState,
+  action: IAction
+) => {
   switch (action.type) {
     case CLEAR_INGREDIENT: {
       return {
