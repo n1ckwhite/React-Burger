@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FC} from "react";
 import stylesBurgerConstructor from "./BurgerConstructor.module.css";
 import {
   CurrencyIcon,
-  Button,
+  Button
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerConstructorItem } from "../BurgetConstructorItem/BurgerConstructorItem";
 import { useDrop } from "react-dnd";
@@ -13,6 +13,7 @@ import {
 import { useHistory } from "react-router-dom";
 import { IIngredient } from "../../services/types";
 import { useDispatch, useSelector } from "../../services/types/index";
+
 interface IIngredients {
   currentIngredient: {
     ingredients: [IIngredient];

@@ -2,7 +2,6 @@ import React, { ChangeEvent, useEffect } from "react";
 import { Form } from "../../components/Form/Form";
 import {
   Input,
-  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { resetPassword } from "../../services/action/users";
 import { useHistory } from "react-router-dom";
@@ -45,8 +44,8 @@ export const ResetPage = () => {
       >
         <div>
           <li className="mt-6">
-            <PasswordInput
-              placeholder={"Введите новый пароль"}
+            <Input
+              placeholder="Введите новый пароль"
               onChange={onChange}
               value={valuePassword}
               name={"password"}
@@ -55,7 +54,7 @@ export const ResetPage = () => {
           <li className="mt-6">
             <Input
               type={"text"}
-              placeholder={"Введите код из письма"}
+              placeholder="Введите код из письма"
               onChange={(e) => setValue(e.target.value)}
               value={value}
               name={"text"}
