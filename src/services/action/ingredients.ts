@@ -4,9 +4,9 @@ import checkResponse, {
   GET_INGREDIENTS_SUCCESSFUL,
 } from "./index";
 import { API_BURGERS } from "../../utils/data";
-import { AppDispatch } from "../types";
+import { AppDispatch, AppThunk } from "../types";
 
-export const getIngredients = () => {
+export const getIngredients: AppThunk = () => {
   return (dispatch: AppDispatch) => {
     dispatch({
       type: GET_INGREDIENTS_REQUEST,

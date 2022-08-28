@@ -1,9 +1,9 @@
 // socketMiddleware.ts
 import type { Middleware, MiddlewareAPI } from "redux";
 import { RootState } from "../store/store";
-import type { AppDispatch } from "../types";
+import type { AppDispatch, AppThunk } from "../types";
 
-export const socketMiddleware = (wsUrl: string): Middleware => {
+export const socketMiddleware: AppThunk = (wsUrl: string): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
 

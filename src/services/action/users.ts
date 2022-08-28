@@ -2,6 +2,7 @@ import { Dispatch } from "react";
 import checkResponse from ".";
 import { API_BURGERS } from "../../utils/data";
 import { IforgotPass, IlogUs, IpassSucc, IpassSuccess, IregSucc, IregUs, IresetPass,IlogUsSucc, IgetUsInfo, IgetUsInfoSuccess, IpathUserInfo, IpathUserInfoSuccess } from "../reducers/usersReduce";
+import { AppThunk } from "../types";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const FORGOT_PASSWORD_SUCCESSFUL = "FORGOT_PASSWORD_SUCCESSFUL";
 export const RESET_PASSWORD_SUCCESSFUL = "RESET_PASSWORD_SUCCESSFUL";
@@ -15,7 +16,7 @@ export const GET_USER_INFO_SUCCESSFUL = "GET_USER_INFO_SUCCESSFUL";
 export const PATCH_USER_INFO = "PATH_USER_INFO";
 export const PATCH_USER_INFO_SUCCESSFUL = "PATH_USER_INFO_SUCCESSFUL";
 export const EXIT_USER = "EXIT_USER";
-export const forgotPassword = (email: any, history: any) => {
+export const forgotPassword: AppThunk = (email: any, history: any) => {
   return (dispatch: Dispatch<IforgotPass | IpassSucc>) => {
     dispatch({
       type: FORGOT_PASSWORD,
@@ -36,13 +37,13 @@ export const forgotPassword = (email: any, history: any) => {
         }
         return null;
       })
-      .catch((error: any) => {
+      .catch((error) => {
         // alert("Ошибка HTTP: ", error.type);
       });
   };
 };
 
-export const resetPassword = (password: any, token: any) => {
+export const resetPassword: AppThunk = (password: any, token: any) => {
   return (dispatch: Dispatch<IresetPass| IpassSuccess>) => {
     dispatch({
       type: RESET_PASSWORD,
@@ -61,7 +62,7 @@ export const resetPassword = (password: any, token: any) => {
   };
 };
 
-export const registerUser = (email: any, password: any, name: any, history: any) => {
+export const registerUser: AppThunk = (email: any, password: any, name: any, history: any) => {
   return (dispatch: Dispatch<IregUs | IregSucc>) => {
     dispatch({
       type: REGISTER_USER,
@@ -89,11 +90,11 @@ export const registerUser = (email: any, password: any, name: any, history: any)
           : alert("Укажите корректную почту")
       )
 
-      // .catch((error: any) => alert("Ошибка HTTP: ", error.type));
+      // .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
-export const loginUser = (email: any, password: any, history: any) => {
+export const loginUser: AppThunk = (email: any, password: any, history: any) => {
   return (dispatch: Dispatch<IlogUs | IlogUsSucc>) => {
     dispatch({
       type: LOGIN_USER,
@@ -122,11 +123,11 @@ export const loginUser = (email: any, password: any, history: any) => {
           history.replace({ pathname: "/" });
         }
       })
-      // .catch((error: any) => alert("Ошибка HTTP: ", error.type));
+      // .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
-export const getUserInfo = () => {
+export const getUserInfo: AppThunk = () => {
   return (dispatch: Dispatch<IgetUsInfo | IgetUsInfoSuccess>) => {
     dispatch({
       type: GET_USER_INFO,
@@ -149,11 +150,11 @@ export const getUserInfo = () => {
           });
         }
       })
-      // .catch((error: any) => alert("Ошибка HTTP: ", error.type));
+      // .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
-export const patchUserInfo = (email: any, name: any) => {
+export const patchUserInfo: AppThunk = (email: any, name: any) => {
   return (dispatch: Dispatch<IpathUserInfo | IpathUserInfoSuccess>) => {
     dispatch({
       type: PATCH_USER_INFO,
@@ -176,11 +177,11 @@ export const patchUserInfo = (email: any, name: any) => {
     });
     fetch(`${API_BURGERS}/auth/user`, requestOptions)
       .then((response) => checkResponse(response))
-      // .catch((error: any) => alert("Ошибка HTTP: ", error.type));
+      // .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
-export const exitUser = () => {
+export const exitUser: AppThunk = () => {
   return (dispatch: Dispatch<() => void>) => {
     const requestOptions = {
       method: "POST",
@@ -197,6 +198,6 @@ export const exitUser = () => {
           window.localStorage.removeItem("refreshToken");
         }
       })
-      // .catch((error: any) => alert("Ошибка HTTP: ", error.type));
+      // .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
