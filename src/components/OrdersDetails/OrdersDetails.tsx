@@ -1,9 +1,9 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { FC} from "react";
+import { FC } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "../../services/types";
 import stylesOrdersDetails from "./OrdersDetails.module.css";
-export const OrdersDetails: FC<any> = ({tal }) => {
+export const OrdersDetails: FC<any> = ({ tal }) => {
   const { id }: any = useParams();
   const { v4: uuidv4 } = require("uuid");
   const ingredients = useSelector(
@@ -20,6 +20,35 @@ export const OrdersDetails: FC<any> = ({tal }) => {
   const notBun = filterIngredients?.filter((i: any) => i[0]?.type !== "bun");
   const bun = filterIngredients?.filter((i: any) => i[0]?.type === "bun")[0];
   const notBunPrice = notBun?.reduce((a: any, b: any) => a + b[0]?.price, 0);
+
+  const ingredientsI = data[0]?.orders && data[0]?.orders;
+
+  const ingredientsOrder =
+    ingredientsI &&
+    ingredientsI.filter((i: any) => i._id === id)[0]?.ingredients;
+
+  const ingredientsInfo =
+    ingredientsOrder &&
+    ingredientsOrder.reduce((acc: any, ingId: any) => {
+      if (!acc[ingId]) {
+        const ingredient = ingredients.find((ing: any) => ing._id === ingId);
+        if (ingredient) {
+          acc[ingId] = {
+            ...ingredient,
+            count: 1,
+          };
+        }
+      } else {
+        acc[ingId].count++;
+      }
+
+      return acc;
+    }, {});
+  const arr: any = [];
+  for (let key in ingredientsInfo) {
+    arr.push(ingredientsInfo[key]);
+  }
+
   return (
     <div className={stylesOrdersDetails.block}>
       <p
@@ -41,51 +70,28 @@ export const OrdersDetails: FC<any> = ({tal }) => {
       </p>
       <p className="text text_type_main-medium mt-15 mb-6">Состав:</p>
       <ul className={stylesOrdersDetails.ul}>
-        {bun && (
-          <li className={stylesOrdersDetails.li}>
-            <div className={stylesOrdersDetails.img_block}>
-              <img
-                className={stylesOrdersDetails.img}
-                src={bun[0]?.image}
-                alt="icon"
-              />
-            </div>
-            <p
-              className={`text text_type_main-default ${stylesOrdersDetails.name}`}
-            >
-              {bun[0]?.name}
-            </p>
-            <div className={stylesOrdersDetails.price}>
-              <p className="text text_type_digits-default">{2}</p>
-              <p className="text text_type_digits-default">x</p>
-              <p className="text text_type_digits-default">
-                {bun[0]?.price * 2}
-              </p>
-              <CurrencyIcon type="primary" />
-            </div>
-          </li>
-        )}
-
-        {notBun &&
-          notBun.map((i: any) => {
+        {arr &&
+          arr.map((i: any) => {
             return (
               <li className={stylesOrdersDetails.li} key={uuidv4()}>
                 <div className={stylesOrdersDetails.img_block}>
                   <img
                     className={stylesOrdersDetails.img}
-                    src={i[0]?.image}
+                    src={i?.image}
                     alt="icon"
                   />
                 </div>
                 <p
                   className={`text text_type_main-default ${stylesOrdersDetails.name}`}
                 >
-                  {i[0]?.name}
+                  {i?.name}
                 </p>
                 <div className={stylesOrdersDetails.price}>
-                  <p className="text text_type_digits-default">{1}</p>
+                  <p className="text text_type_digits-default">{i?.count}</p>
                   <p className="text text_type_digits-default">x</p>
-                  <p className="text text_type_digits-default">{i[0]?.price}</p>
+                  <p className="text text_type_digits-default">
+                    {i?.price * i?.count}
+                  </p>
                   <CurrencyIcon type="primary" />
                 </div>
               </li>
