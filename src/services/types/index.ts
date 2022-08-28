@@ -7,7 +7,7 @@ import {
   useSelector as selectorHook,
 } from "react-redux";
 import { TActionCurrentIngredient } from "../reducers/currentIngredientReduce";
-import { TActionData } from "../reducers/data";
+import { TWSActionData } from "../reducers/socketMiddlewareReduce";
 import { TActionIngredient } from "../reducers/ingredientReduce";
 import { TActionIngredients } from "../reducers/ingredientsReduce";
 import { TActionUsers } from "../reducers/usersReduce";
@@ -31,18 +31,17 @@ export interface IIngredient {
 
 type Taction =
   | TActionCurrentIngredient
-  | TActionData
+  | TWSActionData
   | TActionIngredient
   | TActionIngredients
   | TActionOrder
   | TActionUsers;
 
-export type AppThunk<R, RootState, E, Taction extends Action> = (
-  dispatch: ThunkDispatch<RootState, E, Taction>,
-  getState: () => RootState,
+export type AppThunk<R, S, E, A extends Action> = (
+  dispatch: ThunkDispatch<S, E, A>,
+  getState: () => S,
   extraArgument: E
 ) => R;
-
 type TApplicationActions = Taction;
 
 export type AppDispatch = typeof store.dispatch;

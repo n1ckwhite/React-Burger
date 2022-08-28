@@ -13,7 +13,7 @@ export interface Iclear {
   readonly type: typeof CLEAR_INGREDIENT;
 }
 
-interface Iget {
+export interface Iget {
   readonly type: typeof GET_INGREDIENT;
   arr: IIngredient;
 }

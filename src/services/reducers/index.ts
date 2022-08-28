@@ -4,7 +4,7 @@ import {orderReducer} from "./orderReducer";
 import {ingredientReduce} from "./ingredientReduce";
 import { currentIngredientReduce } from "./currentIngredientReduce";
 import { usersReduce } from "./usersReduce";
-import { wsReducer } from "./data";
+import { wsReducer } from "./socketMiddlewareReduce";
 
 export const rootReducer = combineReducers({
     ingredients: ingredientsReduce,

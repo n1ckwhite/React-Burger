@@ -5,8 +5,10 @@ import checkResponse, {
 } from "./index";
 import { API_BURGERS } from "../../utils/data";
 import { AppDispatch, AppThunk } from "../types";
+import { RootState } from "../store/store";
+import { IgetError, IgetRequest, IgetSuccess } from "../reducers/ingredientsReduce";
 
-export const getIngredients: AppThunk = () => {
+export const getIngredients = () : AppThunk<void, RootState, unknown, IgetRequest | IgetSuccess | IgetError> => {
   return (dispatch: AppDispatch) => {
     dispatch({
       type: GET_INGREDIENTS_REQUEST,

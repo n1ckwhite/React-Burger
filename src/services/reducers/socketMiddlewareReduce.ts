@@ -5,6 +5,7 @@ import {
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE,
+  WS_CONNECTION_START,
 } from "../action/index";
 //   import type { IMessage, TWSActions } from '../types';
 
@@ -20,30 +21,38 @@ const initialState = {
   messages: [],
 };
 
-interface IwsSucc {
+export interface IwsConnStart {
+  readonly type: typeof WS_CONNECTION_START;
+}
+export interface IwsSucc {
   readonly type: typeof WS_CONNECTION_SUCCESS;
 }
 
-interface IwsConnErr {
+export interface IwsConnErr {
   readonly type: typeof WS_CONNECTION_ERROR;
   payload: Event;
 }
 
-interface IwsClosed {
+export interface IwsClosed {
   readonly type: typeof WS_CONNECTION_CLOSED;
 }
 
-interface IgetMsg {
+export interface IgetMsg {
   readonly type: typeof WS_GET_MESSAGE;
   payload: Event;
 }
 
-export type TActionData = IwsSucc | IwsConnErr | IwsClosed | IgetMsg;
+export type TWSActionData =
+  | IwsConnStart
+  | IwsSucc
+  | IwsConnErr
+  | IwsClosed
+  | IgetMsg;
 
 // Создадим редьюсер для WebSocket
 export const wsReducer = (
   state: TWSState = initialState,
-  action: TActionData
+  action: TWSActionData
 ) => {
   switch (action.type) {
     // Опишем обработку экшена с типом WS_CONNECTION_SUCCESS

@@ -7,17 +7,27 @@ import {
 import checkResponse from "./index";
 import { API_BURGERS } from "../../utils/data";
 import { AppDispatch, AppThunk, IIngredient } from "../types";
+import { RootState } from "../store/store";
+import { IError, IOrderNumber, IRequest } from "../reducers/orderReducer";
 
-export const getOrder: AppThunk = (burgers: [IIngredient], bun: IIngredient) => {
+export const getOrder = (
+  burgers: [IIngredient],
+  bun: IIngredient
+): AppThunk<
+  void,
+  RootState,
+  unknown,
+  IOrderNumber | IOrderNumber | IRequest | IError
+> => {
   return (dispatch: AppDispatch) => {
     dispatch({ type: CLEAR_ORDER_NUMBER });
     const requestOptions = {
       method: "POST",
       headers: {
         Accept: "application/json",
-         "Content-Type": "application/json",
-         authorization: `${window.localStorage.getItem('accessToken')}`
-        },
+        "Content-Type": "application/json",
+        authorization: `${window.localStorage.getItem("accessToken")}`,
+      },
       body: JSON.stringify({
         ingredients: [bun, ...burgers, bun],
       }),

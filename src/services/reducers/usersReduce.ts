@@ -113,7 +113,10 @@ export type TActionUsers =
   | IpathUserInfoSuccess
   | Iexit;
 
-export const usersReduce = (state: IState = initialState, action: TActionUsers) => {
+export const usersReduce = (
+  state: IState = initialState,
+  action: TActionUsers
+) => {
   switch (action.type) {
     case FORGOT_PASSWORD_SUCCESSFUL: {
       return {

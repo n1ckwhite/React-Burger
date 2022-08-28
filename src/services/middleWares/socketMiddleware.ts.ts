@@ -7,12 +7,15 @@ import {
   WS_CONNECTION_SUCCESS,
   WS_GET_MESSAGE,
   WS_SEND_MESSAGE,
-} from ".";
+} from "../action";
+import { TWSActionData } from "../reducers/socketMiddlewareReduce";
 import { RootState } from "../store/store";
 import type { AppDispatch, AppThunk } from "../types";
 
-export const socketMiddleware: AppThunk = (wsUrl: string): Middleware => {
-  return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
+export const socketMiddleware = (wsUrl: string): Middleware => {
+  return ((
+    store: MiddlewareAPI<AppDispatch, RootState>
+  ): AppThunk<void, RootState, unknown, TWSActionData> => {
     let socket: WebSocket | null = null;
 
     return (next) => (action: any) => {

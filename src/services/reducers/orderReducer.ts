@@ -17,21 +17,21 @@ interface IState {
   pending: boolean;
 }
 
-interface IRequest {
+export interface IRequest {
   readonly type: typeof GET_ORDER_REQUEST;
 }
 
-interface IError {
+export interface IError {
   readonly type: typeof GET_ORDER_ERROR;
   err: Object;
 }
 
-interface ISuccessful {
+export interface ISuccessful {
   readonly type: typeof GET_ORDER_SUCCESSFUL;
   number: number;
 }
 
-interface IOrderNumber {
+export interface IOrderNumber {
   readonly type: typeof CLEAR_ORDER_NUMBER;
 }
 

@@ -15,15 +15,15 @@ interface IState {
   pending: boolean;
 }
 
-interface IgetRequest {
+export interface IgetRequest {
   readonly type: typeof GET_INGREDIENTS_REQUEST;
 }
-interface IgetSuccess {
+export interface IgetSuccess {
   readonly type: typeof GET_INGREDIENTS_SUCCESSFUL;
   resp: [IIngredient];
 }
 
-interface IgetError {
+export interface IgetError {
   readonly type: typeof GET_INGREDIENTS_ERROR;
   err: Event;
 }
