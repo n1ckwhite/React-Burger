@@ -1,5 +1,7 @@
+import { Dispatch } from "react";
 import checkResponse from ".";
 import { API_BURGERS } from "../../utils/data";
+import { IforgotPass, IlogUs, IpassSucc, IpassSuccess, IregSucc, IregUs, IresetPass,IlogUsSucc, IgetUsInfo, IgetUsInfoSuccess, IpathUserInfo, IpathUserInfoSuccess } from "../reducers/usersReduce";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const FORGOT_PASSWORD_SUCCESSFUL = "FORGOT_PASSWORD_SUCCESSFUL";
 export const RESET_PASSWORD_SUCCESSFUL = "RESET_PASSWORD_SUCCESSFUL";
@@ -14,7 +16,7 @@ export const PATCH_USER_INFO = "PATH_USER_INFO";
 export const PATCH_USER_INFO_SUCCESSFUL = "PATH_USER_INFO_SUCCESSFUL";
 export const EXIT_USER = "EXIT_USER";
 export const forgotPassword = (email: any, history: any) => {
-  return (dispatch: (A: Object) => Object) => {
+  return (dispatch: Dispatch<IforgotPass | IpassSucc>) => {
     dispatch({
       type: FORGOT_PASSWORD,
     });
@@ -41,7 +43,7 @@ export const forgotPassword = (email: any, history: any) => {
 };
 
 export const resetPassword = (password: any, token: any) => {
-  return (dispatch: (A: Object) => Object) => {
+  return (dispatch: Dispatch<IresetPass| IpassSuccess>) => {
     dispatch({
       type: RESET_PASSWORD,
       token: token,
@@ -60,7 +62,7 @@ export const resetPassword = (password: any, token: any) => {
 };
 
 export const registerUser = (email: any, password: any, name: any, history: any) => {
-  return (dispatch: (A: Object) => Object) => {
+  return (dispatch: Dispatch<IregUs | IregSucc>) => {
     dispatch({
       type: REGISTER_USER,
       email: email,
@@ -92,7 +94,7 @@ export const registerUser = (email: any, password: any, name: any, history: any)
 };
 
 export const loginUser = (email: any, password: any, history: any) => {
-  return (dispatch: (A: Object) => Object) => {
+  return (dispatch: Dispatch<IlogUs | IlogUsSucc>) => {
     dispatch({
       type: LOGIN_USER,
       email: email,
@@ -125,7 +127,7 @@ export const loginUser = (email: any, password: any, history: any) => {
 };
 
 export const getUserInfo = () => {
-  return (dispatch: (A: Object) => Object) => {
+  return (dispatch: Dispatch<IgetUsInfo | IgetUsInfoSuccess>) => {
     dispatch({
       type: GET_USER_INFO,
     });
@@ -152,7 +154,7 @@ export const getUserInfo = () => {
 };
 
 export const patchUserInfo = (email: any, name: any) => {
-  return (dispatch: (A: Object) => Object) => {
+  return (dispatch: Dispatch<IpathUserInfo | IpathUserInfoSuccess>) => {
     dispatch({
       type: PATCH_USER_INFO,
       email: email,
@@ -179,7 +181,7 @@ export const patchUserInfo = (email: any, name: any) => {
 };
 
 export const exitUser = () => {
-  return (dispatch: (A: Object) => Object) => {
+  return (dispatch: Dispatch<() => void>) => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

@@ -34,75 +34,65 @@ interface IState {
   isLoggedIn: boolean;
 }
 
-interface IpassSucc {
+export interface IpassSucc {
   readonly type: typeof FORGOT_PASSWORD_SUCCESSFUL;
 }
 
-interface IforgotPass {
+export interface IforgotPass {
   readonly type: typeof FORGOT_PASSWORD;
-  email: string;
 }
 
-interface IresetPass {
+export interface IresetPass {
   readonly type: typeof RESET_PASSWORD;
   token: string;
 }
 
-interface IpassSuccess {
+export interface IpassSuccess {
   readonly type: typeof RESET_PASSWORD_SUCCESSFUL;
 }
 
-interface IregUs {
+export interface IregUs {
   readonly type: typeof REGISTER_USER;
   email: string;
   password: string;
   name: string;
 }
 
-interface IregSucc {
+export interface IregSucc {
   readonly type: typeof REGISTER_USER_SUCCESSFUL;
 }
 
-interface IlogUs {
+export interface IlogUs {
   readonly type: typeof LOGIN_USER;
   email: string;
   password: string;
 }
 
-interface IlogUsSucc {
+export interface IlogUsSucc {
   readonly type: typeof LOGIN_USER_SUCCESSFUL;
-  pending: boolean;
-  success: boolean;
-  isLoggedIn: boolean;
 }
 
-interface IgetUsInfo {
+export interface IgetUsInfo {
   readonly type: typeof GET_USER_INFO;
-  pending: boolean;
-  success: boolean;
 }
 
-interface IgetUsInfoSuccess {
+export interface IgetUsInfoSuccess {
   readonly type: typeof GET_USER_INFO_SUCCESSFUL;
   email: string;
   name: string;
-  isLoggedIn: boolean;
-  pending: boolean;
 }
 
-interface IpathUserInfo {
+export interface IpathUserInfo {
   readonly type: typeof PATCH_USER_INFO;
   email: string;
   name: string;
 }
 
-interface IpathUserInfoSuccess {
+export interface IpathUserInfoSuccess {
   readonly type: typeof PATCH_USER_INFO_SUCCESSFUL;
-  success: boolean;
-  pending: boolean;
 }
 
-interface Iexit {
+export interface Iexit {
   readonly type: typeof EXIT_USER;
   success: boolean;
   pending: boolean;
@@ -135,7 +125,6 @@ export const usersReduce = (state: IState = initialState, action: TActionUsers) 
     case FORGOT_PASSWORD: {
       return {
         ...state,
-        email: action.email,
       };
     }
     case RESET_PASSWORD: {

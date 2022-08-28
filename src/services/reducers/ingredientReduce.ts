@@ -9,9 +9,8 @@ type IState = {
   ingredient: Object;
 };
 
-interface Iclear {
+export interface Iclear {
   readonly type: typeof CLEAR_INGREDIENT;
-  ingredient: IIngredient;
 }
 
 interface Iget {
