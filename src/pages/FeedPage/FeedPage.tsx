@@ -1,12 +1,10 @@
-import { FC, useEffect, useMemo } from "react";
+import { FC, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Orders } from "../../components/Orders/Orders";
 import stylesFeedPage from "./FeedPage.module.css";
-import { useDispatch, useSelector } from "../../services/types";
-import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../../services/action";
+import { useSelector } from "../../services/types";
 export const FeedPage: FC<any> = ({ handleModal }) => {
   const { v4: uuidv4 } = require("uuid");
-  const dispatch = useDispatch()
   const location = useLocation();
   const data = useSelector((state: any) => state.data.messages);
   const done = useMemo(
@@ -21,12 +19,6 @@ export const FeedPage: FC<any> = ({ handleModal }) => {
       data[0]?.orders?.filter((i: any) => i.status === "pending"),
     [data]
   );
-  useEffect(() => {
-    dispatch({type: WS_CONNECTION_START, payload: "wss://norma.nomoreparties.space/orders/all"})
-    return () => {
-      dispatch({type: WS_CONNECTION_CLOSED})
-    }
-  },[dispatch])
   return (
     <div className={stylesFeedPage.feed}>
       <p className="text text_type_main-large">Лента заказов</p>
