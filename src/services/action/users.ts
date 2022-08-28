@@ -30,8 +30,10 @@ export const GET_USER_INFO_SUCCESSFUL = "GET_USER_INFO_SUCCESSFUL";
 export const PATCH_USER_INFO = "PATH_USER_INFO";
 export const PATCH_USER_INFO_SUCCESSFUL = "PATH_USER_INFO_SUCCESSFUL";
 export const EXIT_USER = "EXIT_USER";
+
+
 export const forgotPassword = (
-  email: any,
+  email: string,
   history: any
 ): AppThunk<void, RootState, unknown, IforgotPass | IpassSucc> => {
   return (dispatch: Dispatch<IforgotPass | IpassSucc>) => {
@@ -61,8 +63,8 @@ export const forgotPassword = (
 };
 
 export const resetPassword = (
-  password: any,
-  token: any
+  password: string,
+  token: string
 ): AppThunk<void, RootState, unknown, IresetPass | IpassSucc> => {
   return (dispatch: Dispatch<IresetPass | IpassSuccess>) => {
     dispatch({
@@ -82,11 +84,10 @@ export const resetPassword = (
     );
   };
 };
-
 export const registerUser = (
-  email: any,
-  password: any,
-  name: any,
+  email: string,
+  password: string,
+  name: string,
   history: any
 ): AppThunk<void, RootState, unknown, IregUs | IpassSuccess> => {
   return (dispatch: Dispatch<IregUs | IregSucc>) => {
@@ -121,8 +122,8 @@ export const registerUser = (
 };
 
 export const loginUser = (
-  email: any,
-  password: any,
+  email: string,
+  password: string,
   history: any
 ): AppThunk<void, RootState, unknown, IlogUs | IlogUsSucc> => {
   return (dispatch: Dispatch<IlogUs | IlogUsSucc>) => {
@@ -157,6 +158,7 @@ export const loginUser = (
   };
 };
 
+
 export const getUserInfo = (): AppThunk<
   void,
   RootState,
@@ -167,12 +169,12 @@ export const getUserInfo = (): AppThunk<
     dispatch({
       type: GET_USER_INFO,
     });
-    const requestOptions: any = {
+    const requestOptions = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: window.localStorage.getItem("accessToken"),
-      },
+      } as never,
     };
     fetch(`${API_BURGERS}/auth/user`, requestOptions)
       .then((response) => checkResponse(response))
@@ -190,8 +192,8 @@ export const getUserInfo = (): AppThunk<
 };
 
 export const patchUserInfo = (
-  email: any,
-  name: any
+  email: string,
+  name: string
 ): AppThunk<void, RootState, unknown, IpathUserInfo | IpathUserInfoSuccess> => {
   return (dispatch: Dispatch<IpathUserInfo | IpathUserInfoSuccess>) => {
     dispatch({
@@ -199,7 +201,7 @@ export const patchUserInfo = (
       email: email,
       name: name,
     });
-    const requestOptions: any = {
+    const requestOptions = {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -209,7 +211,7 @@ export const patchUserInfo = (
         email: email,
         name: name,
       }),
-    };
+    } as never;
     dispatch({
       type: PATCH_USER_INFO_SUCCESSFUL,
     });

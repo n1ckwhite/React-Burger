@@ -15,7 +15,7 @@ export const BurgerIngredient: FC<IProps> = ({ handleModal }) => {
       <div className="pt-10" id="bun">
         <p className="text text_type_main-medium">Булки</p>
         <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
-          {burgers.map((item: any) => {
+          {burgers.map((item) => {
             if (item.type === "bun") {
               return (
                 <Link
@@ -36,7 +36,7 @@ export const BurgerIngredient: FC<IProps> = ({ handleModal }) => {
       <div className="pt-10" id="souse">
         <p className="text text_type_main-medium">Соусы</p>
         <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
-          {burgers.map((item: any) => {
+          {burgers.map((item) => {
             if (item.type === "sauce") {
               return (
                 <Link
@@ -57,7 +57,7 @@ export const BurgerIngredient: FC<IProps> = ({ handleModal }) => {
       <div className="pt-10" id="ingredient">
         <p className="text text_type_main-medium">Начинки</p>
         <ul className={`${stylesBurgerIngredient.ul} pl-4 pr-4`}>
-          {burgers.map((item: any) => {
+          {burgers.map((item) => {
             if (item.type === "main") {
               return (
                 <Link

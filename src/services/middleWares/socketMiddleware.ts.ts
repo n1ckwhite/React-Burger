@@ -6,7 +6,6 @@ import {
   WS_CONNECTION_START,
   WS_CONNECTION_SUCCESS,
   WS_GET_MESSAGE,
-  WS_SEND_MESSAGE,
 } from "../action";
 import { TWSActionData } from "../reducers/socketMiddlewareReduce";
 import { RootState } from "../store/store";
@@ -18,7 +17,7 @@ export const socketMiddleware = (): Middleware => {
   ): AppThunk<void, RootState, unknown, TWSActionData> => {
     let socket: WebSocket | null = null;
 
-    return (next) => (action: any) => {
+    return (next) => (action: TWSActionData) => {
       const { dispatch } = store;
       const { type, payload } = action;
 
@@ -46,12 +45,6 @@ export const socketMiddleware = (): Middleware => {
         socket.onclose = (event) => {
           dispatch({ type: WS_CONNECTION_CLOSED, payload: event });
         };
-
-        if (type === WS_SEND_MESSAGE) {
-          const message = payload;
-          // функция для отправки сообщения на сервер
-          socket.send(JSON.stringify(message));
-        }
       }
 
       next(action);

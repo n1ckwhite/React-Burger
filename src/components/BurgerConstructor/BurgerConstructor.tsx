@@ -14,27 +14,15 @@ import { useHistory } from "react-router-dom";
 import { IIngredient } from "../../services/types";
 import { useDispatch, useSelector } from "../../services/types/index";
 
-interface IIngredients {
-  currentIngredient: {
-    ingredients: [IIngredient];
-  };
-}
-
-interface IBun {
-  currentIngredient: {
-    bun: [IIngredient];
-  };
-}
-
 interface IProps {
   openModal: () => void;
 }
 
 export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
   const burgers = useSelector(
-    (state: IIngredients) => state.currentIngredient.ingredients
-  );
-  const bun = useSelector((state: IBun) => state.currentIngredient.bun);
+    (state) => state.currentIngredient.ingredients
+  ) as any;
+  const bun = useSelector((state: any) => state.currentIngredient.bun);
   const dispatch = useDispatch();
   const history = useHistory();
   const onDelete = (item: IIngredient) => {
@@ -49,7 +37,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
       isHover: !!monitor.isOver(),
     }),
   });
-  const prices = burgers.reduce((a, b) => a + b.price, 0);
+  const prices = burgers.reduce((a: number, b: IIngredient) => a + b.price, 0);
   const user = window.localStorage.length;
   const moveIngredient = (dragIndex: number, hoverIndex: number): void => {
     const dragIngredient = burgers[dragIndex];
@@ -72,7 +60,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
   return (
     <section className={`${stylesBurgerConstructor.section} mt-25`}>
       <ul className={stylesBurgerConstructor.ulUnder}>
-        {bun.map((i: IIngredient, index: number) => {
+        {bun.map((i: any, index: any) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
@@ -108,7 +96,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
             );
           })}
         </ul>
-        {bun.map((i, index: number) => {
+        {bun.map((i: any, index: number) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem

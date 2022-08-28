@@ -1,4 +1,4 @@
-import { Dispatch, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import stylesProfilePage from "./ProfilePage.module.css";
 import {
   Input,
@@ -22,7 +22,7 @@ export const ProfilePage = () => {
   const [name, setName] = useState("");
   const history = useHistory();
   const user = window.localStorage.getItem("accessToken");
-  const dispatch: Dispatch<any> = useDispatch();
+  const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   useEffect(() => {
     if (user) {

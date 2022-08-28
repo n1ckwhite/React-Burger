@@ -2,14 +2,16 @@ import stylesModalIngredientsDetails from "./ModalIngredientsDetails.module.css"
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getIngredient } from "../../services/action/ingredient";
-import { IIngredient } from "../../services/types";
 import { useDispatch, useSelector } from "../../services/types/index";
+import { IIngredient } from "../../services/types/index";
 
 export const ModalIngredientsDetails = () => {
   const ingredients = useSelector((state) => state.ingredients.ingredients);
-  const ingredient = useSelector((state: any) => state.ingredient.ingredient);
+  const ingredient = useSelector(
+    (state) => state.ingredient.ingredient
+  ) as IIngredient;
   const dispatch = useDispatch();
-  const { id } = useParams() as any;
+  const { id } = useParams() as never;
   useEffect(() => {
     const findItem = ingredients.find(
       (i: IIngredient) => i._id === id

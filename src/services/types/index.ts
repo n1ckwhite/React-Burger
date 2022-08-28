@@ -13,11 +13,11 @@ import { TActionIngredients } from "../reducers/ingredientsReduce";
 import { TActionUsers } from "../reducers/usersReduce";
 import { TActionOrder } from "../reducers/orderReducer";
 export interface IIngredient {
-  key?: number;
-  _id: object;
+  key?: number | string | unknown;
+  _id?: string | number | any;
   name: string;
   type: string;
-  proteins: number;
+  proteins?: number | string;
   fat: number;
   carbohydrates: number;
   calories: number;
@@ -27,6 +27,27 @@ export interface IIngredient {
   image_large: string;
   __v: number;
   index?: number;
+}
+
+export type TOrder = {
+  ingredients: Array<string>;
+  _id: string;
+  status: string;
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+  type?: string;
+  price: number;
+};
+
+export interface IOrder {
+  order: {
+    ingredients: [];
+    createdAt: string;
+    number: number;
+    name: string;
+  };
 }
 
 type Taction =

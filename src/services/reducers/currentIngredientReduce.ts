@@ -13,14 +13,13 @@ const initialState = {
 };
 
 type IState = {
-  ingredients: Array<IIngredient> | any;
-  bun: Array<IIngredient> | any;
+  ingredients: Array<IIngredient>;
+  bun: Array<IIngredient>;
 };
 
-
 interface Iitem {
-  _id: number,
-  indx: number,
+  _id: number;
+  indx: number;
 }
 interface Icreate {
   readonly type: typeof CREATE_CURRENT_INGREDIENT;
@@ -86,7 +85,7 @@ export const currentIngredientReduce = (
     case DELETE_CONSTRUCTOR_ITEM: {
       const newState = { ...state };
       const indexIngredient = newState.ingredients.findIndex(
-        (item: any) => item._id === action.indx 
+        (item) => item._id === action.indx
       );
       if (indexIngredient !== -1) {
         newState.ingredients.splice(indexIngredient, 1);

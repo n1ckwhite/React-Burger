@@ -10,7 +10,7 @@ interface IProps {
   item: IIngredient;
   index: number;
   isLocked?: boolean;
-  type: "top" | "bottom" | "middle" | any;
+  type?: "top" | "bottom" | "middle" | any;
   position?: boolean;
   onDelete?: () => void;
   drag?: boolean;

@@ -8,12 +8,17 @@ import {
   WS_CONNECTION_CLOSED,
   WS_CONNECTION_START,
 } from "../../services/action";
-import { useDispatch, useSelector } from "../../services/types";
-export const ProfileOrdersPage: FC<any> = ({ handleModal }) => {
+import { TOrder, useDispatch, useSelector } from "../../services/types";
+
+interface IModal {
+  handleModal: () => void
+}
+
+export const ProfileOrdersPage: FC<IModal> = ({ handleModal }) => {
   const location = useLocation();
   const { v4: uuidv4 } = require("uuid");
   const data = useSelector((state: any) => state.data.messages);
-  const dispatch: any = useDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch({
       type: WS_CONNECTION_START,

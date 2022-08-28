@@ -2,21 +2,26 @@ import { FC, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Orders } from "../../components/Orders/Orders";
 import stylesFeedPage from "./FeedPage.module.css";
-import { useSelector } from "../../services/types";
-export const FeedPage: FC<any> = ({ handleModal }) => {
+import { TOrder, useSelector } from "../../services/types";
+
+interface IModal {
+  handleModal: () => void;
+}
+
+export const FeedPage: FC<IModal> = ({ handleModal }) => {
   const { v4: uuidv4 } = require("uuid");
   const location = useLocation();
   const data = useSelector((state: any) => state.data.messages);
   const done = useMemo(
     () =>
       data[0]?.orders &&
-      data[0]?.orders?.filter((i: any) => i.status === "done"),
+      data[0]?.orders?.filter((i: TOrder) => i.status === "done"),
     [data]
   );
   const pending = useMemo(
     () =>
       data[0]?.orders &&
-      data[0]?.orders?.filter((i: any) => i.status === "pending"),
+      data[0]?.orders?.filter((i: TOrder) => i.status === "pending"),
     [data]
   );
   return (
@@ -50,7 +55,7 @@ export const FeedPage: FC<any> = ({ handleModal }) => {
               <p className="text text_type_main-medium mb-6">Готовы:</p>
               <ul className={`${stylesFeedPage.inwork}`}>
                 {done &&
-                  done.map((i: any) => {
+                  done.map((i: TOrder) => {
                     return (
                       <li key={uuidv4()}>
                         <p className="text text_type_digits-default">
@@ -67,7 +72,7 @@ export const FeedPage: FC<any> = ({ handleModal }) => {
                 className={`${stylesFeedPage.inwork} ${stylesFeedPage.inwork_white}`}
               >
                 {pending &&
-                  pending.map((i: any) => {
+                  pending.map((i: TOrder) => {
                     return (
                       <li key={uuidv4()}>
                         <p className="text text_type_digits-default">

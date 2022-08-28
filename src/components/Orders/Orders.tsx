@@ -1,32 +1,31 @@
 import { FC } from "react";
 import stylesOrders from "./Orders.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "../../services/types";
+import { IOrder, useSelector } from "../../services/types";
 
-export const Orders: FC<any> = ({ order }) => {
+
+export const Orders: FC<IOrder> = ({ order }) => {
   const day = new Date().getDate();
-  const ingredients = useSelector(
-    (state: any) => state.ingredients.ingredients
-  );
-  const filterIngredients = order?.ingredients.map((i: any) => {
-    return ingredients.filter((ingredient: any) =>
+  const ingredients = useSelector((state) => state.ingredients.ingredients);
+  const filterIngredients = order?.ingredients.map((i) => {
+    return ingredients.filter((ingredient) =>
       ingredient._id === i ? ingredient.image : null
     );
   });
   const { v4: uuidv4 } = require("uuid");
   const setIngredients: any = new Set(
-    filterIngredients.map((i: any) => i[0]?.image)
+    filterIngredients.map((i) => i[0]?.image)
   );
   const images = [...setIngredients];
   const dayOrder = order.createdAt.includes(`${day}T`);
-  const bun = filterIngredients.filter((i: any) => i[0]?.type === "bun");
+  const bun = filterIngredients.filter((i) => i[0]?.type === "bun");
   const notBunPrice = filterIngredients
-    .filter((i: any) => i[0]?.type !== "bun")
-    .reduce((a: any, b: any) => a + b[0]?.price, 0);
+    .filter((i) => i[0]?.type !== "bun")
+    .reduce((a, b) => a + b[0]?.price, 0);
   const bunPrice =
     bun.length === 1
-      ? bun[0].map((i: any) => i?.price * 2)[0]
-      : bun.reduce((a: any, b: any) => a + b[0]?.price, 0);
+      ? bun[0].map((i) => i?.price * 2)[0]
+      : bun.reduce((a, b) => a + b[0]?.price, 0);
   return (
     <ul className={stylesOrders.ul}>
       <li className={stylesOrders.li}>
@@ -39,7 +38,7 @@ export const Orders: FC<any> = ({ order }) => {
         <p className="text text_type_main-medium">{order?.name}</p>
         <div className={stylesOrders.flex}>
           <ul className={stylesOrders.ul_two}>
-            {images.slice(0, 6).map((i: any, len: any) => {
+            {images.slice(0, 6).map((i, len) => {
               return (
                 <li className={stylesOrders.li_img} key={uuidv4()}>
                   <img className={stylesOrders.img} src={i} alt="icon" />

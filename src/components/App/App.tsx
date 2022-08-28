@@ -145,7 +145,7 @@ const ModalSwitch = () => {
               handleIsActive={openOrderModal}
               closePopup={closeOrderDetails}
             >
-              <OrdersDetails handleModal={orderDetailsModal} tal={true} />
+              <OrdersDetails tal={true} />
             </Modal>
           </Route>
         </>

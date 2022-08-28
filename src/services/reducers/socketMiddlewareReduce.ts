@@ -23,9 +23,11 @@ const initialState = {
 
 export interface IwsConnStart {
   readonly type: typeof WS_CONNECTION_START;
+  payload: string;
 }
 export interface IwsSucc {
   readonly type: typeof WS_CONNECTION_SUCCESS;
+  payload: Event;
 }
 
 export interface IwsConnErr {
@@ -35,6 +37,7 @@ export interface IwsConnErr {
 
 export interface IwsClosed {
   readonly type: typeof WS_CONNECTION_CLOSED;
+  payload: Event;
 }
 
 export interface IgetMsg {
