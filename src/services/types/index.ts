@@ -1,4 +1,4 @@
-import { store } from "../store/store";
+import { store,RootState } from "../store/store";
 import { Action, ActionCreator } from "redux";
 import { ThunkAction } from "redux-thunk";
 import {
@@ -37,7 +37,6 @@ type Taction =
   | TActionOrder
   | TActionUsers;
 
-export type RootState = ReturnType<typeof store.getState>;
 
 type TApplicationActions = Taction;
 

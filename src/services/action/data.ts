@@ -1,7 +1,7 @@
 // socketMiddleware.ts
 import type { Middleware, MiddlewareAPI } from "redux";
-
-import type { AppDispatch, RootState } from "../types";
+import { RootState } from "../store/store";
+import type { AppDispatch } from "../types";
 
 export const socketMiddleware = (wsUrl: string): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
