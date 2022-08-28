@@ -11,7 +11,7 @@ export const store = createStore(
   composeWithDevTools(
     applyMiddleware(
       thunk,
-      socketMiddleware( "wss://norma.nomoreparties.space/orders/all")
+      socketMiddleware()
 
     )
   )

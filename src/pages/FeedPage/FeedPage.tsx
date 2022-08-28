@@ -22,11 +22,11 @@ export const FeedPage: FC<any> = ({ handleModal }) => {
     [data]
   );
   useEffect(() => {
-    dispatch({type: WS_CONNECTION_START})
+    dispatch({type: WS_CONNECTION_START, payload: "wss://norma.nomoreparties.space/orders/all"})
     return () => {
       dispatch({type: WS_CONNECTION_CLOSED})
     }
-  })
+  },[dispatch])
   return (
     <div className={stylesFeedPage.feed}>
       <p className="text text_type_main-large">Лента заказов</p>

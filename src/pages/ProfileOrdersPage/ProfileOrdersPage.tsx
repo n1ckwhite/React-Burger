@@ -15,11 +15,11 @@ export const ProfileOrdersPage: FC<any> = ({ handleModal }) => {
   const data = useSelector((state: any) => state.data.messages);
   const dispatch: any = useDispatch();
   useEffect(() => {
-    dispatch({ type: WS_CONNECTION_START });
+    dispatch({ type: WS_CONNECTION_START, payload: `wss://norma.nomoreparties.space/orders/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDQ4YWM2NDJkMzRhMDAxYzI4MjgyNyIsImlhdCI6MTY2MTY5NDM4MCwiZXhwIjoxNjYxNjk1NTgwfQ.I9XUG6yXGKsBKq7u70JGZydyPWRMqQpMTJGJIYDzbfU`})
     return () => {
       dispatch({ type: WS_CONNECTION_CLOSED });
     };
-  });
+  },[dispatch]);
   if (!window.localStorage.getItem("accessToken")) {
     return <Redirect to="/login" />;
   }

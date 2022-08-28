@@ -80,6 +80,7 @@ export const wsReducer = (
         ...state,
         error: undefined,
         wsConnected: false,
+        messages: [...state.messages]
       };
 
     // Опишем обработку экшена с типом WS_GET_MESSAGE
@@ -89,7 +90,7 @@ export const wsReducer = (
       return {
         ...state,
         error: undefined,
-        messages: [...state.messages, action.payload],
+        messages: [action.payload],
       };
     default:
       return state;

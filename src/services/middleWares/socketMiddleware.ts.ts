@@ -12,7 +12,7 @@ import { TWSActionData } from "../reducers/socketMiddlewareReduce";
 import { RootState } from "../store/store";
 import type { AppDispatch, AppThunk } from "../types";
 
-export const socketMiddleware = (wsUrl: string): Middleware => {
+export const socketMiddleware = (): Middleware => {
   return ((
     store: MiddlewareAPI<AppDispatch, RootState>
   ): AppThunk<void, RootState, unknown, TWSActionData> => {
@@ -24,7 +24,7 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
 
       if (type === WS_CONNECTION_START) {
         // объект класса WebSocket
-        socket = new WebSocket(wsUrl);
+        socket = new WebSocket(payload);
       }
       if (socket) {
         // функция, которая вызывается при открытии сокета
