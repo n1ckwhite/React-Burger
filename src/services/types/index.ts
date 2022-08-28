@@ -1,6 +1,6 @@
-import { store,RootState } from "../store/store";
-import { Action, ActionCreator } from "redux";
-import { ThunkAction } from "redux-thunk";
+import { store, RootState } from "../store/store";
+import { Action } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
@@ -37,13 +37,16 @@ type Taction =
   | TActionOrder
   | TActionUsers;
 
+export type AppThunk<R, RootState, E, Taction extends Action> = (
+  dispatch: ThunkDispatch<RootState, E, Taction>,
+  getState: () => RootState,
+  extraArgument: E
+) => R;
 
 type TApplicationActions = Taction;
 
-export type AppThunk<TReturn = void> = ActionCreator<
-  ThunkAction<TReturn, Action, RootState, TApplicationActions>
->;
 export type AppDispatch = typeof store.dispatch;
 
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
-export const useDispatch = () => dispatchHook<AppDispatch | TApplicationActions | any>();
+export const useDispatch = () =>
+  dispatchHook<AppDispatch | TApplicationActions | any>();
