@@ -12,6 +12,14 @@ import { TActionIngredient } from "../reducers/ingredientReduce";
 import { TActionIngredients } from "../reducers/ingredientsReduce";
 import { TActionUsers } from "../reducers/usersReduce";
 import { TActionOrder } from "../reducers/orderReducer";
+import {
+  WS_CONNECTION_START,
+  WS_CONNECTION_SUCCESS,
+  WS_CONNECTION_CLOSED,
+  WS_CONNECTION_ERROR,
+  WS_GET_MESSAGE,
+} from "../action/index";
+
 export interface IIngredient {
   key?: number | string | unknown;
   _id?: string | number | any;
@@ -57,6 +65,14 @@ type Taction =
   | TActionIngredients
   | TActionOrder
   | TActionUsers;
+
+export type TWSUserActions = {
+  wsInit: typeof WS_CONNECTION_START;
+  onOpen: typeof WS_CONNECTION_SUCCESS;
+  onClose: typeof WS_CONNECTION_CLOSED;
+  onError: typeof WS_CONNECTION_ERROR;
+  wsGetOrders: typeof WS_GET_MESSAGE;
+};
 
 export type AppThunk<R, S, E, A extends Action> = (
   dispatch: ThunkDispatch<S, E, A>,

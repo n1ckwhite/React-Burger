@@ -9,9 +9,9 @@ import {
 } from "../action";
 import { TWSActionData } from "../reducers/socketMiddlewareReduce";
 import { RootState } from "../store/store";
-import type { AppDispatch, AppThunk } from "../types";
+import type { AppDispatch, AppThunk, TWSUserActions } from "../types";
 
-export const socketMiddleware = (): Middleware => {
+export const socketMiddleware = (wsActions: TWSUserActions): Middleware => {
   return ((
     store: MiddlewareAPI<AppDispatch, RootState>
   ): AppThunk<void, RootState, unknown, TWSActionData> => {
