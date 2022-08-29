@@ -18,6 +18,7 @@
   visibility: visible;
   opacity: 1;
   overflow: hidden;
+  z-index: 100;
 }
 .wrapper {
   position: relative;

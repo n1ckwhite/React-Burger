@@ -5,17 +5,16 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, useDrop, XYCoord } from "react-dnd";
-import { IIngredient } from "../../utils/constans";
-
+import { IIngredient } from "../../services/types/index";
 interface IProps {
   item: IIngredient;
   index: number;
   isLocked?: boolean;
-  type: "top" | "bottom" | "middle" | any;
+  type?: "top" | "bottom" | "middle" | any;
   position?: boolean;
   onDelete?: () => void;
   drag?: boolean;
-  moveIngredient:(A: number, B: number) => void
+  moveIngredient: (A: number, B: number) => void;
 }
 
 export const BurgerConstructorItem: FC<IProps> = ({

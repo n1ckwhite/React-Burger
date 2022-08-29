@@ -1,9 +1,8 @@
-import { Dispatch, FC } from "react";
+import { FC } from "react";
 import stylesProfileMenu from "./ProfileMenu.module.css";
 import { NavLink } from "react-router-dom";
 import { exitUser } from "../../services/action/users";
-import { useDispatch } from "react-redux";
-
+import { useDispatch } from "../../services/types/index";
 interface IProps {
   children?: JSX.Element;
   history?: History | string;
@@ -11,7 +10,7 @@ interface IProps {
 }
 
 export const ProfileMenu: FC<IProps> = ({ children, history, profile }) => {
-  const dispatch: Dispatch<any> = useDispatch();
+  const dispatch = useDispatch();
   return (
     <div className={stylesProfileMenu.block}>
       <div>

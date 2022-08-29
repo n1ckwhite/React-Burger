@@ -1,23 +1,21 @@
 import React from "react";
 import stylesModalOrderDetails from "./ModalOrderDetails.module.css";
 import doneImg from "../../images/order accpeted/done.png";
-import { useSelector } from "react-redux";
-
+import { useSelector } from "../../services/types/index";
 interface IState {
   order: {
-    order: number
-  }
+    order: number;
+  };
 }
 
-
 export const ModalOrderDetails = () => {
-  const number = useSelector((state : IState) => state.order.order);
+  const number = useSelector((state: IState) => state.order.order);
   return (
     <>
       <p
         className={`${stylesModalOrderDetails.title} text text_type_digits-large  mt-30`}
       >
-        {number}
+        {number === 0 ? "..." : number}
       </p>
       <p className="text text_type_main-medium mt-8">Индентификатор заказа</p>
       <img

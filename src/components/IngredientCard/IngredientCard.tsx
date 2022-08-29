@@ -9,27 +9,19 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
-import { IIngredient } from "../../utils/constans";
-
+import { IIngredient } from "../../services/types/index";
+import { useDispatch, useSelector } from "../../services/types/index";
 interface IProps {
   ingredient: IIngredient;
   openModal: (A: IIngredient) => void;
 }
 
-interface IState {
-  currentIngredient: {
-    bun: [IIngredient];
-    ingredients: [IIngredient];
-  };
-}
-
 export const IngredientCard: FC<IProps> = ({ ingredient, openModal }) => {
   const { v4: uuidv4 } = require("uuid");
   const ingredients = useSelector(
-    (state: IState) => state.currentIngredient.ingredients
+    (state) => state.currentIngredient.ingredients
   );
-  const bun = useSelector((state: IState) => state.currentIngredient.bun);
+  const bun = useSelector((state) => state.currentIngredient.bun);
   const arr = [...bun, ...bun, ...ingredients];
   const counter = arr.filter((item) => item._id === ingredient._id).length;
   const dispatch = useDispatch();

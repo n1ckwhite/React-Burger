@@ -1,5 +1,22 @@
+import { Dispatch } from "react";
 import checkResponse from ".";
 import { API_BURGERS } from "../../utils/data";
+import {
+  IforgotPass,
+  IlogUs,
+  IpassSucc,
+  IpassSuccess,
+  IregSucc,
+  IregUs,
+  IresetPass,
+  IlogUsSucc,
+  IgetUsInfo,
+  IgetUsInfoSuccess,
+  IpathUserInfo,
+  IpathUserInfoSuccess,
+} from "../reducers/usersReduce";
+import { RootState } from "../store/store";
+import { AppThunk } from "../types";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const FORGOT_PASSWORD_SUCCESSFUL = "FORGOT_PASSWORD_SUCCESSFUL";
 export const RESET_PASSWORD_SUCCESSFUL = "RESET_PASSWORD_SUCCESSFUL";
@@ -13,8 +30,13 @@ export const GET_USER_INFO_SUCCESSFUL = "GET_USER_INFO_SUCCESSFUL";
 export const PATCH_USER_INFO = "PATH_USER_INFO";
 export const PATCH_USER_INFO_SUCCESSFUL = "PATH_USER_INFO_SUCCESSFUL";
 export const EXIT_USER = "EXIT_USER";
-export const forgotPassword = (email, history) => {
-  return (dispatch) => {
+
+
+export const forgotPassword = (
+  email: string,
+  history: any
+): AppThunk<void, RootState, unknown, IforgotPass | IpassSucc> => {
+  return (dispatch: Dispatch<IforgotPass | IpassSucc>) => {
     dispatch({
       type: FORGOT_PASSWORD,
     });
@@ -28,20 +50,23 @@ export const forgotPassword = (email, history) => {
     });
     fetch(`${API_BURGERS}/password-reset`, requestOptions)
       .then((response) => checkResponse(response))
-      .then((data) => {
+      .then((data: any) => {
         if (data.success) {
           return history.replace({ pathname: "/reset-password" });
         }
         return null;
       })
       .catch((error) => {
-        alert("Ошибка HTTP: ", error.type);
+        // alert("Ошибка HTTP: ", error.type);
       });
   };
 };
 
-export const resetPassword = (password, token) => {
-  return (dispatch) => {
+export const resetPassword = (
+  password: string,
+  token: string
+): AppThunk<void, RootState, unknown, IresetPass | IpassSucc> => {
+  return (dispatch: Dispatch<IresetPass | IpassSuccess>) => {
     dispatch({
       type: RESET_PASSWORD,
       token: token,
@@ -54,14 +79,18 @@ export const resetPassword = (password, token) => {
     dispatch({
       type: RESET_PASSWORD_SUCCESSFUL,
     });
-    fetch(`${API_BURGERS}/password-reset/reset`, requestOptions)
-      .then((response) => checkResponse(response))
-      .catch((error) => alert("Ошибка HTTP: ", error.type));
+    fetch(`${API_BURGERS}/password-reset/reset`, requestOptions).then(
+      (response) => checkResponse(response)
+    );
   };
 };
-
-export const registerUser = (email, password, name, history) => {
-  return (dispatch) => {
+export const registerUser = (
+  email: string,
+  password: string,
+  name: string,
+  history: any
+): AppThunk<void, RootState, unknown, IregUs | IpassSuccess> => {
+  return (dispatch: Dispatch<IregUs | IregSucc>) => {
     dispatch({
       type: REGISTER_USER,
       email: email,
@@ -82,20 +111,22 @@ export const registerUser = (email, password, name, history) => {
     });
     fetch(`${API_BURGERS}/auth/register`, requestOptions)
       .then((response) => checkResponse(response))
-      .then((data) =>
+      .then((data: any) =>
         data.success
           ? history.replace({ pathname: "/login" })
           : alert("Укажите корректную почту")
-      )
-      .catch((error) => {
-        alert("Ошибка HTTP: ", error.type);
-      })
-      .catch((error) => alert("Ошибка HTTP: ", error.type));
+      );
+
+    // .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
-export const loginUser = (email, password, history) => {
-  return (dispatch) => {
+export const loginUser = (
+  email: string,
+  password: string,
+  history: any
+): AppThunk<void, RootState, unknown, IlogUs | IlogUsSucc> => {
+  return (dispatch: Dispatch<IlogUs | IlogUsSucc>) => {
     dispatch({
       type: LOGIN_USER,
       email: email,
@@ -114,7 +145,7 @@ export const loginUser = (email, password, history) => {
     });
     fetch(`${API_BURGERS}/auth/login`, requestOptions)
       .then((res) => checkResponse(res))
-      .then((data) => {
+      .then((data: any) => {
         if (data.success) {
           if (!localStorage.length) {
             localStorage.setItem("accessToken", data.accessToken);
@@ -122,13 +153,19 @@ export const loginUser = (email, password, history) => {
           }
           history.replace({ pathname: "/" });
         }
-      })
-      .catch((error) => alert("Ошибка HTTP: ", error.type));
+      });
+    // .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
-export const getUserInfo = () => {
-  return (dispatch) => {
+
+export const getUserInfo = (): AppThunk<
+  void,
+  RootState,
+  unknown,
+  IgetUsInfo | IgetUsInfoSuccess
+> => {
+  return (dispatch: Dispatch<IgetUsInfo | IgetUsInfoSuccess>) => {
     dispatch({
       type: GET_USER_INFO,
     });
@@ -137,11 +174,11 @@ export const getUserInfo = () => {
       headers: {
         "Content-Type": "application/json",
         Authorization: window.localStorage.getItem("accessToken"),
-      },
+      } as never,
     };
     fetch(`${API_BURGERS}/auth/user`, requestOptions)
       .then((response) => checkResponse(response))
-      .then((data) => {
+      .then((data: any) => {
         if (data.success) {
           dispatch({
             type: GET_USER_INFO_SUCCESSFUL,
@@ -149,13 +186,16 @@ export const getUserInfo = () => {
             name: data.user.name,
           });
         }
-      })
-      .catch((error) => alert("Ошибка HTTP: ", error.type));
+      });
+    // .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
-export const patchUserInfo = (email, name) => {
-  return (dispatch) => {
+export const patchUserInfo = (
+  email: string,
+  name: string
+): AppThunk<void, RootState, unknown, IpathUserInfo | IpathUserInfoSuccess> => {
+  return (dispatch: Dispatch<IpathUserInfo | IpathUserInfoSuccess>) => {
     dispatch({
       type: PATCH_USER_INFO,
       email: email,
@@ -171,18 +211,19 @@ export const patchUserInfo = (email, name) => {
         email: email,
         name: name,
       }),
-    };
+    } as never;
     dispatch({
       type: PATCH_USER_INFO_SUCCESSFUL,
     });
-    fetch(`${API_BURGERS}/auth/user`, requestOptions)
-      .then((response) => checkResponse(response))
-      .catch((error) => alert("Ошибка HTTP: ", error.type));
+    fetch(`${API_BURGERS}/auth/user`, requestOptions).then((response) =>
+      checkResponse(response)
+    );
+    // .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
 
-export const exitUser = () => {
-  return (dispatch) => {
+export const exitUser = (): AppThunk<void, RootState, unknown, never> => {
+  return (dispatch: Dispatch<() => void>) => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -192,12 +233,12 @@ export const exitUser = () => {
     };
     fetch(`${API_BURGERS}/auth/logout`, requestOptions)
       .then((response) => checkResponse(response))
-      .then((data) => {
+      .then((data: any) => {
         if (data.success) {
           window.localStorage.removeItem("accessToken");
           window.localStorage.removeItem("refreshToken");
         }
-      })
-      .catch((error) => alert("Ошибка HTTP: ", error.type));
+      });
+    // .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };

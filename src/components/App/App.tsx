@@ -1,5 +1,6 @@
 import MainPage from "../../pages/MainPage/MainPage";
-import { useState, useEffect} from "react";
+import stylesApp from "./App.module.css";
+import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,37 +18,38 @@ import { ProfileOrdersPage } from "../../pages/ProfileOrdersPage/ProfileOrdersPa
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { ModalIngredientsDetails } from "../ModalIngredientDetails/ModalIngredientsDetails";
 import { Modal } from "../Modal/Modal";
-import { useDispatch, useSelector } from "react-redux";
 import { clearIngredient } from "../../services/action/ingredient";
 import { getIngredients } from "../../services/action/ingredients";
-import { Dispatch } from "redux";
-import { IIngredient } from "../../utils/constans";
+import {
+  useDispatch,
+  useSelector,
+  ILocationApp,
+} from "../../services/types/index";
+import { FeedPage } from "../../pages/FeedPage/FeedPage";
+import { OrdersDetails } from "../OrdersDetails/OrdersDetails";
 
-
-
-interface IState {
-  ingredient: {
-    ingredient: IIngredient
-  }
-}
-
-interface ILocation {
-  state?: {background: object | any},
-}
-
-const ModalSwitch =  () => {
+const ModalSwitch = () => {
   const [ingredientsModal, openIngredientsModal] = useState<boolean>(false);
-  const ingredient  = useSelector((state : IState) => state.ingredient.ingredient);
-  const location : ILocation = useLocation();
-  const dispatch : Dispatch<any> = useDispatch();
+  const [orderDetailsModal, openOrderDetailsModal] = useState<boolean>(true);
+  const ingredient = useSelector((state) => state.ingredient.ingredient);
+  const location: ILocationApp = useLocation();
+  const dispatch = useDispatch();
   const history = useHistory();
   const background = location.state && location?.state?.background;
   const openOrderModal = () => {
     openIngredientsModal(true);
   };
   const closeOrderModal = () => {
-    dispatch (clearIngredient());
+    dispatch(clearIngredient());
     openIngredientsModal(false);
+    history.goBack();
+  };
+
+  const openOrderDetails = () => {
+    openOrderDetailsModal(true);
+  };
+  const closeOrderDetails = () => {
+    openOrderDetailsModal(false);
     history.goBack();
   };
 
@@ -56,6 +58,7 @@ const ModalSwitch =  () => {
       openIngredientsModal(true);
     }
   }, [ingredient]);
+
   return (
     <div>
       <AppHeader />
@@ -78,33 +81,68 @@ const ModalSwitch =  () => {
         <Route path="/ingredients/:id" exact={true}>
           <ModalIngredientsDetails />
         </Route>
+        <Route path="/feed" exact={true}>
+          <FeedPage handleModal={openOrderDetails} />
+        </Route>
+        <Route path="/feed/:id" exact={true}>
+          <>
+            <div className={stylesApp.mb}></div>
+            <OrdersDetails />
+          </>
+        </Route>
+        <Route path="/profile/orders" exact={true}>
+          <ProfileOrdersPage handleModal={openOrderDetails} />
+        </Route>
+        <Route path="/profile/orders/:id" exact={true}>
+          <ProtectedRoute>
+            <>
+              <div className={stylesApp.mb}></div>
+              <OrdersDetails />
+            </>
+          </ProtectedRoute>
+        </Route>
         <ProtectedRoute>
           <ProfilePage />
         </ProtectedRoute>
-
-        <Route path="/profile/orders" exact={true}>
-          <ProfileOrdersPage />
-        </Route>
       </Switch>
       {background && (
-        <Route path="/ingredients/:id">
-          <Modal
-            isActive={ingredientsModal}
-            handleIsActive={openOrderModal}
-            closePopup={closeOrderModal}
-            title="Детали ингредиента"
-          >
-            <ModalIngredientsDetails />
-          </Modal>
-        </Route>
+        <>
+          <Route path="/ingredients/:id">
+            <Modal
+              isActive={ingredientsModal}
+              handleIsActive={openOrderModal}
+              closePopup={closeOrderModal}
+              title="Детали ингредиента"
+            >
+              <ModalIngredientsDetails />
+            </Modal>
+          </Route>
+          <Route path="/feed/:id">
+            <Modal
+              isActive={orderDetailsModal}
+              handleIsActive={openOrderDetails}
+              closePopup={closeOrderDetails}
+            >
+              <OrdersDetails tal={true} />
+            </Modal>
+          </Route>
+          <Route path="/profile/orders/:id">
+            <Modal
+              isActive={orderDetailsModal}
+              handleIsActive={openOrderModal}
+              closePopup={closeOrderDetails}
+            >
+              <OrdersDetails tal={true} />
+            </Modal>
+          </Route>
+        </>
       )}
     </div>
   );
 };
 
 export const App = () => {
-  const dispatch : Dispatch<any> = useDispatch();
-
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);

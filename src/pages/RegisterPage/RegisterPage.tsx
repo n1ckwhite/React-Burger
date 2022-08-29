@@ -4,27 +4,25 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
 import { registerUser } from "../../services/action/users";
 import { Redirect, useHistory } from "react-router-dom";
-import { Dispatch } from "react";
-
+import { useDispatch } from "../../services/types";
 export const RegisterPage = () => {
   const [value, setValue] = React.useState("");
   const inputRef = React.useRef(null);
-  const dispatch : Dispatch<any> = useDispatch();
+  const dispatch = useDispatch();
   const history = useHistory();
   const [valuePassword, setValuePassword] = React.useState("");
   const [name, setName] = React.useState("");
   const user = window.localStorage.getItem("accessToken");
-  const onChangeEmail = (e : ChangeEvent<HTMLInputElement>) => {
+  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
-  const onChangePassword = (e : ChangeEvent<HTMLInputElement>) => {
+  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setValuePassword(e.target.value);
   };
 
-  const onChangeName = (e : ChangeEvent<HTMLInputElement>) => {
+  const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
@@ -46,37 +44,37 @@ export const RegisterPage = () => {
         }}
       >
         <div>
-        <li className="mt-6">
-          <Input
-            type={"text"}
-            placeholder={"Имя"}
-            onChange={onChangeName}
-            value={name}
-            name={"email"}
-            error={false}
-            ref={inputRef}
-            size={"default"}
-          />
-        </li>
-        <li className="mt-6">
-          <Input
-            type={"email"}
-            placeholder={"E-mail"}
-            onChange={onChangeEmail}
-            value={value}
-            name={"email"}
-            error={false}
-            ref={inputRef}
-            size={"default"}
-          />
-        </li>
-        <li className="mt-6">
-          <PasswordInput
-            onChange={onChangePassword}
-            value={valuePassword}
-            name={"password"}
-          />
-        </li>
+          <li className="mt-6">
+            <Input
+              type={"text"}
+              placeholder={"Имя"}
+              onChange={onChangeName}
+              value={name}
+              name={"email"}
+              error={false}
+              ref={inputRef}
+              size={"default"}
+            />
+          </li>
+          <li className="mt-6">
+            <Input
+              type={"email"}
+              placeholder={"E-mail"}
+              onChange={onChangeEmail}
+              value={value}
+              name={"email"}
+              error={false}
+              ref={inputRef}
+              size={"default"}
+            />
+          </li>
+          <li className="mt-6">
+            <PasswordInput
+              onChange={onChangePassword}
+              value={valuePassword}
+              name={"password"}
+            />
+          </li>
         </div>
       </Form>
     </>

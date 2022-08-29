@@ -2,19 +2,16 @@ import React from "react";
 import { Form } from "../../components/Form/Form";
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { forgotPassword } from "../../services/action/users";
-import { useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
-import { Dispatch } from "react";
+import { useDispatch } from "../../services/types";
 export const ForgotPage = () => {
   const [value, setValue] = React.useState("");
-  const dispatch : Dispatch<any> = useDispatch();
+  const dispatch = useDispatch();
   const history = useHistory();
-  const user = window.localStorage.getItem('accessToken')
+  const user = window.localStorage.getItem("accessToken");
   const inputRef = React.useRef(null);
-  if(user) {
-    return (
-      <Redirect to="/"/>
-    )
+  if (user) {
+    return <Redirect to="/" />;
   }
   return (
     <>
@@ -24,7 +21,7 @@ export const ForgotPage = () => {
         text="Вспомнили пароль?"
         linkText="Войти"
         linkHref="/reset-password"
-        buttonFunc ={(e: SubmitEvent) => {
+        buttonFunc={(e: SubmitEvent) => {
           e.preventDefault();
           dispatch(forgotPassword(value, history));
         }}

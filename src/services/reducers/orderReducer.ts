@@ -11,7 +11,36 @@ const initialState = {
   pending: false,
 };
 
-export const orderReducer = (state = initialState, action) => {
+interface IState {
+  order: number;
+  error: string;
+  pending: boolean;
+}
+
+export interface IRequest {
+  readonly type: typeof GET_ORDER_REQUEST;
+}
+
+export interface IError {
+  readonly type: typeof GET_ORDER_ERROR;
+  err: Object;
+}
+
+export interface ISuccessful {
+  readonly type: typeof GET_ORDER_SUCCESSFUL;
+  number: number;
+}
+
+export interface IOrderNumber {
+  readonly type: typeof CLEAR_ORDER_NUMBER;
+}
+
+export type TActionOrder = IRequest | IError | ISuccessful | IOrderNumber;
+
+export const orderReducer = (
+  state: IState = initialState,
+  action: TActionOrder
+) => {
   switch (action.type) {
     case GET_ORDER_REQUEST: {
       return {
@@ -30,7 +59,7 @@ export const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         pending: false,
-        order: action.number,
+        order: `${action.number}`,
       };
     }
     case CLEAR_ORDER_NUMBER: {

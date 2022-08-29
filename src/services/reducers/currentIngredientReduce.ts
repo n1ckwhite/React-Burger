@@ -5,18 +5,68 @@ import {
   TARGET_CARD_INGREDIENT,
   SET_SORTED_ARRAY,
 } from "../action";
+import { IIngredient } from "../types";
 
 const initialState = {
   ingredients: [],
   bun: [],
 };
 
-export const currentIngredientReduce = (state = initialState, action) => {
+type IState = {
+  ingredients: Array<IIngredient>;
+  bun: Array<IIngredient>;
+};
+
+interface Iitem {
+  _id: number;
+  indx: number;
+}
+interface Icreate {
+  readonly type: typeof CREATE_CURRENT_INGREDIENT;
+  it: IIngredient;
+  key: () => number;
+}
+
+interface ISetSort {
+  readonly type: typeof SET_SORTED_ARRAY;
+  sortedArray: Array<IIngredient>;
+}
+
+interface Ireplace {
+  readonly type: typeof REPLACE_BUN_INGREDIENT;
+  bun: IIngredient;
+  key: () => number;
+}
+
+interface Idelete {
+  readonly type: typeof DELETE_CONSTRUCTOR_ITEM;
+  indx: IIngredient;
+}
+
+interface Itarget {
+  readonly type: typeof TARGET_CARD_INGREDIENT;
+  targetCard: IIngredient;
+}
+
+export type TActionCurrentIngredient =
+  | Icreate
+  | ISetSort
+  | Ireplace
+  | Idelete
+  | Itarget;
+
+export const currentIngredientReduce = (
+  state: IState = initialState,
+  action: TActionCurrentIngredient
+) => {
   switch (action.type) {
     case CREATE_CURRENT_INGREDIENT: {
       return {
         ...state,
-        ingredients: state.ingredients.concat({ ...action.it, key: action.key }),
+        ingredients: state.ingredients.concat({
+          ...action.it,
+          key: action.key,
+        }),
       };
     }
     case SET_SORTED_ARRAY: {

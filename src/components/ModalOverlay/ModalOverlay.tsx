@@ -17,12 +17,7 @@ export const ModalOverlay: FC<IProps> = ({ children, open, closePopup }) => {
       }
     >
       <div className={stylesModalOverlay.wrapper}>{children}</div>
-      <div
-        className={stylesModalOverlay.close}
-        onClick={() => {
-          closePopup();
-        }}
-      ></div>
+      <div className={stylesModalOverlay.close} onClick={closePopup}></div>
     </div>
   );
 };

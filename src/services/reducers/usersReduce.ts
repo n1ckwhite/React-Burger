@@ -24,7 +24,99 @@ const initialState = {
   isLoggedIn: false,
 };
 
-export const usersReduce = (state = initialState, action) => {
+interface IState {
+  email: string;
+  token: string;
+  password: string;
+  name: string;
+  pending: boolean;
+  success: boolean;
+  isLoggedIn: boolean;
+}
+
+export interface IpassSucc {
+  readonly type: typeof FORGOT_PASSWORD_SUCCESSFUL;
+}
+
+export interface IforgotPass {
+  readonly type: typeof FORGOT_PASSWORD;
+}
+
+export interface IresetPass {
+  readonly type: typeof RESET_PASSWORD;
+  token: string;
+}
+
+export interface IpassSuccess {
+  readonly type: typeof RESET_PASSWORD_SUCCESSFUL;
+}
+
+export interface IregUs {
+  readonly type: typeof REGISTER_USER;
+  email: string;
+  password: string;
+  name: string;
+}
+
+export interface IregSucc {
+  readonly type: typeof REGISTER_USER_SUCCESSFUL;
+}
+
+export interface IlogUs {
+  readonly type: typeof LOGIN_USER;
+  email: string;
+  password: string;
+}
+
+export interface IlogUsSucc {
+  readonly type: typeof LOGIN_USER_SUCCESSFUL;
+}
+
+export interface IgetUsInfo {
+  readonly type: typeof GET_USER_INFO;
+}
+
+export interface IgetUsInfoSuccess {
+  readonly type: typeof GET_USER_INFO_SUCCESSFUL;
+  email: string;
+  name: string;
+}
+
+export interface IpathUserInfo {
+  readonly type: typeof PATCH_USER_INFO;
+  email: string;
+  name: string;
+}
+
+export interface IpathUserInfoSuccess {
+  readonly type: typeof PATCH_USER_INFO_SUCCESSFUL;
+}
+
+export interface Iexit {
+  readonly type: typeof EXIT_USER;
+  success: boolean;
+  pending: boolean;
+}
+
+export type TActionUsers =
+  | IpassSucc
+  | IforgotPass
+  | IresetPass
+  | IpassSuccess
+  | IregUs
+  | IregSucc
+  | IlogUs
+  | IlogUsSucc
+  | IgetUsInfo
+  | IgetUsInfoSuccess
+  | IpathUserInfo
+  | IpathUserInfoSuccess
+  | Iexit;
+
+export const usersReduce = (
+  state: IState = initialState,
+  action: TActionUsers
+) => {
   switch (action.type) {
     case FORGOT_PASSWORD_SUCCESSFUL: {
       return {
@@ -36,7 +128,6 @@ export const usersReduce = (state = initialState, action) => {
     case FORGOT_PASSWORD: {
       return {
         ...state,
-        email: action.email,
       };
     }
     case RESET_PASSWORD: {
