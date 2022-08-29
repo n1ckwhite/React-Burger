@@ -1,4 +1,5 @@
 import MainPage from "../../pages/MainPage/MainPage";
+import stylesApp from "./App.module.css";
 import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -84,7 +85,7 @@ const ModalSwitch = () => {
         </Route>
         <Route path="/feed/:id" exact={true}>
           <>
-            <div style={{ marginBottom: 122 }}></div>
+            <div className={stylesApp.mb}></div>
             <OrdersDetails />
           </>
         </Route>
@@ -94,7 +95,7 @@ const ModalSwitch = () => {
         <Route path="/profile/orders/:id" exact={true}>
           <ProtectedRoute>
             <>
-              <div style={{ marginBottom: 122 }}></div>
+              <div className={stylesApp.mb}></div>
               <OrdersDetails />
             </>
           </ProtectedRoute>

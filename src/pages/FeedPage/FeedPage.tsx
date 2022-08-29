@@ -37,7 +37,7 @@ export const FeedPage: FC<IModal> = ({ handleModal }) => {
     <div className={stylesFeedPage.feed}>
       <p className="text text_type_main-large">Лента заказов</p>
       <div className={stylesFeedPage.feed_flex}>
-        <div style={{ width: 608 }}>
+        <div className={stylesFeedPage.div608}>
           <ul className={stylesFeedPage.ul}>
             {data[0]?.orders &&
               data[0]?.orders.map((i: any) => {
@@ -58,7 +58,7 @@ export const FeedPage: FC<IModal> = ({ handleModal }) => {
               })}
           </ul>
         </div>
-        <div style={{ marginTop: 20, marginLeft: 60 }}>
+        <div className={stylesFeedPage.mtml}>
           <div className={stylesFeedPage.status}>
             <div>
               <p className="text text_type_main-medium mb-6">Готовы:</p>
