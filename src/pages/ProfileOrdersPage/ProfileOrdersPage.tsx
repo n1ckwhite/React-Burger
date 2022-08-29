@@ -26,7 +26,7 @@ export const ProfileOrdersPage: FC<IModal> = ({ handleModal }) => {
   useEffect(() => {
     dispatch({
       type: WS_CONNECTION_START,
-      payload: `wss://norma.nomoreparties.space/orders/?token=${window.localStorage
+      payload: `wss://norma.nomoreparties.space/orders?token=${window.localStorage
         .getItem("accessToken")
         ?.slice(7)}`,
     });

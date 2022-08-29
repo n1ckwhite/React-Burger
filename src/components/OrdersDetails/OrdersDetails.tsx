@@ -1,14 +1,20 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { FC } from "react";
-import { useParams } from "react-router-dom";
-import {  useSelector } from "../../services/types";
+import { FC, useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { ILocation, useDispatch, useSelector } from "../../services/types";
 import stylesOrdersDetails from "./OrdersDetails.module.css";
 import { TOrder } from "../../services/types/index";
+import {
+  WS_CONNECTION_CLOSED,
+  WS_CONNECTION_START,
+} from "../../services/action";
 interface Ital {
   tal?: true | null;
 }
 
 export const OrdersDetails: FC<Ital> = ({ tal }) => {
+  const location = useLocation<ILocation>();
+  const dispatch = useDispatch();
   const { id } = useParams() as never;
   const ingredients = useSelector((state) => state.ingredients.ingredients);
   const data = useSelector((state) => state.data.messages);
@@ -38,7 +44,7 @@ export const OrdersDetails: FC<Ital> = ({ tal }) => {
 
   const ingredientsInfo =
     ingredientsOrder &&
-    ingredientsOrder.reduce((acc: { count: number; }[], ingId: number) => {
+    ingredientsOrder.reduce((acc: { count: number }[], ingId: number) => {
       if (!acc[ingId]) {
         const ingredient = ingredients.find((ing) => ing._id === ingId);
         if (ingredient) {
@@ -57,6 +63,27 @@ export const OrdersDetails: FC<Ital> = ({ tal }) => {
   for (let key in ingredientsInfo) {
     arr.push(ingredientsInfo[key]);
   }
+
+  useEffect(() => {
+    if (location.pathname === `/feed/${id}`) {
+      dispatch({
+        type: WS_CONNECTION_START,
+        payload: "wss://norma.nomoreparties.space/orders/all",
+      });
+    } else if (location.pathname === `/profile/orders/${id}`) {
+      dispatch({
+        type: WS_CONNECTION_START,
+        payload: `wss://norma.nomoreparties.space/orders?token=${window.localStorage
+          .getItem("accessToken")
+          ?.slice(7)}`,
+      });
+    }
+    return () => {
+      dispatch({
+        type: WS_CONNECTION_CLOSED,
+      });
+    };
+  }, [location.pathname, dispatch, id]);
 
   return (
     <div className={stylesOrdersDetails.block}>
