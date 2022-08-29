@@ -3,6 +3,17 @@
   padding: 0;
   list-style: none;
   box-sizing: border-box;
+  height: 868px;
+  overflow-y: scroll;
+  scrollbar-color: var(--text-inactive-color) var(--colors-button-inactive);
+}
+
+.ul::-webkit-scrollbar {
+  background: var(--colors-button-inactive);
+}
+
+.ul::-webkit-scrollbar-thumb {
+  background: var(--text-inactive-color);
 }
 
 .li {

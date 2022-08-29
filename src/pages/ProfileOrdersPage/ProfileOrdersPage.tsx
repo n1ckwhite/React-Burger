@@ -8,10 +8,10 @@ import {
   WS_CONNECTION_CLOSED,
   WS_CONNECTION_START,
 } from "../../services/action";
-import { TOrder, useDispatch, useSelector } from "../../services/types";
+import { useDispatch, useSelector } from "../../services/types";
 
 interface IModal {
-  handleModal: () => void
+  handleModal: () => void;
 }
 
 export const ProfileOrdersPage: FC<IModal> = ({ handleModal }) => {
