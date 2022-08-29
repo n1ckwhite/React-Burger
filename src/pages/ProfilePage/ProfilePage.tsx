@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import stylesProfilePage from "./ProfilePage.module.css";
-import {
-  Input,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getUserInfo, patchUserInfo } from "../../services/action/users";
 import { ProfileMenu } from "../../components/ProfileMenu/ProfileMenu";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "../../services/types/index";
+import { Button } from "../../components/Button/Button";
 interface IState {
   users: {
     email: string;

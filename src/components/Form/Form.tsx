@@ -1,7 +1,7 @@
 import stylesForm from "./Form.module.css";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button } from "../Button/Button";
 
 interface IProps {
   title: string;

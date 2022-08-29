@@ -1,7 +1,7 @@
 import React, { FC, useRef, useState, RefObject } from "react";
 import stylesBurgerIngridients from "./BurgerIngredients.module.css";
-import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "../BurgerIngredient/BurgetIngredient";
+import { Tab } from "../Tab/Tab";
 interface IProps {
   openModal: () => void;
 }
