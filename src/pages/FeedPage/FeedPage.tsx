@@ -9,7 +9,6 @@ interface IModal {
 }
 
 export const FeedPage: FC<IModal> = ({ handleModal }) => {
-  const { v4: uuidv4 } = require("uuid");
   const location = useLocation();
   const data = useSelector((state: any) => state.data.messages);
   const done = useMemo(
@@ -57,7 +56,7 @@ export const FeedPage: FC<IModal> = ({ handleModal }) => {
                 {done &&
                   done.map((i: TOrder) => {
                     return (
-                      <li key={uuidv4()}>
+                      <li key={i.number}>
                         <p className="text text_type_digits-default">
                           {i.number}
                         </p>
@@ -74,7 +73,7 @@ export const FeedPage: FC<IModal> = ({ handleModal }) => {
                 {pending &&
                   pending.map((i: TOrder) => {
                     return (
-                      <li key={uuidv4()}>
+                      <li key={i.number}>
                         <p className="text text_type_digits-default">
                           {i.number}
                         </p>

@@ -10,7 +10,6 @@ interface Ital {
 
 export const OrdersDetails: FC<Ital> = ({ tal }) => {
   const { id } = useParams() as never;
-  const { v4: uuidv4 } = require("uuid");
   const ingredients = useSelector((state) => state.ingredients.ingredients);
   const data = useSelector((state: any) => state.data.messages);
   const dataSearchItem =
@@ -83,7 +82,7 @@ export const OrdersDetails: FC<Ital> = ({ tal }) => {
         {arr &&
           arr.map((i) => {
             return (
-              <li className={stylesOrdersDetails.li} key={uuidv4()}>
+              <li className={stylesOrdersDetails.li} key={i._id}>
                 <div className={stylesOrdersDetails.img_block}>
                   <img
                     className={stylesOrdersDetails.img}

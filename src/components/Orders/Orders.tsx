@@ -3,7 +3,6 @@ import stylesOrders from "./Orders.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IOrder, useSelector } from "../../services/types";
 
-
 export const Orders: FC<IOrder> = ({ order }) => {
   const day = new Date().getDate();
   const ingredients = useSelector((state) => state.ingredients.ingredients);
@@ -12,7 +11,6 @@ export const Orders: FC<IOrder> = ({ order }) => {
       ingredient._id === i ? ingredient.image : null
     );
   });
-  const { v4: uuidv4 } = require("uuid");
   const setIngredients: any = new Set(
     filterIngredients.map((i) => i[0]?.image)
   );
@@ -40,7 +38,7 @@ export const Orders: FC<IOrder> = ({ order }) => {
           <ul className={stylesOrders.ul_two}>
             {images.slice(0, 6).map((i, len) => {
               return (
-                <li className={stylesOrders.li_img} key={uuidv4()}>
+                <li className={stylesOrders.li_img} key={i}>
                   <img className={stylesOrders.img} src={i} alt="icon" />
                   {images.length > 5 && len === 5 ? (
                     <p

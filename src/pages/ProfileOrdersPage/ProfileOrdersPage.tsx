@@ -16,7 +16,6 @@ interface IModal {
 
 export const ProfileOrdersPage: FC<IModal> = ({ handleModal }) => {
   const location = useLocation();
-  const { v4: uuidv4 } = require("uuid");
   const data = useSelector((state: any) => state.data.messages);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -39,7 +38,7 @@ export const ProfileOrdersPage: FC<IModal> = ({ handleModal }) => {
         {data[0]?.orders &&
           data[0]?.orders.slice(0, 10).map((i: any) => {
             return (
-              <li key={uuidv4()}>
+              <li key={i._id}>
                 <Link
                   className={stylesProfileOrdersPage.li}
                   to={{
