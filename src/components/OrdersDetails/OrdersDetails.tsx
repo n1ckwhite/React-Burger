@@ -1,7 +1,7 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "../../services/types";
+import {  useSelector } from "../../services/types";
 import stylesOrdersDetails from "./OrdersDetails.module.css";
 import { TOrder } from "../../services/types/index";
 interface Ital {
@@ -11,7 +11,7 @@ interface Ital {
 export const OrdersDetails: FC<Ital> = ({ tal }) => {
   const { id } = useParams() as never;
   const ingredients = useSelector((state) => state.ingredients.ingredients);
-  const data = useSelector((state: any) => state.data.messages);
+  const data = useSelector((state) => state.data.messages);
   const dataSearchItem =
     data[0]?.orders && data[0]?.orders.filter((i: TOrder) => i?._id === id)[0];
   const day = new Date().getDate();
@@ -38,7 +38,7 @@ export const OrdersDetails: FC<Ital> = ({ tal }) => {
 
   const ingredientsInfo =
     ingredientsOrder &&
-    ingredientsOrder.reduce((acc: any, ingId: number) => {
+    ingredientsOrder.reduce((acc: { count: number; }[], ingId: number) => {
       if (!acc[ingId]) {
         const ingredient = ingredients.find((ing) => ing._id === ingId);
         if (ingredient) {

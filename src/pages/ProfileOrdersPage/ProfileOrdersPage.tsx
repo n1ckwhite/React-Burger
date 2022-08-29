@@ -8,15 +8,20 @@ import {
   WS_CONNECTION_CLOSED,
   WS_CONNECTION_START,
 } from "../../services/action";
-import { useDispatch, useSelector } from "../../services/types";
+import {
+  ILocation,
+  TOrder,
+  useDispatch,
+  useSelector,
+} from "../../services/types";
 
 interface IModal {
   handleModal: () => void;
 }
 
 export const ProfileOrdersPage: FC<IModal> = ({ handleModal }) => {
-  const location = useLocation();
-  const data = useSelector((state: any) => state.data.messages);
+  const location = useLocation<ILocation>();
+  const data = useSelector((state) => state.data.messages);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({
@@ -36,7 +41,7 @@ export const ProfileOrdersPage: FC<IModal> = ({ handleModal }) => {
     <ProfileMenu history={"active"}>
       <ul className={stylesProfileOrdersPage.ul}>
         {data[0]?.orders &&
-          data[0]?.orders.slice(0, 10).map((i: any) => {
+          data[0]?.orders.slice(0, 10).map((i: TOrder) => {
             return (
               <li key={i._id}>
                 <Link

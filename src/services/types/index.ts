@@ -21,7 +21,7 @@ import {
 } from "../action/index";
 
 export interface IIngredient {
-  key?: number | string | unknown;
+  key?: number | string | any;
   _id?: string | number | any;
   name: string;
   type: string;
@@ -38,8 +38,8 @@ export interface IIngredient {
 }
 
 export type TOrder = {
+  _id?: number;
   ingredients: Array<string>;
-  _id: string;
   status: string;
   number: number;
   createdAt: string;
@@ -50,12 +50,27 @@ export type TOrder = {
 };
 
 export interface IOrder {
+  id: number
   order: {
     ingredients: [];
     createdAt: string;
     number: number;
     name: string;
   };
+}
+
+export interface ILocation {
+  from: Location;
+  background?: Location;
+  pathname: string;
+}
+
+export type ILocationApp = {
+  state: { background: Location | any };
+};
+
+export interface IIngredients {
+  currentIngredient: IIngredient | any;
 }
 
 type Taction =

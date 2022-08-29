@@ -2,7 +2,7 @@ import { FC, SyntheticEvent } from "react";
 import stylesBurgerIngredient from "./BurgerIngredient.module.css";
 import { IngredientCard } from "../IngredientCard/IngredientCard";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "../../services/types/index";
+import { ILocation, useSelector } from "../../services/types/index";
 interface IProps {
   handleModal: () => void;
   sectionRef: HTMLDivElement | undefined | any,
@@ -21,7 +21,7 @@ export const BurgerIngredient: FC<IProps> = ({
   handleModal,
 }) => {
   const burgers = useSelector((state) => state.ingredients.ingredients);
-  const location = useLocation();
+  const location = useLocation<ILocation>();
   return (
     <div
       className={stylesBurgerIngredient.card}

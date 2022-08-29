@@ -19,7 +19,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
   const burgers = useSelector(
     (state) => state.currentIngredient.ingredients
   ) as any;
-  const bun = useSelector((state: any) => state.currentIngredient.bun);
+  const bun = useSelector((state) => state.currentIngredient.bun);
   const dispatch = useDispatch();
   const history = useHistory();
   const onDelete = (item: IIngredient) => {
@@ -57,7 +57,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
   return (
     <section className={`${stylesBurgerConstructor.section} mt-25`}>
       <ul className={stylesBurgerConstructor.ulUnder}>
-        {bun.map((i: any, index: any) => {
+        {bun.map((i, index) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem
@@ -79,7 +79,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
             border: isHover ? "3px solid #4C4CFF" : "",
           }}
         >
-          {burgers.map((i: any, index: number) => {
+          {burgers.map((i: IIngredient, index: number) => {
             return (
               <BurgerConstructorItem
                 moveIngredient={moveIngredient}
@@ -93,7 +93,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
             );
           })}
         </ul>
-        {bun.map((i: any, index: number) => {
+        {bun.map((i, index: number) => {
           if (i.type === "bun") {
             return (
               <BurgerConstructorItem

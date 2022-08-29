@@ -11,8 +11,7 @@ import {
 
 type TWSState = {
   wsConnected: boolean;
-  messages: Array<Object>;
-
+  messages: Array<Object> | any;
   error?: Event;
 };
 

@@ -1,7 +1,13 @@
 import { FC } from "react";
 import stylesOrders from "./Orders.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { IOrder, useSelector } from "../../services/types";
+import { TOrder, useSelector } from "../../services/types";
+import { Set } from "typescript";
+
+interface IOrder {
+  order: TOrder;
+}
+
 
 export const Orders: FC<IOrder> = ({ order }) => {
   const day = new Date().getDate();
@@ -11,9 +17,9 @@ export const Orders: FC<IOrder> = ({ order }) => {
       ingredient._id === i ? ingredient.image : null
     );
   });
-  const setIngredients: any = new Set(
+  const setIngredients = new Set(
     filterIngredients.map((i) => i[0]?.image)
-  );
+  )as any;
   const images = [...setIngredients];
   const dayOrder = order.createdAt.includes(`${day}T`);
   const bun = filterIngredients.filter((i) => i[0]?.type === "bun");

@@ -20,18 +20,19 @@ import { ModalIngredientsDetails } from "../ModalIngredientDetails/ModalIngredie
 import { Modal } from "../Modal/Modal";
 import { clearIngredient } from "../../services/action/ingredient";
 import { getIngredients } from "../../services/action/ingredients";
-import { useDispatch, useSelector } from "../../services/types/index";
+import {
+  useDispatch,
+  useSelector,
+  ILocationApp,
+} from "../../services/types/index";
 import { FeedPage } from "../../pages/FeedPage/FeedPage";
 import { OrdersDetails } from "../OrdersDetails/OrdersDetails";
-interface ILocation {
-  state?: { background: object | any };
-}
 
 const ModalSwitch = () => {
   const [ingredientsModal, openIngredientsModal] = useState<boolean>(false);
   const [orderDetailsModal, openOrderDetailsModal] = useState<boolean>(true);
   const ingredient = useSelector((state) => state.ingredient.ingredient);
-  const location: ILocation = useLocation();
+  const location: ILocationApp = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
   const background = location.state && location?.state?.background;

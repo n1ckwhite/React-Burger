@@ -44,7 +44,7 @@ export const BurgerIngredients: FC<IProps> = ({ openModal }) => {
           <Tab
             value="Булки"
             active={currentTab === "Булки"}
-            onClick={(ingredientType: any) => {
+            onClick={(ingredientType) => {
               setCurrentTab(ingredientType);
               scrollToRef(bunRef);
             }}
@@ -56,7 +56,7 @@ export const BurgerIngredients: FC<IProps> = ({ openModal }) => {
           <Tab
             value="Соусы"
             active={currentTab === "Соусы"}
-            onClick={(ingredientType: any) => {
+            onClick={(ingredientType) => {
               setCurrentTab(ingredientType);
               scrollToRef(sauceRef);
             }}
@@ -68,7 +68,7 @@ export const BurgerIngredients: FC<IProps> = ({ openModal }) => {
           <Tab
             value="Начинки"
             active={currentTab === "Начинки"}
-            onClick={(ingredientType: any) => {
+            onClick={(ingredientType) => {
               setCurrentTab(ingredientType);
               scrollToRef(mainRef);
             }}

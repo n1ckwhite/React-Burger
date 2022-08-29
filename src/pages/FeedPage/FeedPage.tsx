@@ -2,7 +2,7 @@ import { FC, useEffect, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Orders } from "../../components/Orders/Orders";
 import stylesFeedPage from "./FeedPage.module.css";
-import { TOrder, useDispatch, useSelector } from "../../services/types";
+import { ILocation, TOrder, useDispatch, useSelector } from "../../services/types";
 import {WS_CONNECTION_START,WS_CONNECTION_CLOSED} from '../../services/action/index';
 interface IModal {
   handleModal: () => void;
@@ -10,8 +10,8 @@ interface IModal {
 
 export const FeedPage: FC<IModal> = ({ handleModal }) => {
   const dispatch = useDispatch()
-  const location = useLocation();
-  const data = useSelector((state: any) => state.data.messages);
+  const location = useLocation<ILocation>();
+  const data = useSelector((state) => state.data.messages);
   const done = useMemo(
     () =>
       data[0]?.orders &&
@@ -40,7 +40,7 @@ export const FeedPage: FC<IModal> = ({ handleModal }) => {
         <div className={stylesFeedPage.div608}>
           <ul className={stylesFeedPage.ul}>
             {data[0]?.orders &&
-              data[0]?.orders.map((i: any) => {
+              data[0]?.orders.map((i: TOrder) => {
                 return (
                   <li key={i._id}>
                     <Link
