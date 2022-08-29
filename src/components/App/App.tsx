@@ -22,11 +22,6 @@ import { getIngredients } from "../../services/action/ingredients";
 import { useDispatch, useSelector } from "../../services/types/index";
 import { FeedPage } from "../../pages/FeedPage/FeedPage";
 import { OrdersDetails } from "../OrdersDetails/OrdersDetails";
-import {
-  WS_CONNECTION_CLOSED,
-  WS_CONNECTION_START,
-} from "../../services/action";
-
 interface ILocation {
   state?: { background: object | any };
 }
@@ -61,16 +56,6 @@ const ModalSwitch = () => {
       openIngredientsModal(true);
     }
   }, [ingredient]);
-
-  useEffect(() => {
-    dispatch({
-      type: WS_CONNECTION_START,
-      payload: "wss://norma.nomoreparties.space/orders/all",
-    });
-    return () => {
-      dispatch({ type: WS_CONNECTION_CLOSED });
-    };
-  }, [dispatch]);
 
   return (
     <div>

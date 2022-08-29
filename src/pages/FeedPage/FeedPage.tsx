@@ -1,14 +1,15 @@
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Orders } from "../../components/Orders/Orders";
 import stylesFeedPage from "./FeedPage.module.css";
-import { TOrder, useSelector } from "../../services/types";
-
+import { TOrder, useDispatch, useSelector } from "../../services/types";
+import {WS_CONNECTION_START,WS_CONNECTION_CLOSED} from '../../services/action/index';
 interface IModal {
   handleModal: () => void;
 }
 
 export const FeedPage: FC<IModal> = ({ handleModal }) => {
+  const dispatch = useDispatch()
   const location = useLocation();
   const data = useSelector((state: any) => state.data.messages);
   const done = useMemo(
@@ -23,6 +24,15 @@ export const FeedPage: FC<IModal> = ({ handleModal }) => {
       data[0]?.orders?.filter((i: TOrder) => i.status === "pending"),
     [data]
   );
+  useEffect(() => {
+    dispatch({
+      type: WS_CONNECTION_START,
+      payload: "wss://norma.nomoreparties.space/orders/all",
+    });
+    return () => {
+      dispatch({ type: WS_CONNECTION_CLOSED });
+    };
+  },[dispatch])
   return (
     <div className={stylesFeedPage.feed}>
       <p className="text text_type_main-large">Лента заказов</p>
