@@ -3,7 +3,7 @@ import { rootReducer } from "../reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { socketMiddleware } from "../middleWares/socketMiddleware.ts";
+import { socketMiddleware } from "../middleWares/socketMiddleware";
 import {
   WS_CONNECTION_START,
   WS_CONNECTION_SUCCESS,
