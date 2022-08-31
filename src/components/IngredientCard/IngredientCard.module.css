@@ -5,6 +5,12 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  transition: 0.2s;
+}
+
+.li:hover {
+  box-shadow: 0 0 20px 0 #fff;
+  border-radius: 5px;
 }
 
 .prices {

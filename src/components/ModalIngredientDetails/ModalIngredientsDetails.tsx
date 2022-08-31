@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getIngredient } from "../../services/action/ingredient";
 import { useDispatch, useSelector } from "../../services/types/index";
 import { IIngredient } from "../../services/types/index";
+import { Loading } from "../Loading/Loading";
 
 export const ModalIngredientsDetails = () => {
   const ingredients = useSelector((state) => state.ingredients.ingredients);
@@ -20,44 +21,50 @@ export const ModalIngredientsDetails = () => {
   }, [dispatch, id, ingredients]);
   return (
     <div className={stylesModalIngredientsDetails.div}>
-      <img
-        className={stylesModalIngredientsDetails.img}
-        src={ingredient?.image}
-        alt={ingredient?.name}
-      />
-      <p className="text text_type_main-medium mt-4">{ingredient?.name}</p>
-      <ul className={`${stylesModalIngredientsDetails.ul} mt-8`}>
-        <li className={`${stylesModalIngredientsDetails.li} mr-5`}>
-          <p className="text text_type_main-default text_color_inactive">
-            Каллории,ккал
-          </p>
-          <p className="text text_type_digits-default">
-            {ingredient?.calories}
-          </p>
-        </li>
-        <li className={`${stylesModalIngredientsDetails.li} mr-5`}>
-          <p className="text text_type_main-default text_color_inactive">
-            Белки,г
-          </p>
-          <p className="text text_type_digits-default">
-            {ingredient?.proteins}
-          </p>
-        </li>
-        <li className={`${stylesModalIngredientsDetails.li} mr-5`}>
-          <p className="text text_type_main-default text_color_inactive">
-            Жиры,г
-          </p>
-          <p className="text text_type_digits-default">{ingredient?.fat}</p>
-        </li>
-        <li className={`${stylesModalIngredientsDetails.li}`}>
-          <p className="text text_type_main-default text_color_inactive">
-            Углеводы,г
-          </p>
-          <p className="text text_type_digits-default">
-            {ingredient?.carbohydrates}
-          </p>
-        </li>
-      </ul>
+      {ingredients.length !== 0 ? (
+        <>
+          <img
+            className={stylesModalIngredientsDetails.img}
+            src={ingredient?.image}
+            alt={ingredient?.name}
+          />
+          <p className="text text_type_main-medium mt-4">{ingredient?.name}</p>
+          <ul className={`${stylesModalIngredientsDetails.ul} mt-8`}>
+            <li className={`${stylesModalIngredientsDetails.li} mr-5`}>
+              <p className="text text_type_main-default text_color_inactive">
+                Каллории,ккал
+              </p>
+              <p className="text text_type_digits-default">
+                {ingredient?.calories}
+              </p>
+            </li>
+            <li className={`${stylesModalIngredientsDetails.li} mr-5`}>
+              <p className="text text_type_main-default text_color_inactive">
+                Белки,г
+              </p>
+              <p className="text text_type_digits-default">
+                {ingredient?.proteins}
+              </p>
+            </li>
+            <li className={`${stylesModalIngredientsDetails.li} mr-5`}>
+              <p className="text text_type_main-default text_color_inactive">
+                Жиры,г
+              </p>
+              <p className="text text_type_digits-default">{ingredient?.fat}</p>
+            </li>
+            <li className={`${stylesModalIngredientsDetails.li}`}>
+              <p className="text text_type_main-default text_color_inactive">
+                Углеводы,г
+              </p>
+              <p className="text text_type_digits-default">
+                {ingredient?.carbohydrates}
+              </p>
+            </li>
+          </ul>
+        </>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 };

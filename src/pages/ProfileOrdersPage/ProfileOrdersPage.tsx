@@ -14,6 +14,7 @@ import {
   useDispatch,
   useSelector,
 } from "../../services/types";
+import { Loading } from "../../components/Loading/Loading";
 
 interface IModal {
   handleModal: () => void;
@@ -39,25 +40,28 @@ export const ProfileOrdersPage: FC<IModal> = ({ handleModal }) => {
   }
   return (
     <ProfileMenu history={"active"}>
+      {data.length !== 0 ? (
       <ul className={stylesProfileOrdersPage.ul}>
-        {data[0]?.orders &&
-          data[0]?.orders.slice(0, 10).map((i: TOrder) => {
-            return (
-              <li key={i._id}>
-                <Link
-                  className={stylesProfileOrdersPage.li}
-                  to={{
-                    pathname: `/profile/orders/${i._id}`,
-                    state: { background: location },
-                  }}
-                  onClick={handleModal}
-                >
-                  <Orders order={i} />
-                </Link>
-              </li>
-            );
-          })}
-      </ul>
+      {data[0]?.orders &&
+        data[0]?.orders.slice(0, 10).map((i: TOrder) => {
+          return (
+            <li key={i._id}>
+              <Link
+                className={stylesProfileOrdersPage.li}
+                to={{
+                  pathname: `/profile/orders/${i._id}`,
+                  state: { background: location },
+                }}
+                onClick={handleModal}
+              >
+                <Orders order={i} />
+              </Link>
+            </li>
+          );
+        })}
+    </ul>
+      ) : <div className="dfjccaic"><Loading/></div>}
+
     </ProfileMenu>
   );
 };

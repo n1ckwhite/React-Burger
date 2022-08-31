@@ -56,60 +56,97 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
 
   return (
     <section className={`${stylesBurgerConstructor.section} mt-25`}>
-      <ul className={stylesBurgerConstructor.ulUnder}>
-        {bun.map((i, index) => {
-          if (i.type === "bun") {
-            return (
-              <BurgerConstructorItem
-                moveIngredient={moveIngredient}
-                index={index}
-                key={i.key}
-                item={i}
-                type="top"
-                isLocked={true}
-                position={true}
-              />
-            );
-          }
-        })}
+      <ul className={stylesBurgerConstructor.ulUnder} ref={dropRef}>
+        <>
+          {bun.length !== 0 ? (
+            <>
+              {bun.map((i, index) => {
+                if (i.type === "bun") {
+                  return (
+                    <BurgerConstructorItem
+                      moveIngredient={moveIngredient}
+                      index={index}
+                      key={i.key}
+                      item={i}
+                      type="top"
+                      isLocked={true}
+                      position={true}
+                    />
+                  );
+                }
+              })}
+            </>
+          ) : (
+            <li
+              className={`${stylesBurgerConstructor.liBun} ${stylesBurgerConstructor.liBunTop}`}
+              style={{
+                border: isHover ? "3px dashed #4C4CFF" : "",
+              }}
+            >
+              <p className="text text_type_main-medium">Булка</p>
+            </li>
+          )}
+        </>
         <ul
           className={stylesBurgerConstructor.ul}
-          ref={dropRef}
           style={{
-            border: isHover ? "3px solid #4C4CFF" : "",
+            border: isHover ? "3px dashed #FFF" : "",
           }}
         >
-          {burgers.map((i: IIngredient, index: number) => {
-            return (
-              <BurgerConstructorItem
-                moveIngredient={moveIngredient}
-                key={i.key}
-                item={i}
-                type="middle"
-                drag={true}
-                index={index}
-                onDelete={() => onDelete(i._id)}
-              />
-            );
-          })}
+          {burgers.length !== 0 ? (
+            <>
+              {burgers.map((i: IIngredient, index: number) => {
+                return (
+                  <BurgerConstructorItem
+                    moveIngredient={moveIngredient}
+                    key={i.key}
+                    item={i}
+                    type="middle"
+                    drag={true}
+                    index={index}
+                    onDelete={() => onDelete(i._id)}
+                  />
+                );
+              })}
+            </>
+          ) : (
+            <li
+              className={`${stylesBurgerConstructor.liBun} ${stylesBurgerConstructor.liBunMiddle}`}
+            >
+              <p className="text text_type_main-medium">Ингредиент</p>
+            </li>
+          )}
         </ul>
-        {bun.map((i, index: number) => {
-          if (i.type === "bun") {
-            return (
-              <BurgerConstructorItem
-                moveIngredient={moveIngredient}
-                index={index}
-                key={i.key}
-                item={i}
-                type="bottom"
-                isLocked={true}
-                position={false}
-              />
-            );
-          }
-        })}
+        {bun.length !== 0 ? (
+          <>
+            {bun.map((i, index: number) => {
+              if (i.type === "bun") {
+                return (
+                  <BurgerConstructorItem
+                    moveIngredient={moveIngredient}
+                    index={index}
+                    key={i.key}
+                    item={i}
+                    type="bottom"
+                    isLocked={true}
+                    position={false}
+                  />
+                );
+              }
+            })}
+          </>
+        ) : (
+          <li
+            className={`${stylesBurgerConstructor.liBun} ${stylesBurgerConstructor.liBunBottom}`}
+            style={{
+              border: isHover ? "3px dashed #4C4CFF" : "",
+            }}
+          >
+            <p className="text text_type_main-medium">Булка</p>
+          </li>
+        )}
       </ul>
-      <div className={`${stylesBurgerConstructor.info} mt-10`}>
+      <div className={`${stylesBurgerConstructor.info}`}>
         <p
           className={`text text_type_digits-medium ${stylesBurgerConstructor.price} mr-10`}
         >

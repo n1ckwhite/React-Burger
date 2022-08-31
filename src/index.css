@@ -15,3 +15,9 @@ code {
 .input {
   width: 480px !important;
 }
+
+.dfjccaic {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}

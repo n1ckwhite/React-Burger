@@ -6,6 +6,7 @@ import { ProfileMenu } from "../../components/ProfileMenu/ProfileMenu";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "../../services/types/index";
 import { Button } from "../../components/Button/Button";
+import { Loading } from "../../components/Loading/Loading";
 interface IState {
   users: {
     email: string;
@@ -39,68 +40,74 @@ export const ProfilePage = () => {
 
   return (
     <ProfileMenu profile={"active"}>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          dispatch(patchUserInfo(value, name));
-        }}
-      >
-        <ul className={`${stylesProfilePage.form}`}>
-          <li className={stylesProfilePage.form_li}>
-            <Input
-              type={"text"}
-              placeholder={"Имя"}
-              onChange={(e) => setName(e.target.value)}
-              icon={"EditIcon"}
-              value={name}
-              name={"name"}
-              error={false}
-              errorText={"Ошибка"}
-              size={"default"}
-            />
-          </li>
-          <li className={stylesProfilePage.form_li}>
-            <Input
-              type={"text"}
-              placeholder={"Логин"}
-              onChange={(e) => setValue(e.target.value)}
-              icon={"EditIcon"}
-              value={value}
-              name={"name"}
-              error={false}
-              errorText={"Ошибка"}
-              size={"default"}
-            />
-          </li>
-          <li className={stylesProfilePage.form_li}>
-            <Input
-              type={"password"}
-              placeholder={"Пароль"}
-              onChange={(e) => setPassword(e.target.value)}
-              icon={"EditIcon"}
-              value={password}
-              name={"name"}
-              error={false}
-              errorText={"Ошибка"}
-              size={"default"}
-            />
-          </li>
-          <li className={stylesProfilePage.form_li}>
-            <div className={stylesProfilePage.buttons}>
-              <Button
-                type="secondary"
-                size="medium"
-                onClick={() => cancelFunc()}
-              >
-                Отмена
-              </Button>
-              <Button type="primary" size="medium">
-                Сохранить
-              </Button>
-            </div>
-          </li>
-        </ul>
-      </form>
+      {emailUser.length !== 0 && nameUser.length !== 0 ? (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(patchUserInfo(value, name));
+          }}
+        >
+          <ul className={`${stylesProfilePage.form}`}>
+            <li className={stylesProfilePage.form_li}>
+              <Input
+                type={"text"}
+                placeholder={"Имя"}
+                onChange={(e) => setName(e.target.value)}
+                icon={"EditIcon"}
+                value={name}
+                name={"name"}
+                error={false}
+                errorText={"Ошибка"}
+                size={"default"}
+              />
+            </li>
+            <li className={stylesProfilePage.form_li}>
+              <Input
+                type={"text"}
+                placeholder={"Логин"}
+                onChange={(e) => setValue(e.target.value)}
+                icon={"EditIcon"}
+                value={value}
+                name={"name"}
+                error={false}
+                errorText={"Ошибка"}
+                size={"default"}
+              />
+            </li>
+            <li className={stylesProfilePage.form_li}>
+              <Input
+                type={"password"}
+                placeholder={"Пароль"}
+                onChange={(e) => setPassword(e.target.value)}
+                icon={"EditIcon"}
+                value={password}
+                name={"name"}
+                error={false}
+                errorText={"Ошибка"}
+                size={"default"}
+              />
+            </li>
+            <li className={stylesProfilePage.form_li}>
+              <div className={stylesProfilePage.buttons}>
+                <Button
+                  type="secondary"
+                  size="medium"
+                  onClick={() => cancelFunc()}
+                >
+                  Отмена
+                </Button>
+                <Button type="primary" size="medium">
+                  Сохранить
+                </Button>
+              </div>
+            </li>
+          </ul>
+        </form>
+      ) : (
+        <div className="dfjccaic">
+          <Loading />
+        </div>
+      )}
     </ProfileMenu>
   );
 };
