@@ -75,7 +75,7 @@ export const BurgerConstructorItem: FC<IProps> = ({
   return (
     <li
       ref={isLocked ? null : ref}
-      className={`${styleBurgerConstructorItem.li} mb-4`}
+      className={`${styleBurgerConstructorItem.li} mt-4`}
       style={{ opacity }}
     >
       {drag && <DragIcon type="primary" />}

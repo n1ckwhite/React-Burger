@@ -2,6 +2,7 @@
   "name": "burger-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://n1ckwhite.github.io/React-Burger",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.16.4",
@@ -33,7 +34,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "cypress:open": "./node_modules/.bin/cypress open",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +58,9 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.3.3"
+    "@types/react-router-dom": "^5.3.3",
+    "cypress": "^10.7.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "gh-pages": "^4.0.0"
   }
 }

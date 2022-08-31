@@ -40,9 +40,9 @@ const ModalSwitch = () => {
     openIngredientsModal(true);
   };
   const closeOrderModal = () => {
-    dispatch(clearIngredient());
     openIngredientsModal(false);
     history.goBack();
+    dispatch(clearIngredient());
   };
 
   const openOrderDetails = () => {

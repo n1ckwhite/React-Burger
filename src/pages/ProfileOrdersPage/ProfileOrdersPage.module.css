@@ -6,6 +6,7 @@
   height: 868px;
   overflow-y: scroll;
   scrollbar-color: var(--text-inactive-color) var(--colors-button-inactive);
+  margin-left: 60px;
 }
 
 .ul::-webkit-scrollbar {

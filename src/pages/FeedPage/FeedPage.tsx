@@ -4,6 +4,7 @@ import { Orders } from "../../components/Orders/Orders";
 import stylesFeedPage from "./FeedPage.module.css";
 import { ILocation, TOrder, useDispatch, useSelector } from "../../services/types";
 import {WS_CONNECTION_START,WS_CONNECTION_CLOSED} from '../../services/action/index';
+import { Loading } from "../../components/Loading/Loading";
 interface IModal {
   handleModal: () => void;
 }
@@ -35,7 +36,9 @@ export const FeedPage: FC<IModal> = ({ handleModal }) => {
   },[dispatch])
   return (
     <div className={stylesFeedPage.feed}>
-      <p className="text text_type_main-large">Лента заказов</p>
+      {data.length !== 0 ? (
+        <>
+              <p className="text text_type_main-large">Лента заказов</p>
       <div className={stylesFeedPage.feed_flex}>
         <div className={stylesFeedPage.div608}>
           <ul className={stylesFeedPage.ul}>
@@ -103,6 +106,9 @@ export const FeedPage: FC<IModal> = ({ handleModal }) => {
           <p className="text text_type_digits-large">{data[0]?.totalToday}</p>
         </div>
       </div>
+        </>
+      ) :<div className="dfjccaic"><Loading/></div>}
+
     </div>
   );
 };

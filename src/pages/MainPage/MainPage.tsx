@@ -5,7 +5,12 @@ import { BurgerConstructor } from "../../components/BurgerConstructor/BurgerCons
 import { Modal } from "../../components/Modal/Modal";
 import { ModalOrderDetails } from "../../components/ModalOrderDetails/ModalOrderDetails";
 import { getOrder } from "../../services/action/order";
-import { IIngredients, useDispatch, useSelector } from "../../services/types/index";
+import {
+  IIngredients,
+  useDispatch,
+  useSelector,
+} from "../../services/types/index";
+import { Loading } from "../../components/Loading/Loading";
 interface Iprops {
   openModal: () => void;
 }
@@ -26,7 +31,7 @@ const MainPage: FC<Iprops> = ({ openModal }) => {
   const handleOpenModal = () => {
     dispatch(
       getOrder(
-        ingredients.map((item: {_id: number}) => item._id),
+        ingredients.map((item: { _id: number }) => item._id),
         buns[0]._id
       )
     );
@@ -39,18 +44,26 @@ const MainPage: FC<Iprops> = ({ openModal }) => {
 
   return (
     <div className={MainPageStyles.App}>
-      <Modal
-        isActive={priceModal}
-        handleIsActive={handlePriceModal}
-        closePopup={closePriseModal}
-      >
-        <ModalOrderDetails />
-      </Modal>
+      {burgers.length !== 0 ? (
+        <>
+          <Modal
+            isActive={priceModal}
+            handleIsActive={handlePriceModal}
+            closePopup={closePriseModal}
+          >
+            <ModalOrderDetails />
+          </Modal>
 
-      <main className={MainPageStyles.container}>
-        {burgers.length && <BurgerIngredients openModal={openModal} />}
-        {burgers.length && <BurgerConstructor openModal={handleOpenModal} />}
-      </main>
+          <main className={MainPageStyles.container}>
+            <BurgerIngredients openModal={openModal} />
+            <BurgerConstructor openModal={handleOpenModal} />
+          </main>
+        </>
+      ) : (
+        <div className="dfjccaic">
+          <Loading />
+        </div>
+      )}
     </div>
   );
 };

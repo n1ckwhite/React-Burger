@@ -8,6 +8,7 @@ import {
   WS_CONNECTION_CLOSED,
   WS_CONNECTION_START,
 } from "../../services/action";
+import { Loading } from "../Loading/Loading";
 interface Ital {
   tal?: true | null;
 }
@@ -86,68 +87,78 @@ export const OrdersDetails: FC<Ital> = ({ tal }) => {
   }, [location.pathname, dispatch, id]);
 
   return (
-    <div className={stylesOrdersDetails.block}>
-      <p
-        className={`text text_type_digits-default ${
-          stylesOrdersDetails.title
-        } ${tal && stylesOrdersDetails.tal}`}
-      >
-        #{dataSearchItem?.number}
-      </p>
-      <p
-        className={`text text_type_main-medium mt-10 ${stylesOrdersDetails.subtitle}`}
-      >
-        {dataSearchItem?.name}
-      </p>
-      <p
-        className={`text text_type_main-default mt-3 ${stylesOrdersDetails.status}`}
-      >
-        {dataSearchItem?.status === "done" ? "Выполнен" : "Готовиться"}
-      </p>
-      <p className="text text_type_main-medium mt-15 mb-6">Состав:</p>
-      <ul className={stylesOrdersDetails.ul}>
-        {arr &&
-          arr.map((i) => {
-            return (
-              <li className={stylesOrdersDetails.li} key={i._id}>
-                <div className={stylesOrdersDetails.img_block}>
-                  <img
-                    className={stylesOrdersDetails.img}
-                    src={i?.image}
-                    alt="icon"
-                  />
-                </div>
-                <p
-                  className={`text text_type_main-default ${stylesOrdersDetails.name}`}
-                >
-                  {i?.name}
-                </p>
-                <div className={stylesOrdersDetails.price}>
-                  <p className="text text_type_digits-default">{i?.count}</p>
-                  <p className="text text_type_digits-default">x</p>
-                  <p className="text text_type_digits-default">
-                    {i?.price * i?.count}
-                  </p>
-                  <CurrencyIcon type="primary" />
-                </div>
-              </li>
-            );
-          })}
-      </ul>
-      <div className={`${stylesOrdersDetails.time} mt-10`}>
-        <p
-          className={`text text_type_main-default ${stylesOrdersDetails.time_p}`}
-        >
-          {dayOrder ? "Сегодня" : "Вчера"},{" "}
-          {dataSearchItem?.createdAt.slice(11, 16)}
-        </p>
-        <div className={stylesOrdersDetails.price_block}>
-          <p className="text text_type_digits-default">
-            {bun && `${bun[0]?.price * 2 + notBunPrice}`}
+    <>
+      {data.length !== 0 ? (
+        <div className={stylesOrdersDetails.block}>
+          <p
+            className={`text text_type_digits-default ${
+              stylesOrdersDetails.title
+            } ${tal && stylesOrdersDetails.tal}`}
+          >
+            #{dataSearchItem?.number}
           </p>
-          <CurrencyIcon type="primary" />
+          <p
+            className={`text text_type_main-medium mt-10 ${stylesOrdersDetails.subtitle}`}
+          >
+            {dataSearchItem?.name}
+          </p>
+          <p
+            className={`text text_type_main-default mt-3 ${stylesOrdersDetails.status}`}
+          >
+            {dataSearchItem?.status === "done" ? "Выполнен" : "Готовиться"}
+          </p>
+          <p className="text text_type_main-medium mt-15 mb-6">Состав:</p>
+          <ul className={stylesOrdersDetails.ul}>
+            {arr &&
+              arr.map((i) => {
+                return (
+                  <li className={stylesOrdersDetails.li} key={i._id}>
+                    <div className={stylesOrdersDetails.img_block}>
+                      <img
+                        className={stylesOrdersDetails.img}
+                        src={i?.image}
+                        alt="icon"
+                      />
+                    </div>
+                    <p
+                      className={`text text_type_main-default ${stylesOrdersDetails.name}`}
+                    >
+                      {i?.name}
+                    </p>
+                    <div className={stylesOrdersDetails.price}>
+                      <p className="text text_type_digits-default">
+                        {i?.count}
+                      </p>
+                      <p className="text text_type_digits-default">x</p>
+                      <p className="text text_type_digits-default">
+                        {i?.price * i?.count}
+                      </p>
+                      <CurrencyIcon type="primary" />
+                    </div>
+                  </li>
+                );
+              })}
+          </ul>
+          <div className={`${stylesOrdersDetails.time} mt-10`}>
+            <p
+              className={`text text_type_main-default ${stylesOrdersDetails.time_p}`}
+            >
+              {dayOrder ? "Сегодня" : "Вчера"},{" "}
+              {dataSearchItem?.createdAt.slice(11, 16)}
+            </p>
+            <div className={stylesOrdersDetails.price_block}>
+              <p className="text text_type_digits-default">
+                {bun && `${bun[0]?.price * 2 + notBunPrice}`}
+              </p>
+              <CurrencyIcon type="primary" />
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div className="dfjccaic">
+          <Loading />
+        </div>
+      )}
+    </>
   );
 };
