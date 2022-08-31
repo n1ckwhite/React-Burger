@@ -31,7 +31,6 @@ export const PATCH_USER_INFO = "PATH_USER_INFO";
 export const PATCH_USER_INFO_SUCCESSFUL = "PATH_USER_INFO_SUCCESSFUL";
 export const EXIT_USER = "EXIT_USER";
 
-
 export const forgotPassword = (
   email: string,
   history: any
@@ -147,16 +146,16 @@ export const loginUser = (
       .then((res) => checkResponse(res))
       .then((data: any) => {
         if (data.success) {
-          if (!localStorage.getItem('accessToken')) {
+          if (!localStorage.getItem("accessToken")) {
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refreshToken", data.refreshToken);
           }
+          history.replace({ pathname: "/" });
         }
       });
     // .catch((error) => alert("Ошибка HTTP: ", error.type));
   };
 };
-
 
 export const getUserInfo = (): AppThunk<
   void,

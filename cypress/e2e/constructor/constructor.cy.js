@@ -3,7 +3,6 @@ describe("Запуск сервера", function () {
     cy.visit("http://localhost:3000");
   });
   it("Вход в профиль", function () {
-    cy.visit("http://localhost:3000");
     cy.get(":nth-child(3) > .AppHeader_button__V41QH").click();
     cy.get(
       ":nth-child(1) > .input__container > .input > .input__textfield"
