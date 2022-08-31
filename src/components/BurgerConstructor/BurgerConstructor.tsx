@@ -7,7 +7,6 @@ import {
   DELETE_CONSTRUCTOR_ITEM,
   SET_SORTED_ARRAY,
 } from "../../services/action";
-import { useHistory } from "react-router-dom";
 import { IIngredient } from "../../services/types";
 import { useDispatch, useSelector } from "../../services/types/index";
 import { Button } from "../Button/Button";
@@ -21,7 +20,6 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
   ) as any;
   const bun = useSelector((state) => state.currentIngredient.bun);
   const dispatch = useDispatch();
-  const history = useHistory();
   const onDelete = (item: IIngredient) => {
     dispatch({
       type: DELETE_CONSTRUCTOR_ITEM,
@@ -35,7 +33,6 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
     }),
   });
   const prices = burgers.reduce((a: number, b: IIngredient) => a + b.price, 0);
-  const user = window.localStorage.length;
   const moveIngredient = (dragIndex: number, hoverIndex: number): void => {
     const dragIngredient = burgers[dragIndex];
     if (dragIngredient) {
@@ -47,11 +44,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
   };
 
   const openModalUser = () => {
-    if (user !== 0) {
       openModal();
-    } else {
-      history.replace({ pathname: "/login" });
-    }
   };
 
   return (
@@ -157,7 +150,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
           type="primary"
           size="medium"
           onClick={() => openModalUser()}
-          disabled={burgers.length && bun.length ? false : true}
+          disabled={burgers.length && bun.length && true && window.localStorage.getItem('accessToken') ? false : true}
         >
           Оформить заказ
         </Button>

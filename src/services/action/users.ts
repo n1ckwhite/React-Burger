@@ -147,11 +147,10 @@ export const loginUser = (
       .then((res) => checkResponse(res))
       .then((data: any) => {
         if (data.success) {
-          if (!localStorage.length) {
+          if (!localStorage.getItem('accessToken')) {
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refreshToken", data.refreshToken);
           }
-          history.replace({ pathname: "/" });
         }
       });
     // .catch((error) => alert("Ошибка HTTP: ", error.type));
