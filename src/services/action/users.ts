@@ -151,6 +151,7 @@ export const loginUser = (
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refreshToken", data.refreshToken);
           }
+          history.replace({pathname: '/'})
         }
       });
     // .catch((error) => alert("Ошибка HTTP: ", error.type));
