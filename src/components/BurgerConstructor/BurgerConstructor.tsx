@@ -44,7 +44,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
   };
 
   const openModalUser = () => {
-      openModal();
+    openModal();
   };
 
   return (
@@ -150,7 +150,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
           type="primary"
           size="medium"
           onClick={() => openModalUser()}
-          disabled={burgers.length && bun.length && true && window.localStorage.getItem('accessToken') ? false : true}
+          disabled={burgers.length && bun.length ? false : true}
         >
           Оформить заказ
         </Button>
