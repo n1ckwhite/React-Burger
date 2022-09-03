@@ -45,10 +45,10 @@ describe("Запуск сервера", function () {
     cy.get(":nth-child(3) > .text_type_digits-default").contains("24");
     cy.get(":nth-child(4) > .text_type_digits-default").contains("53");
   });
-  it("закрытие модальных окон при клике на кнопку закрытия", function () {
+  it("закрытие модального окна деталей ингредиента при клике на кнопку закрытия", function () {
     cy.get(".Modal_row__lRfC0 > .Modal_button__PTCbC > svg > path").click();
   });
-  it("открытие модального окна с данными о заказе при клике по кнопке «Оформить заказ»", function () {
+  it("открытие и закрытие модального окна с данными о заказе при клике по кнопке «Оформить заказ»", function () {
     cy.get("button").contains("Оформить заказ").click();
     cy.get(".Modal_button__PTCbC > svg > path").click();
   });
