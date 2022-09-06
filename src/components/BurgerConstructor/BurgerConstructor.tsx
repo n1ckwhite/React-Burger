@@ -49,7 +49,7 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
 
   return (
     <section className={`${stylesBurgerConstructor.section} mt-25`}>
-      <ul className={stylesBurgerConstructor.ulUnder} ref={dropRef}>
+      <ul className={stylesBurgerConstructor.ulUnder} ref={dropRef} data-constructor="constructor">
         <>
           {bun.length !== 0 ? (
             <>
