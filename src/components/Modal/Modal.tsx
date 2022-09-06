@@ -40,8 +40,8 @@ export const Modal: FC<IProps> = ({
         {title ? (
           <div className={`${stylesModal.row} mt-10`}>
             <p className="text text_type_main-large">{title}</p>
-            <button className={`${stylesModal.button}`} onClick={closePopup}>
-              <CloseIcon type="primary" />
+            <button className={`${stylesModal.button}`} onClick={closePopup} data-close="button-close">
+              <CloseIcon type="primary"/>
             </button>
           </div>
         ) : (

@@ -10,6 +10,7 @@ interface IProps {
 export const ModalOverlay: FC<IProps> = ({ children, open, closePopup }) => {
   return (
     <div
+    data-modal="modal"
       className={
         open
           ? `${stylesModalOverlay.modal} ${stylesModalOverlay.modal_active}`

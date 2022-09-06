@@ -28,7 +28,7 @@ export const ModalIngredientsDetails = () => {
             src={ingredient?.image}
             alt={ingredient?.name}
           />
-          <p className="text text_type_main-medium mt-4">{ingredient?.name}</p>
+          <p data-name="name" className="text text_type_main-medium mt-4">{ingredient?.name}</p>
           <ul className={`${stylesModalIngredientsDetails.ul} mt-8`}>
             <li className={`${stylesModalIngredientsDetails.li} mr-5`}>
               <p className="text text_type_main-default text_color_inactive">

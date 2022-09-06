@@ -4,14 +4,15 @@ import {
   GET_INGREDIENTS_SUCCESSFUL,
 } from "../action";
 import { IIngredient } from "../types";
-const initialIngredients = {
+export const initialIngredients = {
   ingredients: [],
   pending: false,
+  error: ''
 };
 
 interface IState {
   ingredients: Array<IIngredient>;
-  error?: Event;
+  error?: String;
   pending: boolean;
 }
 
@@ -53,7 +54,7 @@ export const ingredientsReduce = (
         ...state,
         pending: false,
         ingredients: state.ingredients,
-        error: action.err,
+        error: `${action.err}`,
       };
     }
 
