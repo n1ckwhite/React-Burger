@@ -4,7 +4,7 @@ import {
   GET_INGREDIENTS_SUCCESSFUL,
 } from "../action";
 import { IIngredient } from "../types";
-const initialIngredients = {
+export const initialIngredients = {
   ingredients: [],
   pending: false,
   error: ''

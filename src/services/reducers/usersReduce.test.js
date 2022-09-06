@@ -11,17 +11,7 @@ import {
   PATCH_USER_INFO_SUCCESSFUL,
   EXIT_USER,
 } from "../action/users";
-import { usersReduce } from "./usersReduce";
-
-const initialState = {
-  email: "",
-  token: "",
-  password: "",
-  name: "",
-  pending: true,
-  success: false,
-  isLoggedIn: false,
-};
+import { usersReduce, initialState } from "./usersReduce";
 
 describe("init Reduce", () => {
   it("initial State", () => {

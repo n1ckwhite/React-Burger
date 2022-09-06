@@ -14,7 +14,7 @@ import {
   EXIT_USER,
 } from "../action/users";
 
-const initialState = {
+export const initialState = {
   email: "",
   token: "",
   password: "",

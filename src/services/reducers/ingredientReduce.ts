@@ -1,7 +1,7 @@
 import { CLEAR_INGREDIENT, GET_INGREDIENT } from "../action";
 import { IIngredient } from "../types";
 
-const initialState = {
+export const initialState = {
   ingredient: {},
 };
 

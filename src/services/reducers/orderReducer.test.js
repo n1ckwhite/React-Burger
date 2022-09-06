@@ -4,12 +4,7 @@ import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESSFUL,
 } from "../action";
-import { orderReducer } from "./orderReducer";
-const initialState = {
-  order: 0,
-  error: "",
-  pending: false,
-};
+import { orderReducer,initialState } from "./orderReducer";
 
 describe("init Reduce", () => {
   it("initial State", () => {

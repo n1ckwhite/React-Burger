@@ -7,7 +7,7 @@ import {
 } from "../action";
 import { IIngredient } from "../types";
 
-const initialState = {
+export const initialState = {
   ingredients: [],
   bun: [],
 };

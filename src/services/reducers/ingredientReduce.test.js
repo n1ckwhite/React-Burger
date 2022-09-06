@@ -1,9 +1,7 @@
 import { CLEAR_INGREDIENT, GET_INGREDIENT } from "../action";
 import { ingredient } from "./cureentIngredientReduce.test";
-import { ingredientReduce } from "./ingredientReduce";
-const initialState = {
-  ingredient: {},
-};
+import { ingredientReduce,initialState } from "./ingredientReduce";
+
 
 describe("checkReduce", () => {
   it("initState", () => {

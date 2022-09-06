@@ -5,7 +5,7 @@ import {
   GET_ORDER_ERROR,
 } from "../action";
 
-const initialState = {
+export const initialState = {
   order: 0,
   error: "",
   pending: false,

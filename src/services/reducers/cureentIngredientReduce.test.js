@@ -5,9 +5,8 @@ import {
   SET_SORTED_ARRAY,
   TARGET_CARD_INGREDIENT,
 } from "../action";
-import { currentIngredientReduce } from "./currentIngredientReduce";
+import { currentIngredientReduce,initialState } from "./currentIngredientReduce";
 const { v4: uuidv4 } = require("uuid");
-const initialState = { ingredients: [], bun: [] };
 export const ingredient = {
   _id: "60d3b41abdacab0026a733c6",
   name: "Краторная булка N-200i",

@@ -4,12 +4,7 @@ import {
   WS_CONNECTION_SUCCESS,
   WS_GET_MESSAGE,
 } from "../action";
-import { wsReducer } from "./socketMiddlewareReduce";
-
-const initialState = {
-  wsConnected: false,
-  messages: [],
-};
+import { wsReducer, initialState } from "./socketMiddlewareReduce";
 
 describe("init Reduce", () => {
   it("initial State", () => {
