@@ -10,11 +10,13 @@ import {
 import { IIngredient } from "../../services/types";
 import { useDispatch, useSelector } from "../../services/types/index";
 import { Button } from "../Button/Button";
+import { Redirect, useHistory } from "react-router-dom";
 interface IProps {
   openModal: () => void;
 }
 
 export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
+  const history = useHistory()
   const burgers = useSelector(
     (state) => state.currentIngredient.ingredients
   ) as any;
@@ -44,7 +46,11 @@ export const BurgerConstructor: FC<IProps> = ({ openModal }) => {
   };
 
   const openModalUser = () => {
-    openModal();
+    if(window.localStorage.getItem('accessToken')) {
+      openModal();
+    } else {
+      history.replace({pathname:'/login'})
+    }
   };
 
   return (
