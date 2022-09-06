@@ -2,7 +2,7 @@ describe("Запуск сервера", function () {
   it("Запуск сервера localhost:3000", function () {
     cy.visit("http://localhost:3000");
   });
-  it("Вход в профиль", function () {
+  beforeEach(() => {
     cy.intercept("GET", "api/auth/user", { fixture: "user.json" });
     cy.intercept("POST", "api/orders", { fixture: "order.json" }).as(
       "postOrder"
